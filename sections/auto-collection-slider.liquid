@@ -1,0 +1,200 @@
+<section class="auto-collection-slider page-width">
+  {%- if section.settings.title != blank -%}
+    <h2 class="h2 section-title">{{ section.settings.title | escape }}</h2>
+  {%- endif -%}
+
+  {%- if section.settings.collection.products.size > 0 -%}
+    <div class="slider-container" style="--animation-duration: {{ section.settings.animation_speed }}s;">
+      <div class="slider-wrapper">
+        {%- for product in section.settings.collection.products -%}
+          <div class="slider-item">
+            <a href="{{ product.url }}" class="slider-item-link">
+              {%- if product.featured_image -%}
+                <img
+                  src="{{ product.featured_image | image_url: width: 360 }}"
+                  srcset="{{ product.featured_image | image_url: width: 180 }} 180w, {{ product.featured_image | image_url: width: 360 }} 360w"
+                  sizes="(max-width: 749px) 180px, 180px"
+                  alt="{{ product.featured_image.alt | escape | default: product.title | escape }}"
+                  loading="lazy"
+                  width="180"
+                  height="{{ 180 | divided_by: product.featured_image.aspect_ratio | round }}"
+                >
+              {%- else -%}
+                {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif -%}
+              <div class="product-info">
+                <h3 class="product-title">{{ product.title }}</h3>
+                <p class="product-price">{{ product.price | money }}</p>
+              </div>
+            </a>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
+</section>
+
+<style>
+.auto-collection-slider {
+  position: relative;
+  padding: 20px 0;
+  background: {{ section.settings.background_color | default: 'var(--gradient-base-background-1, var(--color-base-background-1))' }};
+}
+
+}
+
+.auto-collection-slider::before,
+.auto-collection-slider::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100vw;
+  background: {{ section.settings.background_color | default: 'var(--gradient-base-background-1, var(--color-base-background-1))' }};
+  z-index: -1;
+}
+
+.auto-collection-slider::before {
+  left: calc(-50vw + 50%);
+}
+
+.auto-collection-slider::after {
+  right: calc(-50vw + 50%);
+}
+
+
+.section-title {
+  text-align: center;
+  margin-bottom: 24px;
+}
+.slider-container {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+.slider-wrapper {
+  display: flex;
+  gap: 24px;
+  white-space: nowrap; /* Megakadályozza a sor törését */
+  animation: scroll-left var(--animation-duration, 40s) linear infinite;
+}
+.slider-wrapper:hover {
+  animation-play-state: paused;
+}
+.slider-item {
+  flex: 0 0 auto;
+  width: 180px; /* fix szélesség */
+}
+.slider-item-link {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  transition: transform 0.3s ease;
+}
+.slider-item-link:hover {
+  transform: scale(1.05);
+}
+.slider-item img, .slider-item .placeholder-svg {
+  width: 180px;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto 12px;
+  border-radius: 12px;
+  background-color: #f2f2f2;
+}
+.product-info {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.product-title {
+  font-weight: 500;
+  margin: 0 0 4px;
+  font-size: 14px;
+  color: #000;
+  line-height: 1.3em;
+  height: 2.6em; /* 2 sor magasság */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  white-space: normal; /* Visszaállítja a normál sortörést a címhez */
+}
+.product-price {
+  color: #555;
+  font-size: 13px;
+  margin: 0;
+}
+@keyframes scroll-left {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .slider-wrapper {
+    animation: none;
+  }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const sliderWrapper = document.querySelector('.auto-collection-slider .slider-wrapper');
+
+  if (sliderWrapper) {
+    const cloneItems = () => {
+      // Duplikáljuk a tartalmat a végtelen csúszáshoz, de csak ha szükséges
+      const sliderItems = sliderWrapper.querySelectorAll('.slider-item');
+      sliderItems.forEach(item => {
+        const clone = item.cloneNode(true);
+        // A klónozott elemeket rejtsük el a kisegítő technológiák elől
+        clone.setAttribute('aria-hidden', 'true');
+        sliderWrapper.appendChild(clone);
+      });
+    };
+    
+    // Kezdeti duplikáció
+    cloneItems();
+  }
+});
+</script>
+
+{% schema %}
+{
+  "name": "Auto Collection Slider",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Cím",
+      "default": "Produse recomandate"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Selectează o colecție"
+    },
+    {
+      "type": "range",
+      "id": "animation_speed",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "s",
+      "label": "Viteza animației",
+      "default": 40
+    },
+    {
+    "type": "color",
+    "id": "background_color",
+    "label": "Background color"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Auto Collection Slider",
+      "category": "Products"
+    }
+  ]
+}
+{% endschema %}

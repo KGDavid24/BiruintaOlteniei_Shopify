@@ -1,0 +1,670 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "custom_liquid_YkCpbf": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "{%- if request.locale.iso_code == 'en' -%}\n  <h1 style=\"text-align:center;\"><strong>Frequently asked questions about our products</strong></h1>\n{%- else -%}\n  <h1 style=\"text-align:center;\"><strong>Întrebări frecvente despre produsele noastre</strong></h1>\n{%- endif -%}",
+        "color_scheme": "",
+        "padding_top": 40,
+        "padding_bottom": 0
+      }
+    },
+    "rich_text_djfX4m": {
+      "type": "rich-text",
+      "blocks": {
+        "text_fjAhMf": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>Cuprins:</strong></p><ol><li><a href=\"https://biruintaolteniei.ro/pages/faq#specific-faina\" title=\"https://biruintaolteniei.ro/pages/faq#specific-faina\"><strong>Specific (despre făină, calitate, analize, moară)</strong></a></li><li><a href=\"https://biruintaolteniei.ro/pages/faq#transport-comanda-plata\" title=\"https://biruintaolteniei.ro/pages/faq#transport-comanda-plata\"><strong>Transport / comandă / plată / disponibilitate</strong></a></li><li><a href=\"https://biruintaolteniei.ro/pages/faq#produse-recomandate\" title=\"https://biruintaolteniei.ro/pages/faq#produse-recomandate\"><strong>Produse și pentru ce sunt recomandate (cozonac, pizza, dulciuri, paste)</strong></a></li><li><a href=\"https://biruintaolteniei.ro/pages/faq#paine-intrebari\" title=\"https://biruintaolteniei.ro/pages/faq#paine-intrebari\"><strong>Pâine (pâine de casă, maia, integrală, secară) + întrebări frecvente</strong></a></li><li><a href=\"https://biruintaolteniei.ro/pages/faq#paine-diabet\" title=\"https://biruintaolteniei.ro/pages/faq#paine-diabet\"><strong>Pâine și diabet</strong></a></li></ol>"
+          }
+        }
+      },
+      "block_order": [
+        "text_fjAhMf"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "left",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 0,
+        "padding_bottom": 52
+      }
+    },
+    "custom_liquid_6UWtdB": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<div id=\"specific-faina\" style=\"text-align:center;\">\n  <h2 class=\"collapsible-content__heading inline-richtext h2\">\n    {%- if request.locale.iso_code == 'en' -%}\n      1. Specifications (about flour, quality, analysis, mill)\n    {%- else -%}\n      1. Specific (despre făină, calitate, analize, moară)\n    {%- endif -%}\n  </h2>\n</div>",
+        "color_scheme": "",
+        "padding_top": 40,
+        "padding_bottom": 0
+      }
+    },
+    "collapsible_content_jxJAnr": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row_xDHjQE": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Făina voastră are în compoziție „cenușă”?",
+            "icon": "question_mark",
+            "row_content": "<p>Da – orice făină are „cenușă” (adică reziduul mineral). La Biruința Olteniei, <a href=\"https://biruintaolteniei.ro/products/faina-alba-de-grau-premium-25-kg\"><span style=\"text-decoration:underline\">făina albă PREMIUM</span></a> este Tip 650.În norma românească pentru făina de grâu, Tip 650 înseamnă conținut de cenușă max. 0,65% (raportat la substanța uscată).</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_fXdpPp": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Ce înseamnă făină Tip 650?",
+            "icon": "question_mark",
+            "row_content": "<p>Tip 650 este o clasificare a făinii de grâu în funcție de conținutul de cenușă (minerale). Pentru Tip 650, limita este de max. 0,65% cenușă (raportat la substanța uscată).</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_8gKGBN": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Care este procentul de proteină la făina voastră?",
+            "icon": "question_mark",
+            "row_content": "<ul><li><a href=\"https://biruintaolteniei.ro/products/faina-alba-de-grau-premium-25-kg\"><span style=\"text-decoration:underline\"><strong>Făină albă de grâu PREMIUM</strong></span></a><strong> (tip 650): 15% proteină</strong></li><li><a href=\"https://biruintaolteniei.ro/products/faina-integrala-de-grau\"><span style=\"text-decoration:underline\"><strong>Făină integrală de grâu</strong></span></a><strong>: 13,8% proteină</strong></li></ul><p><a href=\"https://biruintaolteniei.ro/products/faina-integrala-de-secara-100\"><span style=\"text-decoration:underline\"><strong>Făină integrală de secară</strong></span></a><strong>: 13% proteină</strong></p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_BkjUkU": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "De ce este relevant procentul de proteină la făină și ce indică el?",
+            "icon": "question_mark",
+            "row_content": "<p>Procentul de proteină îți arată, în mare, cât de bine poate „lega” aluatul. Mai multă proteină = de regulă, aluat mai elastic și mai stabil, bun pentru pâine/pizza/cozonac. Dar contează și tipul de grâu și cum lucrezi aluatul; nu e singurul criteriu.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_NcV6gz": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Cerealele folosite la moara de la Biruința Olteniei au pesticide?",
+            "icon": "question_mark",
+            "row_content": "<p>Pentru probe de grâu și secară din 2025, rezultatul pentru reziduuri de pesticide este &lt;LOQ (sub limita de cuantificare), cu concluzie de conformitate raportată la Reg. (CE) 396/2005.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_DV8gW9": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Ce înseamnă < LOQ la analize?",
+            "icon": "question_mark",
+            "row_content": "<p>Înseamnă „sub limita de cuantificare” – adică s-a analizat, dar valoarea e atât de mică încât este sub pragul la care laboratorul o poate măsura precis.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_zDWg7E": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Care sunt produsele de la Biruința Olteniei?",
+            "icon": "question_mark",
+            "row_content": "<p>În gama noastră găsești: făină albă PREMIUM, <a href=\"https://biruintaolteniei.ro/products/faina-integrala-de-grau\"><span style=\"text-decoration:underline\"><strong>făină integrală de grâu</strong></span></a>, <a href=\"https://biruintaolteniei.ro/products/faina-integrala-de-secara-100\"><span style=\"text-decoration:underline\"><strong>Făină integrală de secară</strong></span></a>, tărâțe integrale de grâu și pachete (combinații grâu/secară).</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_UbCpXe": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Aveți și tărâțe? La ce sunt bune?",
+            "icon": "question_mark",
+            "row_content": "<p>Da, avem tărâțe integrale de grâu. Le poți folosi în pâine (în cantități mici), granola, iaurt, sau pentru extra fibre în rețete.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_PB48mV": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Unde aveți moara?",
+            "icon": "question_mark",
+            "row_content": "<p>Moara Cooperativei Agricole Biruința Olteniei este în Dobrun, sat Ulmet, jud. Olt.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_dBjwkz": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Cum păstrez făina ca să nu prindă miros/umiditate?",
+            "icon": "question_mark",
+            "row_content": "<p>Într-un recipient închis (cutie/borcan), la loc uscat și răcoros. Ideal să nu stea lângă condimente puternice sau în umezeală.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_kzkeHJ": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Ce termen de valabilitate are făina?",
+            "icon": "question_mark",
+            "row_content": "<p>Termenul exact îl găsești pe ambalaj. Recomandarea practică: după deschidere, păstreaz-o bine închisă.</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_xDHjQE",
+        "collapsible_row_fXdpPp",
+        "collapsible_row_8gKGBN",
+        "collapsible_row_BkjUkU",
+        "collapsible_row_NcV6gz",
+        "collapsible_row_DV8gW9",
+        "collapsible_row_zDWg7E",
+        "collapsible_row_UbCpXe",
+        "collapsible_row_PB48mV",
+        "collapsible_row_dBjwkz",
+        "collapsible_row_kzkeHJ"
+      ],
+      "name": "t:sections.collapsible_content.presets.name",
+      "settings": {
+        "caption": "",
+        "heading": "",
+        "heading_size": "h2",
+        "heading_alignment": "left",
+        "layout": "none",
+        "container_color_scheme": "",
+        "color_scheme": "",
+        "open_first_collapsible_row": false,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 0,
+        "padding_bottom": 36
+      }
+    },
+    "custom_liquid_tzykUX": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<div id=\"transport-comanda-plata\" style=\"text-align:center;\">\n  <h2 class=\"collapsible-content__heading inline-richtext h2\">\n    {%- if request.locale.iso_code == 'en' -%}\n      2. Shipping / ordering / payment / availability\n    {%- else -%}\n      2. Transport / comandă / plată / disponibilitate\n    {%- endif -%}\n  </h2>\n</div>",
+        "color_scheme": "",
+        "padding_top": 40,
+        "padding_bottom": 0
+      }
+    },
+    "collapsible_content_XbepW8": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row_wJGFCR": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Unde găsim făina de la Biruința Olteniei?",
+            "icon": "question_mark",
+            "row_content": "<p>Online, pe site-ul nostru: biruintaolteniei.ro – comandă directă.<br/>În București: Băcănia Veche.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_QVfeFe": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "În ce băcănii și magazine sunteți în țară?",
+            "icon": "question_mark",
+            "row_content": "<p>Momentan, suntem prezenți în Băcănia Veche (București).</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_j6aCJn": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Livrați făină în toată țara?",
+            "icon": "question_mark",
+            "row_content": "<p>Da, livrăm în toată țara.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_TKCx6f": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "În cât timp ajunge comanda de făină?",
+            "icon": "question_mark",
+            "row_content": "<p>Conform politicii de expediere, comanda ajunge în aproximativ 3 zile (după confirmarea comenzii și în funcție de stoc).</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_eYtLPy": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Pot plăti cu cardul când fac o comandă?",
+            "icon": "question_mark",
+            "row_content": "<p>Da. Poți plăti cu cardul folosind metode uzuale (Visa/Mastercard etc.).</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_EdeRt4": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Pot plăti ramburs când comand de pe site?",
+            "icon": "question_mark",
+            "row_content": "<p>Da. Avem și opțiunea de plată ramburs.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_pgirc7": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Ce fac dacă mi-a ajuns coletul deteriorat?",
+            "icon": "question_mark",
+            "row_content": "<p>Scurt: „ne scrii cu poze și rezolvăm”.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_Kd9cbi": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Vreau să fac o comandă, dar nu mă descurc să comand online. Cum procedez?",
+            "icon": "question_mark",
+            "row_content": "<p>Putem să vă ajutăm cu plasarea comenzii telefonic. Vă rugăm să ne contactați la numărul <strong>0778 748 196</strong>, de luni până vineri, în intervalul <strong>09:00–16:00</strong>.</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_wJGFCR",
+        "collapsible_row_QVfeFe",
+        "collapsible_row_j6aCJn",
+        "collapsible_row_TKCx6f",
+        "collapsible_row_eYtLPy",
+        "collapsible_row_EdeRt4",
+        "collapsible_row_pgirc7",
+        "collapsible_row_Kd9cbi"
+      ],
+      "name": "t:sections.collapsible_content.presets.name",
+      "settings": {
+        "caption": "",
+        "heading": "",
+        "heading_size": "h2",
+        "heading_alignment": "left",
+        "layout": "none",
+        "container_color_scheme": "",
+        "color_scheme": "",
+        "open_first_collapsible_row": false,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 0,
+        "padding_bottom": 36
+      }
+    },
+    "custom_liquid_p6Kh9G": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<div id=\"produse-recomandate\" style=\"text-align:center;\">\n  <h2 class=\"collapsible-content__heading inline-richtext h2\">\n    {%- if request.locale.iso_code == 'en' -%}\n      3. Products and recommendations (sweet bread, pizza, sweets, pasta)\n    {%- else -%}\n      3. Produse și pentru ce sunt recomandate (cozonac, pizza, dulciuri, paste)\n    {%- endif -%}\n  </h2>\n</div>",
+        "color_scheme": "",
+        "padding_top": 32,
+        "padding_bottom": 0
+      }
+    },
+    "collapsible_content_aGmmqK": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row_R8fjTH": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Vreau să fac cozonaci. Ce făină îmi recomandați?",
+            "icon": "question_mark",
+            "row_content": "<p>Pentru cozonaci, îți recomandăm Făină albă de grâu PREMIUM (5 kg / 15 kg). E potrivită pentru cozonaci, aluaturi fine și produse de patiserie.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_AFV3aE": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Vreau să fac pizza. Ce făină îmi recomandați?",
+            "icon": "question_mark",
+            "row_content": "<p>Pentru pizza clasică/albă: Făină albă de grâu PREMIUM (13% proteină).Pentru o pizza cu aromă mai rustică: recomandăm <a href=\"https://biruintaolteniei.ro/products/faina-integrala-de-grau\"><span style=\"text-decoration:underline\"><strong>făină integrală de grâu</strong></span></a>.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_pUwV64": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Făina voastră e bună pentru paste (tăiței)?",
+            "icon": "question_mark",
+            "row_content": "<p>Da. Poți folosi atât <a href=\"https://biruintaolteniei.ro/products/faina-integrala-de-grau\"><span style=\"text-decoration:underline\"><strong>făină integrală de grâu</strong></span></a>, cât și făina Tip 650 (<a href=\"https://biruintaolteniei.ro/products/faina-alba-de-grau-premium-25-kg\"><span style=\"text-decoration:underline\"><strong>Făină albă de grâu PREMIUM</strong></span></a><strong>) </strong>pentru tăiței/paste de casă. (Dacă vrei tăiței mai „galbeni”, poți pune mai multe ouă sau poți face un amestec cu integrală în proporție mai mică.)</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_HFzhpn": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Ce făină recomandați pentru clătite și pancakes?",
+            "icon": "question_mark",
+            "row_content": "<p>Pentru clătite și pancakes, poți folosi făina Tip 650 (<a href=\"https://biruintaolteniei.ro/products/faina-alba-de-grau-premium-25-kg\"><span style=\"text-decoration:underline\"><strong>Făină albă de grâu PREMIUM</strong></span></a>). Dacă vrei un gust mai „de cereale” (ca odinioară), poți face un amestec: 50% făină integrală + 50% Tip 650.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_hRPWwh": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Ce făină recomandați pentru plăcinte, chec, pandișpan?",
+            "icon": "question_mark",
+            "row_content": "<p><a href=\"https://biruintaolteniei.ro/products/faina-alba-de-grau-premium-25-kg\"><span style=\"text-decoration:underline\"><strong>Făină albă de grâu PREMIUM</strong></span></a><strong>, </strong>tip 650 e ok pentru majoritatea aluaturilor de casă. Pentru pandișpan foarte fin, contează mult și tehnica (ouăle bătute corect), nu doar făina.</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_R8fjTH",
+        "collapsible_row_AFV3aE",
+        "collapsible_row_pUwV64",
+        "collapsible_row_HFzhpn",
+        "collapsible_row_hRPWwh"
+      ],
+      "name": "t:sections.collapsible_content.presets.name",
+      "settings": {
+        "caption": "",
+        "heading": "",
+        "heading_size": "h2",
+        "heading_alignment": "left",
+        "layout": "none",
+        "container_color_scheme": "",
+        "color_scheme": "",
+        "open_first_collapsible_row": false,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 0,
+        "padding_bottom": 36
+      }
+    },
+    "custom_liquid_AR3JXk": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<div id=\"paine-intrebari\" style=\"text-align:center;\">\n  <h2 class=\"collapsible-content__heading inline-richtext h2\">\n    {%- if request.locale.iso_code == 'en' -%}\n      4. Bread (homemade bread, sourdough, whole wheat, rye) + frequently asked questions\n    {%- else -%}\n      4. Pâine (pâine de casă, maia, integrală, secară) + întrebări frecvente\n    {%- endif -%}\n  </h2>\n</div>",
+        "color_scheme": "",
+        "padding_top": 40,
+        "padding_bottom": 0
+      }
+    },
+    "collapsible_content_76JHta": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row_CKptnC": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Ce făină recomandați pentru pâine de casă?",
+            "icon": "question_mark",
+            "row_content": "<p>Recomandăm <a href=\"https://biruintaolteniei.ro/products/faina-integrala-de-grau\"><span style=\"text-decoration:underline\"><strong>făină integrală de grâu</strong></span></a> și <a href=\"https://biruintaolteniei.ro/products/faina-integrala-de-secara-100\"><span style=\"text-decoration:underline\"><strong>făină integrală de secară</strong></span></a>.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_QT9kmL": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Ce făină recomandați pentru pâine cu maia?",
+            "icon": "question_mark",
+            "row_content": "<p>Recomandăm <a href=\"https://biruintaolteniei.ro/products/faina-integrala-de-grau\"><span style=\"text-decoration:underline\"><strong>făina integrală de grâu</strong></span></a> și <a href=\"https://biruintaolteniei.ro/products/faina-integrala-de-secara-100\"><span style=\"text-decoration:underline\"><strong>făină integrală de secară</strong></span></a>, mai ales pentru maia.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_xaD3Nz": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Făina e potrivită pentru maia (sourdough)?",
+            "icon": "question_mark",
+            "row_content": "<p>Da. Merge foarte bine și pentru maia, mai ales dacă ai răbdare cu timpii de fermentație și hidratarea (în special la integrală).</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_PFrq3g": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Pot face pâine 100% integrală cu făina voastră?",
+            "icon": "question_mark",
+            "row_content": "<p>Da, majoritatea clienților noștri folosesc făina integrală pentru pâine. Ajută mult: hidratare mai mare, autoliză și fermentație mai lungă.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_H7pwPc": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "La ce e bună făina integrală de secară?",
+            "icon": "question_mark",
+            "row_content": "<p>Clienții noștri o comandă mai ales pentru pâine și pizza. E foarte bună pentru pâini cu aromă intensă, crackers și turte, dar și în amestec cu grâu (de exemplu 10–30% secară) pentru gust și umiditate.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_XFWQrR": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Aveți o rețetă pentru făina de secară?",
+            "icon": "question_mark",
+            "row_content": "<p>Da. Orice rețetă clasică cu secară (disponibilă pe internet) este potrivită și pentru făina noastră integrală de secară.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_pgJ8Dy": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Care e diferența între făina albă și făina integrală?",
+            "icon": "question_mark",
+            "row_content": "<p>Făina integrală include și tărâța și germenele, deci are gust mai „plin” și cere, de regulă, mai multă apă și timp de hidratare.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_t8QLL7": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "De ce cere făina integrală mai multă apă?",
+            "icon": "question_mark",
+            "row_content": "<p>Pentru că tărâța absoarbe multă apă. De aceea, aluatul are nevoie de hidratare mai mare și de timp de repaus (autoliză / pauze între frământări).</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_EK7kt3": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Ce este autoliza și de ce contează la făina integrală?",
+            "icon": "question_mark",
+            "row_content": "<p>Autoliza (în panificație) este pauza în care amesteci făina + apa și lași 20–60 min înainte de sare și drojdie/maia. Ajută la hidratare și la formarea structurii aluatului.<br/>La făină integrală, autoliza (și, în general, timpii de hidratare) ajută fiindcă tărâța „fură” apă, iar aluatul se stabilizează mai bine după repaus.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_xV9Yij": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Care sunt cauzele pentru care aluatul pentru paine nu crește (și ce poți face)?",
+            "icon": "question_mark",
+            "row_content": "<p>Dacă folosești o făină integrală, așa cum este făina noastră, e bine să știi că făina noastră este fără amelioratori/aditivi, ceea ce poate cere timpi mai buni de frământare și dospire față de făinurile industriale „ajutate”.Recomandări practice (generale):verifică drojdia/maiaua (să fie activă) și temperatura de dospire;mărește ușor hidratarea (mai ales la integrală/secară);prelungește fermentația (bulk + dospire finală);dacă vrei ajutor punctual, avem număr de contact pentru comenzi/situații neprevăzute pe paginile de produs.<br/><br/></p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_nnPiJG": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "De ce aluatul meu e prea lipicios cu făina integrală?",
+            "icon": "question_mark",
+            "row_content": "<p>E normal să fie mai lipicios la început. Ajută mult: autoliza, pauze între împachetări, și să nu adaugi multă făină pe masă (mai bine lucrezi cu mâinile umezite).</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_VPjzAd": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "De ce pâinea cu secară iese „cleioasă” la mijloc?",
+            "icon": "question_mark",
+            "row_content": "<p>Secara se comportă diferit față de grâul alb (mai puțin gluten). De obicei ajută: procent mai mic de secară în amestec, coacere suficientă și răcire completă înainte de tăiere.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_GzJEHE": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Pot combina Tip 650 cu integrală? În ce proporții?",
+            "icon": "question_mark",
+            "row_content": "<p>Da. O combinație simplă pentru paine și foarte folosită: 3% <a href=\"https://biruintaolteniei.ro/products/faina-integrala-de-grau\"><span style=\"text-decoration:underline\"><strong>făină integrală de grâu</strong></span></a> (tip 650) + 70% integrală pentru paine. Ajustezi apa în sus, ușor, când crești procentul de integrală.</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_CKptnC",
+        "collapsible_row_QT9kmL",
+        "collapsible_row_xaD3Nz",
+        "collapsible_row_PFrq3g",
+        "collapsible_row_H7pwPc",
+        "collapsible_row_XFWQrR",
+        "collapsible_row_pgJ8Dy",
+        "collapsible_row_t8QLL7",
+        "collapsible_row_EK7kt3",
+        "collapsible_row_xV9Yij",
+        "collapsible_row_nnPiJG",
+        "collapsible_row_VPjzAd",
+        "collapsible_row_GzJEHE"
+      ],
+      "name": "t:sections.collapsible_content.presets.name",
+      "settings": {
+        "caption": "",
+        "heading": "",
+        "heading_size": "h2",
+        "heading_alignment": "left",
+        "layout": "none",
+        "container_color_scheme": "",
+        "color_scheme": "",
+        "open_first_collapsible_row": false,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 0,
+        "padding_bottom": 36
+      }
+    },
+    "custom_liquid_MEJTJK": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<div id=\"paine-diabet\" style=\"text-align:center;\">\n  <h2 class=\"collapsible-content__heading inline-richtext h2\">\n    {%- if request.locale.iso_code == 'en' -%}\n      5. Bread and diabetes\n    {%- else -%}\n      5. Pâine și diabet\n    {%- endif -%}\n  </h2>\n</div>",
+        "color_scheme": "",
+        "padding_top": 40,
+        "padding_bottom": 0
+      }
+    },
+    "collapsible_content_wqEzie": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row_PeLbfz": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Ce pâine e mai potrivită pentru diabet: albă sau integrală?",
+            "icon": "question_mark",
+            "row_content": "<p>În general, pâinea integrală (cu mai multe fibre) poate avea un impact mai blând decât pâinea albă, dar contează mult porția, rețeta și cu ce o mănânci. Dacă ai diabet, cel mai bine e să îți adaptezi consumul împreună cu medicul/dieteticianul.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_R3xtXK": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Făina integrală are indice glicemic mai mic?",
+            "icon": "question_mark",
+            "row_content": "<p>De obicei, produsele integrale pot avea un răspuns glicemic mai lent față de cele din făină albă, datorită fibrelor. Totuși, indicele glicemic al pâinii depinde și de proces (maia vs drojdie), hidratare, fermentație și coacere.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_rdxWH3": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Pâinea cu maia e mai bună pentru glicemie?",
+            "icon": "question_mark",
+            "row_content": "<p>Pentru unii oameni, pâinea cu maia (fermentație mai lungă) poate fi mai bine tolerată decât pâinea cu dospire rapidă, dar reacția diferă de la persoană la persoană. Importantă rămâne cantitatea consumată.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_keCCXV": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Secara e o opțiune bună pentru pâine?",
+            "icon": "question_mark",
+            "row_content": "<p>Secara are gust intens și, în general, pâinile cu secară sunt mai „dense”. Mulți aleg să pună 10–30% secară în amestec cu grâu pentru aromă și textură. (Pentru recomandări personalizate, mai ales în diabet, e bine de discutat cu specialistul.)</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_6cAgGk": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Pâinea integrală înseamnă „fără zahăr” sau „low carb”?",
+            "icon": "question_mark",
+            "row_content": "<p>Nu. E tot pâine, deci are carbohidrați. Diferența e că integralul aduce, de regulă, mai multe fibre.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_YbFqDN": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Ce contează cel mai mult pentru glicemie când mănânc pâine?",
+            "icon": "question_mark",
+            "row_content": "<p>De regulă: porția, tipul pâinii (integrală/maia), combinația din farfurie (cu proteine/grăsimi/fibre) și momentul zilei. Dacă urmărești glicemia, cel mai util e să testezi cum reacționezi tu la diferite tipuri.</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_PeLbfz",
+        "collapsible_row_R3xtXK",
+        "collapsible_row_rdxWH3",
+        "collapsible_row_keCCXV",
+        "collapsible_row_6cAgGk",
+        "collapsible_row_YbFqDN"
+      ],
+      "name": "t:sections.collapsible_content.presets.name",
+      "settings": {
+        "caption": "",
+        "heading": "",
+        "heading_size": "h2",
+        "heading_alignment": "left",
+        "layout": "none",
+        "container_color_scheme": "",
+        "color_scheme": "",
+        "open_first_collapsible_row": false,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 0,
+        "padding_bottom": 36
+      }
+    },
+    "custom_liquid_mL8HKK": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<script type=\"application/ld+json\">\n{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"FAQPage\",\n  \"mainEntity\": [\n    {\n      \"@type\": \"Question\",\n      \"name\": \"Făina voastră are în compoziție „cenușă”?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"Da. Orice făină are „cenușă”, adică reziduul mineral. La Biruința Olteniei, făina albă PREMIUM este Tip 650, ceea ce înseamnă un conținut de cenușă de maximum 0,65%, raportat la substanța uscată.\"\n      }\n    },\n    {\n      \"@type\": \"Question\",\n      \"name\": \"Ce înseamnă făină Tip 650?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"Tip 650 este o clasificare a făinii de grâu în funcție de conținutul de cenușă, adică de minerale. Pentru Tip 650, limita este de maximum 0,65% cenușă, raportat la substanța uscată.\"\n      }\n    },\n    {\n      \"@type\": \"Question\",\n      \"name\": \"Care este procentul de proteină la făina voastră?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"Făina albă de grâu PREMIUM are 15% proteină, făina integrală de grâu are 13,8% proteină, iar făina integrală de secară are 13% proteină.\"\n      }\n    },\n    {\n      \"@type\": \"Question\",\n      \"name\": \"De ce este relevant procentul de proteină la făină și ce indică el?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"Procentul de proteină arată, în mare, cât de bine poate lega aluatul. Mai multă proteină înseamnă, de regulă, un aluat mai elastic și mai stabil, bun pentru pâine, pizza sau cozonac. Totuși, contează și tipul de grâu și modul în care lucrezi aluatul, deci nu este singurul criteriu.\"\n      }\n    },\n    {\n      \"@type\": \"Question\",\n      \"name\": \"Cerealele folosite la moara de la Biruința Olteniei au pesticide?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"Pentru probe de grâu și secară din 2025, rezultatul pentru reziduuri de pesticide este sub limita de cuantificare, cu concluzie de conformitate raportată la Regulamentul (CE) nr. 396/2005.\"\n      }\n    },\n    {\n      \"@type\": \"Question\",\n      \"name\": \"Ce înseamnă < LOQ la analize?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"Înseamnă „sub limita de cuantificare”, adică s-a analizat, dar valoarea este atât de mică încât se află sub pragul la care laboratorul o poate măsura precis.\"\n      }\n    },\n    {\n      \"@type\": \"Question\",\n      \"name\": \"Care sunt produsele de la Biruința Olteniei?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"În gamă se găsesc făină albă PREMIUM, făină integrală de grâu, făină integrală de secară, tărâțe integrale de grâu și pachete cu combinații de grâu și secară.\"\n      }\n    },\n    {\n      \"@type\": \"Question\",\n      \"name\": \"Aveți și tărâțe? La ce sunt bune?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"Da, există tărâțe integrale de grâu. Pot fi folosite în pâine, în cantități mici, dar și în granola, iaurt sau în alte rețete pentru un plus de fibre.\"\n      }\n    },\n    {\n      \"@type\": \"Question\",\n      \"name\": \"Unde aveți moara?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"Moara Cooperativei Agricole Biruința Olteniei este în Dobrun, sat Ulmet, județul Olt.\"\n      }\n    },\n    {\n      \"@type\": \"Question\",\n      \"name\": \"Cum păstrez făina ca să nu prindă miros sau umiditate?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"Păstrează făina într-un recipient închis, la loc uscat și răcoros. Ideal este să nu stea lângă condimente puternice sau în spații umede.\"\n      }\n    },\n    {\n      \"@type\": \"Question\",\n      \"name\": \"Ce termen de valabilitate are făina?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"Termenul exact de valabilitate este indicat pe ambalaj. După deschidere, recomandarea practică este să fie păstrată bine închisă.\"\n      }\n    },\n    {\n      \"@type\": \"Question\",\n      \"name\": \"Unde găsim făina de la Biruința Olteniei?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"Făina poate fi comandată online direct de pe site-ul biruintaolteniei.ro. În București este disponibilă și în Băcănia Veche.\"\n      }\n    },\n    {\n      \"@type\": \"Question\",\n      \"name\": \"În ce băcănii și magazine sunteți în țară?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"Momentan, produsele sunt prezente în Băcănia Veche din București.\"\n      }\n    },\n    {\n      \"@type\": \"Question\",\n      \"name\": \"Livrați făină în toată țara?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"Da, livrăm în toată țara.\"\n      }\n    },\n    {\n      \"@type\": \"Question\",\n      \"name\": \"În cât timp ajunge comanda de făină?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"Conform politicii de expediere, comanda ajunge în aproximativ 3 zile, după confirmarea comenzii și în funcție de stoc.\"\n      }\n    },\n    {\n      \"@type\": \"Question\",\n      \"name\": \"Pot plăti cu cardul când fac o comandă?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"Da, poți plăti cu cardul folosind metode uzuale, precum Visa și Mastercard.\"\n      }\n    },\n    {\n      \"@type\": \"Question\",\n      \"name\": \"Pot plăti ramburs când comand de pe site?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"Da, există și opțiunea de plată ramburs.\"\n      }\n    },\n    {\n      \"@type\": \"Question\",\n      \"name\": \"Ce fac dacă mi-a ajuns coletul deteriorat?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"Dacă pachetul a ajuns deteriorat, trimiteți un mesaj cu poze și situația va fi rezolvată.\"\n      }\n    },\n    {\n      \"@type\": \"Question\",\n      \"name\": \"Vreau să fac o comandă, dar nu mă descurc să comand online. Cum procedez?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"Comanda poate fi plasată și telefonic cu ajutorul echipei. Pentru asistență, sunați la 0778 748 196, de luni până vineri, în intervalul 09:00–16:00.\"\n      }\n    },\n    {\n      \"@type\": \"Question\",\n      \"name\": \"Vreau să fac cozonaci. Ce făină îmi recomandați?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"Pentru cozonaci este recomandată făina albă de grâu PREMIUM, potrivită pentru cozonaci, aluaturi fine și produse de patiserie.\"\n      }\n    },\n    {\n      \"@type\": \"Question\",\n      \"name\": \"Vreau să fac pizza. Ce făină îmi recomandați?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"Pentru pizza clasică se recomandă făina albă de grâu PREMIUM, cu 15% proteină. Pentru o pizza cu aromă mai rustică, este recomandată făina integrală de grâu.\"\n      }\n    },\n    {\n      \"@type\": \"Question\",\n      \"name\": \"Făina voastră e bună pentru paste (tăiței)?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"Da. Pentru tăiței și paste de casă pot fi folosite atât făina integrală de grâu, cât și făina albă de grâu PREMIUM Tip 650. Dacă se dorește o culoare mai galbenă la tăiței, se pot folosi mai multe ouă sau un amestec cu mai puțină făină integrală.\"\n      }\n    },\n    {\n      \"@type\": \"Question\",\n      \"name\": \"Ce făină recomandați pentru clătite și pancakes?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"Pentru clătite și pancakes se poate folosi făina albă de grâu PREMIUM Tip 650. Pentru un gust mai intens de cereale, se poate face și un amestec de 50% făină integrală și 50% făină Tip 650.\"\n      }\n    },\n    {\n      \"@type\": \"Question\",\n      \"name\": \"Ce făină recomandați pentru plăcinte, chec și pandișpan?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"Făina albă de grâu PREMIUM Tip 650 este potrivită pentru majoritatea aluaturilor de casă. Pentru pandișpan foarte fin contează mult și tehnica, mai ales cum sunt bătute ouăle, nu doar tipul de făină.\"\n      }\n    },\n    {\n      \"@type\": \"Question\",\n      \"name\": \"Ce făină recomandați pentru pâine de casă?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"Pentru pâine de casă sunt recomandate făina integrală de grâu și făina integrală de secară.\"\n      }\n    },\n    {\n      \"@type\": \"Question\",\n      \"name\": \"Ce făină recomandați pentru pâine cu maia?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"Pentru pâine cu maia sunt recomandate în special făina integrală de grâu și făina integrală de secară.\"\n      }\n    },\n    {\n      \"@type\": \"Question\",\n      \"name\": \"Făina e potrivită pentru maia (sourdough)?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"Da. Făina merge foarte bine și pentru maia, mai ales dacă sunt respectați timpii de fermentație și hidratarea potrivită, în special la făinurile integrale.\"\n      }\n    },\n    {\n      \"@type\": \"Question\",\n      \"name\": \"Pot face pâine 100% integrală cu făina voastră?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"Da. Mulți clienți folosesc făina integrală pentru pâine 100% integrală. Ajută mult o hidratare mai mare, autoliza și o fermentație mai lungă.\"\n      }\n    },\n    {\n      \"@type\": \"Question\",\n      \"name\": \"La ce e bună făina integrală de secară?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"Făina integrală de secară este folosită mai ales pentru pâine și pizza. Este foarte bună pentru pâini cu aromă intensă, crackers și turte, dar și în amestec cu grâu, de exemplu în proporție de 10–30%, pentru gust și umiditate.\"\n      }\n    },\n    {\n      \"@type\": \"Question\",\n      \"name\": \"Aveți o rețetă pentru făina de secară?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"Da. Orice rețetă clasică cu secară este potrivită și pentru făina integrală de secară de la Biruința Olteniei.\"\n      }\n    },\n    {\n      \"@type\": \"Question\",\n      \"name\": \"Care e diferența între făina albă și făina integrală?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"Făina integrală include și tărâța și germenele, de aceea are un gust mai plin și cere, de regulă, mai multă apă și mai mult timp de hidratare decât făina albă.\"\n      }\n    },\n    {\n      \"@type\": \"Question\",\n      \"name\": \"De ce cere făina integrală mai multă apă?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"Pentru că tărâța absoarbe multă apă. Din acest motiv, aluatul are nevoie de hidratare mai mare și de timp de repaus, cum ar fi autoliza sau pauzele între frământări.\"\n      }\n    },\n    {\n      \"@type\": \"Question\",\n      \"name\": \"Ce este autoliza și de ce contează la făina integrală?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"Autoliza este etapa în care se amestecă făina cu apa și se lasă la odihnă 20–60 de minute înainte de a adăuga sarea și drojdia sau maiaua. Ajută la hidratare și la formarea structurii aluatului. La făina integrală este importantă deoarece tărâța absoarbe multă apă, iar aluatul se stabilizează mai bine după repaus.\"\n      }\n    },\n    {\n      \"@type\": \"Question\",\n      \"name\": \"Care sunt cauzele pentru care aluatul pentru pâine nu crește și ce poți face?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"La făina integrală, mai ales una fără amelioratori sau aditivi, cum este făina Biruința Olteniei, pot fi necesari timpi mai buni de frământare și dospire decât la făinurile industriale. În general, este important să verifici drojdia sau maiaua să fie activă, temperatura de dospire, să mărești ușor hidratarea, mai ales la integrală și secară, și să prelungești fermentația.\"\n      }\n    },\n    {\n      \"@type\": \"Question\",\n      \"name\": \"De ce aluatul meu e prea lipicios cu făina integrală?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"Este normal ca aluatul cu făină integrală să fie mai lipicios la început. Ajută mult autoliza, pauzele între împachetări și lucrul cu mâinile umezite, în loc să se adauge multă făină pe masă.\"\n      }\n    },\n    {\n      \"@type\": \"Question\",\n      \"name\": \"De ce pâinea cu secară iese „cleioasă” la mijloc?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"Secara se comportă diferit față de grâul alb și are mai puțin gluten. De obicei ajută un procent mai mic de secară în amestec, o coacere suficientă și răcirea completă a pâinii înainte de tăiere.\"\n      }\n    },\n    {\n      \"@type\": \"Question\",\n      \"name\": \"Pot combina Tip 650 cu integrală? În ce proporții?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"Da. Făina Tip 650 poate fi combinată cu făina integrală, iar proporția se ajustează în funcție de tipul de pâine dorit și de cât de rustic vrei să iasă rezultatul. Pe măsură ce crește procentul de făină integrală, este util să ajustezi ușor și cantitatea de apă.\"\n      }\n    },\n    {\n      \"@type\": \"Question\",\n      \"name\": \"Ce pâine este mai potrivită pentru diabet: albă sau integrală?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"În general, pâinea integrală poate avea un impact mai blând decât pâinea albă, datorită fibrelor. Totuși, contează mult porția, rețeta și cu ce este consumată. Pentru recomandări personalizate, este bine să discuți cu medicul sau dieteticianul.\"\n      }\n    },\n    {\n      \"@type\": \"Question\",\n      \"name\": \"Făina integrală are indice glicemic mai mic?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"De obicei, produsele integrale pot avea un răspuns glicemic mai lent decât cele din făină albă, datorită fibrelor. Totuși, indicele glicemic al pâinii depinde și de procesul de preparare, de exemplu maia versus drojdie, precum și de hidratare, fermentație și coacere.\"\n      }\n    },\n    {\n      \"@type\": \"Question\",\n      \"name\": \"Pâinea cu maia este mai bună pentru glicemie?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"Pentru unii oameni, pâinea cu maia poate fi mai bine tolerată decât pâinea cu dospire rapidă, însă reacția diferă de la persoană la persoană. Cantitatea consumată rămâne foarte importantă.\"\n      }\n    },\n    {\n      \"@type\": \"Question\",\n      \"name\": \"Secara e o opțiune bună pentru pâine?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"Secara are un gust intens, iar pâinile cu secară sunt în general mai dense. Mulți aleg să folosească 10–30% secară în amestec cu grâu pentru aromă și textură. Pentru recomandări personalizate, mai ales în diabet, este bine să discuți cu un specialist.\"\n      }\n    },\n    {\n      \"@type\": \"Question\",\n      \"name\": \"Pâinea integrală înseamnă „fără zahăr” sau „low carb”?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"Nu. Pâinea integrală este tot pâine și conține carbohidrați. Diferența este că, de regulă, are mai multe fibre decât pâinea albă.\"\n      }\n    },\n    {\n      \"@type\": \"Question\",\n      \"name\": \"Ce contează cel mai mult pentru glicemie când mănânc pâine?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"De regulă contează porția, tipul pâinii, de exemplu integrală sau cu maia, combinația din farfurie cu proteine, grăsimi și fibre, dar și momentul zilei. Dacă urmărești glicemia, cel mai util este să observi cum reacționezi tu la diferite tipuri de pâine.\"\n      }\n    }\n  ]\n}\n</script>",
+        "color_scheme": "",
+        "padding_top": 12,
+        "padding_bottom": 8
+      }
+    }
+  },
+  "order": [
+    "main",
+    "custom_liquid_YkCpbf",
+    "rich_text_djfX4m",
+    "custom_liquid_6UWtdB",
+    "collapsible_content_jxJAnr",
+    "custom_liquid_tzykUX",
+    "collapsible_content_XbepW8",
+    "custom_liquid_p6Kh9G",
+    "collapsible_content_aGmmqK",
+    "custom_liquid_AR3JXk",
+    "collapsible_content_76JHta",
+    "custom_liquid_MEJTJK",
+    "collapsible_content_wqEzie",
+    "custom_liquid_mL8HKK"
+  ]
+}

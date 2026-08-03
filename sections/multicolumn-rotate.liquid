@@ -1,0 +1,399 @@
+{{ 'section-multicolumn.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  /* Végtelen csúszka alap beállításai */
+  .marquee-container-{{ section.id }} {
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+    /* Ez akadályozza meg, hogy a téma alapértelmezett rácsa szétcsússzon */
+    box-sizing: border-box; 
+  }
+
+  .marquee-track-{{ section.id }} {
+    display: flex;
+    width: max-content;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    /* A 20s határozza meg a sebességet. Kisebb szám = gyorsabb! */
+    animation: marqueeScroll-{{ section.id }} {{ section.settings.scroll_speed }}s linear infinite;
+  }
+
+  /* Ha az egeret ráviszik, megáll, hogy el lehessen olvasni */
+  .marquee-track-{{ section.id }}:hover {
+    animation-play-state: paused;
+  }
+
+  /* Az egyes kártyák méretezése (a JS fogja megadni a pontos értéket a CSS változónak) */
+  .marquee-item-{{ section.id }} {
+    flex: 0 0 auto;
+    width: var(--item-width, 300px);
+    margin-right: 15px; /* A kártyák közötti fix távolság */
+    box-sizing: border-box;
+  }
+
+  /* Animáció: 4 szettet generálunk, így pontosan 25%-ot kell tolnunk rajta a tökéletes ismétlődéshez */
+  @keyframes marqueeScroll-{{ section.id }} {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-25%); }
+  }
+{%- endstyle -%}
+
+<div class="multicolumn color-{{ section.settings.color_scheme }} gradient background-{{ section.settings.background_style }}{% if section.settings.title == blank %} no-heading{% endif %}">
+  <div class="page-width section-{{ section.id }}-padding isolate">
+    {%- unless section.settings.title == blank -%}
+      <div class="title-wrapper-with-link title-wrapper--self-padded-mobile title-wrapper--no-top-margin multicolumn__title">
+        <h2 class="title inline-richtext {{ section.settings.heading_size }}">
+          {{ section.settings.title }}
+        </h2>
+      </div>
+    {%- endunless -%}
+
+    {%- liquid
+      assign highest_ratio = 0
+      for block in section.blocks
+        if block.settings.image.aspect_ratio > highest_ratio
+          assign highest_ratio = block.settings.image.aspect_ratio
+        endif
+      endfor
+    -%}
+
+    {%- capture slider_content -%}
+      {%- for block in section.blocks -%}
+        <li
+          class="multicolumn-list__item marquee-item-{{ section.id }} {% if section.settings.column_alignment == 'center' %} center{% endif %}"
+          {{ block.shopify_attributes }}
+        >
+          <div class="multicolumn-card content-container">
+            {%- if block.settings.image != blank -%}
+              {% if section.settings.image_ratio == 'adapt' or section.settings.image_ratio == 'circle' %}
+                {% assign spaced_image = true %}
+              {% endif %}
+              <div class="multicolumn-card__image-wrapper multicolumn-card__image-wrapper--{{ section.settings.image_width }}-width{% if section.settings.image_width != 'full' or spaced_image %} multicolumn-card-spacing{% endif %}">
+                <div
+                  class="media media--transparent media--{{ section.settings.image_ratio }}"
+                  {% if section.settings.image_ratio == 'adapt' %}
+                    style="padding-bottom: {{ 1 | divided_by: highest_ratio | times: 100 }}%;"
+                  {% endif %}
+                >
+                  {{
+                    block.settings.image
+                    | image_url: width: 1000
+                    | image_tag: loading: 'lazy', class: 'multicolumn-card__image'
+                  }}
+                </div>
+              </div>
+            {%- endif -%}
+            <div class="multicolumn-card__info">
+              {%- if block.settings.title != blank -%}
+                <h3 class="inline-richtext {{ section.settings.card_title_size }}">{{ block.settings.title }}</h3>
+              {%- endif -%}
+              {%- if block.settings.text != blank -%}
+                <div class="rte">{{ block.settings.text }}</div>
+              {%- endif -%}
+              {%- if block.settings.link_label != blank -%}
+                <a
+                  class="link animate-arrow"
+                  {% if block.settings.link == blank %}
+                    role="link" aria-disabled="true"
+                  {% else %}
+                    href="{{ block.settings.link }}"
+                  {% endif %}
+                >
+                  {{- block.settings.link_label | escape -}}
+                  <span class="svg-wrapper"
+                    ><span class="icon-wrap">&nbsp;{{ 'icon-arrow.svg' | inline_asset_content }}</span></span
+                  >
+                </a>
+              {%- endif -%}
+            </div>
+          </div>
+        </li>
+      {%- endfor -%}
+    {%- endcapture -%}
+
+    <div class="marquee-container-{{ section.id }}" id="MarqueeContainer-{{ section.id }}">
+      <ul class="marquee-track-{{ section.id }}">
+        {{ slider_content }}
+        {{ slider_content }}
+        {{ slider_content }}
+        {{ slider_content }}
+      </ul>
+    </div>
+    
+    <div class="center" style="margin-top: 20px;">
+      {%- if section.settings.button_label != blank -%}
+        <a
+          class="button button--primary"
+          {% if section.settings.button_link == blank %}
+            role="link" aria-disabled="true"
+          {% else %}
+            href="{{ section.settings.button_link }}"
+          {% endif %}
+        >
+          {{ section.settings.button_label | escape }}
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+<script>
+  function adjustMarqueeItemWidth_{{ section.id | replace: '-', '_' }}() {
+    const container = document.getElementById('MarqueeContainer-{{ section.id }}');
+    if (!container) return;
+
+    // Kinyerjük a beállított oszlopszámokat
+    const desktopCols = {{ section.settings.columns_desktop }};
+    const mobileCols = {{ section.settings.columns_mobile }};
+    
+    // Mobilon vagyunk? (750px alatt)
+    const isMobile = window.innerWidth < 750;
+    const activeCols = isMobile ? mobileCols : desktopCols;
+    
+    const gap = 15; // A CSS-ben megadott margin-right értéke
+    
+    // Kiszámoljuk egy kártya pontos szélességét, hogy pont 'activeCols' darab férjen ki
+    const itemWidth = (container.clientWidth - (gap * (activeCols - 1))) / activeCols;
+    
+    // Beállítjuk a CSS változót
+    container.style.setProperty('--item-width', `${itemWidth}px`);
+  }
+
+  // Futatás betöltéskor
+  document.addEventListener('DOMContentLoaded', adjustMarqueeItemWidth_{{ section.id | replace: '-', '_' }});
+  
+  // Futatás ablak átméretezésekor
+  window.addEventListener('resize', adjustMarqueeItemWidth_{{ section.id | replace: '-', '_' }});
+  
+  // Futatás a Shopify szerkesztőben való állítgatáskor is
+  document.addEventListener('shopify:section:load', adjustMarqueeItemWidth_{{ section.id | replace: '-', '_' }});
+</script>
+
+{% schema %}
+{
+  "name": "Folyamatos Csúszka",
+  "class": "section",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "default": "Végtelen Csúszka",
+      "label": "Főcím"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        { "value": "h2", "label": "Kicsi" },
+        { "value": "h1", "label": "Közepes" },
+        { "value": "h0", "label": "Nagy" }
+      ],
+      "default": "h1",
+      "label": "Főcím mérete"
+    },
+    {
+      "type": "range",
+      "id": "scroll_speed",
+      "min": 5,
+      "max": 50,
+      "step": 1,
+      "default": 20,
+      "unit": "mp",
+      "label": "Görgetési sebesség",
+      "info": "Kisebb szám = Gyorsabb forgás."
+    },
+    {
+      "type": "header",
+      "content": "Képek beállításai"
+    },    
+    {
+      "type": "select",
+      "id": "image_width",
+      "options": [
+        { "value": "third", "label": "Harmad" },
+        { "value": "half", "label": "Fél" },
+        { "value": "full", "label": "Teljes" }
+      ],
+      "default": "full",
+      "label": "Kép szélessége"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "options": [
+        { "value": "adapt", "label": "Képhez igazodik" },
+        { "value": "portrait", "label": "Álló" },
+        { "value": "square", "label": "Négyzet" },
+        { "value": "circle", "label": "Kör" }
+      ],
+      "default": "adapt",
+      "label": "Képarány"
+    },
+    {
+      "type": "header",
+      "content": "Gomb"
+    },    
+    {
+      "type": "text",
+      "id": "button_label",
+      "default": "Tovább",
+      "label": "Gomb szövege"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Gomb linkje"
+    },    
+    {
+      "type": "header",
+      "content": "Elrendezés"
+    },     
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "default": 4,
+      "label": "Oszlopok száma (Asztali)"
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" }
+      ],
+      "default": "1",
+      "label": "Oszlopok száma (Mobil)"
+    },
+    {
+      "type": "select",
+      "id": "column_alignment",
+      "options": [
+        { "value": "left", "label": "Balra" },
+        { "value": "center", "label": "Középre" }
+      ],
+      "default": "center",
+      "label": "Szöveg igazítása"
+    },
+    {
+      "type": "select",
+      "id": "card_title_size",
+      "options": [
+        { "value": "h5", "label": "Legkisebb" },
+        { "value": "h4", "label": "Kicsi" },
+        { "value": "h3", "label": "Közepes" },
+        { "value": "h2", "label": "Nagy" }
+      ],
+      "default": "h3",
+      "label": "Kártya címének mérete"
+    },
+    {
+      "type": "select",
+      "id": "background_style",
+      "options": [
+        { "value": "none", "label": "Nincs" },
+        { "value": "primary", "label": "Elsődleges" }
+      ],
+      "default": "primary",
+      "label": "Háttér stílus"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Színséma",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Távolságok (Padding)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Távolság felül",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Távolság alul",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Oszlop",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Kép"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "title",
+          "default": "Oszlop címe",
+          "label": "Cím"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "default": "<p>Szöveg helye.</p>",
+          "label": "Szöveg"
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Link szöveg"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link url"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Folyamatos Csúszka",
+      "blocks": [
+        { "type": "column" },
+        { "type": "column" },
+        { "type": "column" },
+        { "type": "column" },
+        { "type": "column" }
+      ]
+    }
+  ]
+}
+{% endschema %}

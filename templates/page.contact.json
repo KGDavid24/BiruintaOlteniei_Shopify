@@ -1,0 +1,107 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 0
+      }
+    },
+    "form": {
+      "type": "contact-form",
+      "disabled": true,
+      "settings": {
+        "heading": "",
+        "heading_size": "h1",
+        "color_scheme": "scheme-1",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "rich_text_jgHrj4": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_UDTztG": {
+          "type": "heading",
+          "disabled": true,
+          "settings": {
+            "heading": "<strong>Contact Biruința Olteniei</strong>",
+            "heading_size": "h1"
+          }
+        },
+        "text_gdbyRN": {
+          "type": "text",
+          "settings": {
+            "text": "<h2><br/><strong>Înainte să ne scrii</strong></h2><p>Pentru a te putea ajuta cât mai repede, te rugăm să menționezi în mesaj cât mai clar subiectul solicitării tale.<strong> Dacă întrebarea este legată de o comandă, include numărul comenzii și, dacă este cazul, numărul de telefon folosit la plasare.</strong></p><p>Dacă dorești informații despre produse sau o colaborare, ne poți descrie pe scurt ce te interesează, iar noi revenim cu detalii cât mai curând.</p><p><strong>Denumire firmă</strong>: BIRUINȚA OLTENIEI COOPERATIVA AGRICOLĂ<br/><strong>Cod unic de înregistrare (CUI)</strong>: 39545542</p><p><strong>Adresă sediu</strong>: Str. Ias-Ului nr. 8, Cam. 2, Cod poștal 237370</p><p><strong>Punct de lucru:</strong> Strada Principala Nr. 115, sat Ulmet, comuna Dobrun, Olt<br/><strong>Adresă de e-mail</strong>: <a href=\"mailto:comenzi@biruintaolteniei.ro\" target=\"_blank\">comenzi@biruintaolteniei.ro</a><br/><strong>Telefon</strong>: <a href=\"tel:+40778748196\"><strong>+40 778 748 196</strong></a></p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_UDTztG",
+        "text_gdbyRN"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "left",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 0,
+        "padding_bottom": 52
+      }
+    },
+    "custom_contact_7THiYe": {
+      "type": "custom-contact",
+      "name": "Custom contact page",
+      "settings": {
+        "heading": "",
+        "intro": "<p>Ai întrebări despre produse, comenzi sau livrare? Ne poți contacta telefonic sau prin formularul de mai jos, iar echipa noastră îți va răspunde în cel mai scurt timp.</p>",
+        "extra_text": "<p>Fie că dorești informații despre produse, ajutor pentru o comandă sau detalii despre colaborări, îți stăm la dispoziție. Ne dorim să oferim răspunsuri clare, utile și rapide, astfel încât să poți lua decizia potrivită fără bătăi de cap.</p>",
+        "phone_label": "Telefon",
+        "phone": "+40 778 748 196",
+        "email_label": "Email",
+        "email": "",
+        "hours_label": "Program de răspuns",
+        "hours": "Luni – Vineri, 09:00 – 17:00",
+        "response_label": "Timp estimat de răspuns",
+        "response_time": "În maximum 1 zi lucrătoare",
+        "address_label": "Adresă",
+        "address": "",
+        "topics_heading": "Ne poți contacta pentru",
+        "topic_1": "informații despre produse",
+        "topic_2": "ajutor legat de comenzi",
+        "topic_3": "întrebări despre livrare",
+        "topic_4": "colaborări și parteneriate",
+        "help_heading": "",
+        "help_text": "",
+        "company_heading": "",
+        "company_details": "<p></p><p><br/></p>",
+        "name_label": "Nume",
+        "email_form_label": "Email",
+        "phone_form_label": "Telefon",
+        "subject_label": "",
+        "message_label": "Mesaj",
+        "privacy_note": "<p>Prin trimiterea formularului, datele tale vor fi folosite doar pentru a răspunde solicitării transmise.</p>",
+        "button_label": "Trimite mesajul",
+        "success_message": "Mesajul tău a fost trimis cu succes. Îți răspundem cât mai curând.",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "main",
+    "form",
+    "rich_text_jgHrj4",
+    "custom_contact_7THiYe"
+  ]
+}

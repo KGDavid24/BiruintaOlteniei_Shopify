@@ -1,0 +1,142 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "t:sections.header.name",
+  "type": "header",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "blocks": {
+        "announcement-bar-0": {
+          "type": "announcement",
+          "settings": {
+            "text": "Disponibilă cu PLATA RAMBURS",
+            "link": ""
+          }
+        },
+        "announcement_d3X3gB": {
+          "type": "announcement",
+          "disabled": true,
+          "settings": {
+            "text": "NOU: Livrare prin FanBox",
+            "link": ""
+          }
+        },
+        "announcement_6NiUbF": {
+          "type": "announcement",
+          "settings": {
+            "text": "Peste 17.000 de clienți mulțumiți",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "announcement-bar-0",
+        "announcement_d3X3gB",
+        "announcement_6NiUbF"
+      ],
+      "custom_css": [
+        ".announcement-bar__message {font-weight: bold; font-size: 16px; /* modifică dimensiunea cum dorești */}"
+      ],
+      "settings": {
+        "auto_rotate": true,
+        "change_slides_speed": 5,
+        "color_scheme": "scheme-5",
+        "show_line_separator": true,
+        "show_social": false,
+        "enable_country_selector": false,
+        "enable_language_selector": false
+      }
+    },
+    "1770674860b0d21cc7": {
+      "type": "apps",
+      "blocks": {
+        "essential_countdown_timer_app_block_8J7hqj": {
+          "type": "shopify://apps/essential-countdown-timer/blocks/app-block/722378e8-5a70-4eae-aa89-9e44e8e9f6de",
+          "settings": {
+            "id": "cmhxgl3up00mlhyf7lso49bdi"
+          }
+        }
+      },
+      "block_order": [
+        "essential_countdown_timer_app_block_8J7hqj"
+      ],
+      "disabled": true,
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "header": {
+      "type": "header",
+      "custom_css": [
+        ".header__menu-item {font-size: 17px;}"
+      ],
+      "settings": {
+        "logo_position": "top-center",
+        "mobile_logo_position": "center",
+        "menu": "main-menu",
+        "menu_type_desktop": "dropdown",
+        "sticky_header_type": "reduce-logo-size",
+        "show_line_separator": false,
+        "color_scheme": "scheme-2",
+        "menu_color_scheme": "scheme-1",
+        "enable_country_selector": false,
+        "enable_language_selector": true,
+        "enable_customer_avatar": false,
+        "margin_bottom": 0,
+        "padding_top": 8,
+        "padding_bottom": 8
+      }
+    },
+    "custom_liquid_gkUeL9": {
+      "type": "custom-liquid",
+      "custom_css": [],
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<div class=\"mobile-only\">\n  <center>\n    <b>\n      {%- if request.locale.iso_code == 'en' -%}\n        For orders, questions, and unexpected situations: <br>\n      {%- else -%}\n        Pentru comenzi, întrebări și situații neprevăzute: <br>\n      {%- endif -%}\n      <a href=\"tel:+40778748196\"\n         style=\"color:#F4A623; text-decoration:none; font-size:1.35em;\">\n        📞 +40 778 748 196\n      </a>\n    </b>\n  </center>\n</div>",
+        "color_scheme": "",
+        "padding_top": 8,
+        "padding_bottom": 8
+      }
+    },
+    "announcement_bar_NetqhT": {
+      "type": "announcement-bar",
+      "blocks": {
+        "announcement_V3RJEz": {
+          "type": "announcement",
+          "settings": {
+            "text": "Pentru comenzi, întrebări și reclamații => 📞 +40 725 875 923",
+            "link": "shopify://pages/contact"
+          }
+        }
+      },
+      "block_order": [
+        "announcement_V3RJEz"
+      ],
+      "disabled": true,
+      "settings": {
+        "auto_rotate": false,
+        "change_slides_speed": 5,
+        "color_scheme": "scheme-1",
+        "show_line_separator": false,
+        "show_social": false,
+        "enable_country_selector": false,
+        "enable_language_selector": false
+      }
+    }
+  },
+  "order": [
+    "announcement-bar",
+    "1770674860b0d21cc7",
+    "header",
+    "custom_liquid_gkUeL9",
+    "announcement_bar_NetqhT"
+  ]
+}

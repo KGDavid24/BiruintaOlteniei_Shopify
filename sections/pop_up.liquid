@@ -1,0 +1,400 @@
+{% comment %}
+  Promo popup section (global modal)
+  Install:
+  1) Create sections/promo-popup.liquid with this content
+  2) Include it globally in layout/theme.liquid before </body>:
+      {% section 'promo-popup' %}
+{% endcomment %}
+
+{% assign modal_id = 'promoPopup-' | append: section.id %}
+
+{% if section.settings.enabled %}
+<div id="{{ modal_id }}" class="pp-modal" aria-hidden="true">
+  <div class="pp-overlay" data-pp-close></div>
+
+  <div class="pp-dialog" role="dialog" aria-modal="true" tabindex="-1">
+    <button type="button" class="pp-close" aria-label="{{ section.settings.close_aria_label }}" data-pp-close>×</button>
+
+    {% if section.settings.hero_image != blank %}
+      <div class="pp-hero">
+        {{ section.settings.hero_image | image_url: width: 800 | image_tag: class: 'pp-hero-img', loading: 'lazy', alt: section.settings.hero_alt }}
+      </div>
+    {% endif %}
+
+    <div class="pp-body">
+      {% if section.settings.title != blank %}
+        <h2 class="pp-title">{{ section.settings.title }}</h2>
+      {% endif %}
+
+      {% if section.settings.subtitle != blank %}
+        <div class="pp-subtitle">{{ section.settings.subtitle }}</div>
+      {% endif %}
+
+      {% if section.settings.note != blank %}
+        <div class="pp-note">
+          <span class="pp-note-line"></span>
+          <span class="pp-note-text">{{ section.settings.note }}</span>
+          <span class="pp-note-line"></span>
+        </div>
+      {% endif %}
+
+      {% if section.settings.button_label != blank %}
+        <a class="pp-btn" href="{{ section.settings.button_link }}" {% if section.settings.open_in_new_tab %}target="_blank" rel="noopener"{% endif %}>
+          {{ section.settings.button_label }}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Alapbeállítások */
+  #{{ modal_id }} * { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; box-sizing: border-box; }
+  
+  #{{ modal_id }} { display: none; position: fixed; inset: 0; z-index: 99999; }
+  #{{ modal_id }}.is-open { display: flex; align-items: center; justify-content: center; }
+
+  #{{ modal_id }} .pp-overlay { position: absolute; inset: 0; background: rgba(0,0,0,{{ section.settings.overlay_opacity | divided_by: 100.0 }}); }
+
+  /* Dialog doboz */
+  #{{ modal_id }} .pp-dialog {
+    position: relative;
+    width: min(480px, calc(100vw - 30px)); 
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+    background: {{ section.settings.body_bg }};
+    max-height: 90vh;
+    overflow-y: auto;
+    margin: 0;
+    outline: none !important;
+  }
+  
+  #{{ modal_id }} .pp-dialog:focus, 
+  #{{ modal_id }} .pp-dialog:active { outline: none !important; border: none !important; }
+
+  /* Kép */
+  #{{ modal_id }} .pp-hero-img { width: 100%; height: auto; max-height: 250px; object-fit: cover; display: block; }
+
+  /* Tartalom */
+  #{{ modal_id }} .pp-body {
+    padding: 30px 25px 35px;
+    text-align: center;
+    background: {{ section.settings.body_bg }};
+  }
+
+  /* Cím */
+  #{{ modal_id }} .pp-title {
+    margin: 0 0 5px;
+    font-family: 'Impact', 'Oswald', 'Arial Narrow', sans-serif;
+    font-weight: 400; 
+    text-transform: uppercase;
+    color: {{ section.settings.title_color }};
+    font-size: 42px;
+    line-height: 1.0;
+    letter-spacing: 0.5px;
+  }
+
+  /* Alcím */
+  #{{ modal_id }} .pp-subtitle {
+    margin: 0 0 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: {{ section.settings.subtitle_color }};
+    font-size: 15px;
+    letter-spacing: 0.5px;
+  }
+  #{{ modal_id }} .pp-subtitle p { margin: 0; }
+
+  /* Jegyzet és a VASTAGABB VONALAK */
+  #{{ modal_id }} .pp-note {
+    margin: 0 auto 25px;
+    font-weight: 600;
+    color: {{ section.settings.note_color }};
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  #{{ modal_id }} .pp-note-text {
+    padding: 0 15px;
+    white-space: nowrap;
+  }
+
+  #{{ modal_id }} .pp-note-line {
+    display: block;
+    width: 50px;
+    height: 2px; /* Vastagabb vonal */
+    background-color: #333333;
+    opacity: 0.8;
+  }
+
+  /* Gomb - VÉKONYABB ÉS SZÉLESEBB */
+  #{{ modal_id }} .pp-btn {
+    display: inline-block;
+    padding: 11px 40px; /* Kevesebb padding felül-alul (vékonyabb) */
+    border-radius: 4px;
+    background: {{ section.settings.button_bg }};
+    color: {{ section.settings.button_text }};
+    font-weight: 800;
+    text-transform: uppercase;
+    text-decoration: none;
+    min-width: 340px; /* Szélesebb fix méret */
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    transition: transform 0.2s ease, filter 0.2s;
+    outline: none !important;
+  }
+  #{{ modal_id }} .pp-btn:hover { transform: scale(1.02); filter: brightness(110%); }
+
+  /* Bezáró X */
+  #{{ modal_id }} .pp-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 32px;
+    height: 32px;
+    background: transparent;
+    color: #fff;
+    border: 0;
+    font-size: 32px;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 10;
+    padding: 0;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none !important;
+  }
+
+  @media(max-width: 480px){
+    #{{ modal_id }} .pp-dialog { margin: 0; width: calc(100vw - 20px); }
+    #{{ modal_id }} .pp-title { font-size: 34px; }
+    #{{ modal_id }} .pp-hero-img { max-height: 200px; }
+    #{{ modal_id }} .pp-body { padding: 25px 15px; }
+    #{{ modal_id }} .pp-btn { width: 100%; min-width: 0; }
+    #{{ modal_id }} .pp-note { font-size: 12px; }
+    #{{ modal_id }} .pp-note-line { width: 30px; }
+  }
+</style>
+
+<script>
+(function(){
+  var modal = document.getElementById({{ modal_id | json }});
+  if(!modal) return;
+
+  var exclude = ({{ section.settings.exclude_templates | json }} || '').trim().toLowerCase();
+  if(exclude && exclude !== 'none'){
+    var tmpl = ({{ template.name | json }} || '').toLowerCase();
+    var list = exclude.split(',').map(function(s){ return s.trim().toLowerCase(); }).filter(Boolean);
+    if(list.indexOf(tmpl) !== -1) return;
+  }
+
+  var delayMs = ({{ section.settings.delay_seconds | json }} || 0) * 1000;
+  var lockDays = ({{ section.settings.show_once_days | json }} || 0);
+  var key = 'pp_seen_' + {{ modal_id | json }};
+
+  function seen(){
+    try{
+      var d = JSON.parse(localStorage.getItem(key));
+      if(!d || !d.t) return false;
+      return (Date.now() - d.t) < (lockDays * 86400000);
+    }catch(e){ return false; }
+  }
+
+  function mark(){
+    try{ localStorage.setItem(key, JSON.stringify({ t: Date.now() })); }catch(e){}
+  }
+
+  function open(){
+    if(seen()) return;
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden','false');
+    document.documentElement.style.overflow='hidden';
+    var dialog = modal.querySelector('.pp-dialog');
+    if(dialog) dialog.focus();
+    mark();
+  }
+
+  function close(){
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden','true');
+    document.documentElement.style.overflow='';
+  }
+
+  modal.addEventListener('click', function(e){
+    if(e.target && e.target.hasAttribute('data-pp-close')) close();
+  });
+
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && modal.classList.contains('is-open')) close();
+  });
+
+  if({{ section.settings.trigger_on_load | json }}){
+    setTimeout(open, Math.max(0, delayMs|0));
+  }
+})();
+</script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Promo popup",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enabled",
+      "label": "Enable popup",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Top image"
+    },
+    {
+      "type": "text",
+      "id": "hero_alt",
+      "label": "Image alt",
+      "default": "Promo image"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "20% EXTRA DISCOUNT"
+    },
+    {
+      "type": "richtext",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "<p>LA FAINA INTEGRALA ȘI TARATE,</p>"
+    },
+    {
+      "type": "text",
+      "id": "note",
+      "label": "Note",
+      "default": "la comanda de minim 100 lei"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button text",
+      "default": "COMANDĂ ACUM"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_in_new_tab",
+      "label": "Open in new tab",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "close_aria_label",
+      "label": "Close label",
+      "default": "Close popup"
+    },
+    {
+      "type": "header",
+      "content": "Triggers"
+    },
+    {
+      "type": "checkbox",
+      "id": "trigger_on_load",
+      "label": "Show on load",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "delay_seconds",
+      "label": "Delay (seconds)",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "show_once_days",
+      "label": "Show once per X days",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "default": 7
+    },
+    {
+      "type": "text",
+      "id": "exclude_templates",
+      "label": "Exclude templates (comma-separated). Use 'none' for no exclusions.",
+      "default": "none"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay opacity (%)",
+      "min": 10,
+      "max": 90,
+      "step": 5,
+      "default": 55
+    },
+    {
+      "type": "color",
+      "id": "body_bg",
+      "label": "Body background",
+      "default": "#f0f2f1"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title color",
+      "default": "#3a7543"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle color",
+      "default": "#222222"
+    },
+    {
+      "type": "color",
+      "id": "note_color",
+      "label": "Note color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "button_bg",
+      "label": "Button background",
+      "default": "#3a7543"
+    },
+    {
+      "type": "color",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "#ffffff"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Promo popup"
+    }
+  ]
+}
+{% endschema %}

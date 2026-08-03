@@ -1,0 +1,469 @@
+{% liquid
+  assign phone_clean = section.settings.phone | remove: ' ' | remove: '-' | remove: '(' | remove: ')'
+%}
+
+<div class="page-width section-{{ section.id }}-padding">
+  <div class="contact-page-custom">
+    {% if section.settings.heading != blank %}
+      <h1>{{ section.settings.heading | escape }}</h1>
+    {% endif %}
+
+    {% if section.settings.intro != blank %}
+      <div class="rte">
+        {{ section.settings.intro }}
+      </div>
+    {% endif %}
+
+    {% if section.settings.extra_text != blank %}
+      <div class="rte">
+        {{ section.settings.extra_text }}
+      </div>
+    {% endif %}
+
+    <div class="contact-page-custom__layout">
+      <div class="contact-page-custom__info">
+        {% if section.settings.phone != blank
+          or section.settings.email != blank
+          or section.settings.hours != blank
+          or section.settings.response_time != blank
+          or section.settings.address != blank
+        %}
+          <div>
+            {% if section.settings.phone != blank %}
+              <p>
+                <strong>{{ section.settings.phone_label }}</strong><br>
+                <a href="tel:{{ phone_clean }}">{{ section.settings.phone }}</a>
+              </p>
+            {% endif %}
+
+            {% if section.settings.email != blank %}
+              <p>
+                <strong>{{ section.settings.email_label }}</strong><br>
+                <a href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a>
+              </p>
+            {% endif %}
+
+            {% if section.settings.hours != blank %}
+              <p>
+                <strong>{{ section.settings.hours_label }}</strong><br>
+                {{ section.settings.hours }}
+              </p>
+            {% endif %}
+
+            {% if section.settings.response_time != blank %}
+              <p>
+                <strong>{{ section.settings.response_label }}</strong><br>
+                {{ section.settings.response_time }}
+              </p>
+            {% endif %}
+
+            {% if section.settings.address != blank %}
+              <div class="rte">
+                <p><strong>{{ section.settings.address_label }}</strong></p>
+                {{ section.settings.address }}
+              </div>
+            {% endif %}
+          </div>
+        {% endif %}
+
+        {% if section.settings.topics_heading != blank
+          or section.settings.topic_1 != blank
+          or section.settings.topic_2 != blank
+          or section.settings.topic_3 != blank
+          or section.settings.topic_4 != blank
+        %}
+          <div>
+            {% if section.settings.topics_heading != blank %}
+              <h2>{{ section.settings.topics_heading }}</h2>
+            {% endif %}
+
+            <ul>
+              {% if section.settings.topic_1 != blank %}<li>{{ section.settings.topic_1 }}</li>{% endif %}
+              {% if section.settings.topic_2 != blank %}<li>{{ section.settings.topic_2 }}</li>{% endif %}
+              {% if section.settings.topic_3 != blank %}<li>{{ section.settings.topic_3 }}</li>{% endif %}
+              {% if section.settings.topic_4 != blank %}<li>{{ section.settings.topic_4 }}</li>{% endif %}
+            </ul>
+          </div>
+        {% endif %}
+
+        {% if section.settings.help_text != blank %}
+          <div class="rte">
+            <h2>{{ section.settings.help_heading }}</h2>
+            {{ section.settings.help_text }}
+          </div>
+        {% endif %}
+
+        {% if section.settings.company_details != blank %}
+          <div class="rte">
+            <h2>{{ section.settings.company_heading }}</h2>
+            {{ section.settings.company_details }}
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="contact-page-custom__form">
+        {% form 'contact' %}
+          {% if form.posted_successfully? %}
+            <div class="form-status form-status-list form__message" tabindex="-1" autofocus>
+              {{ section.settings.success_message }}
+            </div>
+          {% elsif form.errors %}
+            <div class="form__message">
+              {{ form.errors | default_errors }}
+            </div>
+          {% endif %}
+
+          <div class="field">
+            <input
+              class="field__input"
+              autocomplete="name"
+              type="text"
+              id="ContactFormName-{{ section.id }}"
+              name="contact[name]"
+              value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+              placeholder="{{ section.settings.name_label }}"
+            >
+            <label class="field__label" for="ContactFormName-{{ section.id }}">
+              {{ section.settings.name_label }}
+            </label>
+          </div>
+
+          <div class="field">
+            <input
+              autocomplete="email"
+              type="email"
+              id="ContactFormEmail-{{ section.id }}"
+              class="field__input"
+              name="contact[email]"
+              spellcheck="false"
+              autocapitalize="off"
+              value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+              aria-required="true"
+              {% if form.errors contains 'email' %}
+                aria-invalid="true"
+                aria-describedby="ContactFormEmail-error-{{ section.id }}"
+              {% endif %}
+              placeholder="{{ section.settings.email_form_label }}"
+              required
+            >
+            <label class="field__label" for="ContactFormEmail-{{ section.id }}">
+              {{ section.settings.email_form_label }}
+            </label>
+          </div>
+
+          <div class="field">
+            <input
+              type="tel"
+              id="ContactFormPhone-{{ section.id }}"
+              class="field__input"
+              autocomplete="tel"
+              name="contact[phone]"
+              value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}"
+              placeholder="{{ section.settings.phone_form_label }}"
+            >
+            <label class="field__label" for="ContactFormPhone-{{ section.id }}">
+              {{ section.settings.phone_form_label }}
+            </label>
+          </div>
+
+          <div class="field">
+            <label class="form__label" for="ContactFormSubject-{{ section.id }}">
+              {{ section.settings.subject_label }}
+            </label>
+            <div class="select">
+              <select
+                id="ContactFormSubject-{{ section.id }}"
+                name="contact[subject]"
+                class="select__select"
+              >
+                {% if request.locale.iso_code == 'en' %}
+                  <option value="Product information">Product information</option>
+                  <option value="Order">Order</option>
+                  <option value="Delivery">Delivery</option>
+                  <option value="Collaboration" selected>Collaboration</option>
+                  <option value="Other">Other</option>
+                {% else %}
+                  <option value="Informații produse">Informații produse</option>
+                  <option value="Comandă">Comandă</option>
+                  <option value="Livrare">Livrare</option>
+                  <option value="Colaborare" selected>Colaborare</option>
+                  <option value="Altceva">Altceva</option>
+                {% endif %}
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <textarea
+              rows="10"
+              id="ContactFormMessage-{{ section.id }}"
+              class="text-area field__input"
+              name="contact[body]"
+              placeholder="{{ section.settings.message_label }}"
+              required
+            >{% if form.body %}{{ form.body }}{% endif %}</textarea>
+            <label class="form__label field__label" for="ContactFormMessage-{{ section.id }}">
+              {{ section.settings.message_label }}
+            </label>
+          </div>
+
+          {% if section.settings.privacy_note != blank %}
+            <div class="rte caption-with-letter-spacing" style="margin-top: 1.2rem;">
+              {{ section.settings.privacy_note }}
+            </div>
+          {% endif %}
+
+          <div style="margin-top: 2rem;">
+            <button type="submit" class="button">
+              {{ section.settings.button_label }}
+            </button>
+          </div>
+        {% endform %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  .contact-page-custom__layout {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .contact-page-custom__info > * + * {
+    margin-top: 2rem;
+  }
+
+  .contact-page-custom__form .field + .field {
+    margin-top: 1.5rem;
+  }
+
+  @media screen and (max-width: 989px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+
+    .contact-page-custom__layout {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Custom contact page",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Contact Biruința Olteniei"
+    },
+    {
+      "type": "richtext",
+      "id": "intro",
+      "label": "Intro text",
+      "default": "<p>Ai întrebări despre produkty, comenzi sau livrare? Ne poți contacta telefonic sau prin formularul de mai jos, iar echipa noastră îți va răspunde în cel mai scurt timp.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "extra_text",
+      "label": "Extra intro text",
+      "default": "<p>Fie că dorești informații despre produse, ajutor pentru o comandă sau detalii despre colaborări, îtsí stăm la dispoziție. Ne dorim să oferim răspunsuri clare, utile și rapide, astfel încât să poți lua decizia potrivită fără bătăi de cap.</p>"
+    },
+    {
+      "type": "text",
+      "id": "phone_label",
+      "label": "Phone label",
+      "default": "Telefon"
+    },
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "Phone number",
+      "default": "+40 778 748 196"
+    },
+    {
+      "type": "text",
+      "id": "email_label",
+      "label": "Email label",
+      "default": "Email"
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Email"
+    },
+    {
+      "type": "text",
+      "id": "hours_label",
+      "label": "Hours label",
+      "default": "Program de răspuns"
+    },
+    {
+      "type": "text",
+      "id": "hours",
+      "label": "Business hours",
+      "default": "Luni – Vineri, 09:00 – 17:00"
+    },
+    {
+      "type": "text",
+      "id": "response_label",
+      "label": "Response time label",
+      "default": "Timp estimat de răspuns"
+    },
+    {
+      "type": "text",
+      "id": "response_time",
+      "label": "Response time",
+      "default": "În maximum 1 zi lucrătoare"
+    },
+    {
+      "type": "text",
+      "id": "address_label",
+      "label": "Address label",
+      "default": "Adresă"
+    },
+    {
+      "type": "richtext",
+      "id": "address",
+      "label": "Address"
+    },
+    {
+      "type": "text",
+      "id": "topics_heading",
+      "label": "Topics heading",
+      "default": "Ne poți contacta pentru"
+    },
+    {
+      "type": "text",
+      "id": "topic_1",
+      "label": "Topic 1",
+      "default": "informații despre produse"
+    },
+    {
+      "type": "text",
+      "id": "topic_2",
+      "label": "Topic 2",
+      "default": "ajutor legat de comenzi"
+    },
+    {
+      "type": "text",
+      "id": "topic_3",
+      "label": "Topic 3",
+      "default": "întrebări despre livrare"
+    },
+    {
+      "type": "text",
+      "id": "topic_4",
+      "label": "Topic 4",
+      "default": "colaborări și parteneriate"
+    },
+    {
+      "type": "text",
+      "id": "help_heading",
+      "label": "Help heading",
+      "default": "Înainte să ne scrii"
+    },
+    {
+      "type": "richtext",
+      "id": "help_text",
+      "label": "Help text",
+      "default": "<p>Pentru a te putea ajuta cât mai repede, te rugăm să menționezi în mesaj cât mai clar subiectul solicitării tale. Dacă întrebarea este legată de o comandă, include numărul comenzii și, dacă este cazul, numărul de telefon folosit la plasare.</p><p>Dacă dorești információi despre produse sau o colaborare, ne poți descrie pe scurt ce te interesează, iar noi revenim cu detalii cât mai curând.</p>"
+    },
+    {
+      "type": "text",
+      "id": "company_heading",
+      "label": "Company heading",
+      "default": "Date companie"
+    },
+    {
+      "type": "richtext",
+      "id": "company_details",
+      "label": "Company details"
+    },
+    {
+      "type": "text",
+      "id": "name_label",
+      "label": "Name label",
+      "default": "Nume"
+    },
+    {
+      "type": "text",
+      "id": "email_form_label",
+      "label": "Form email label",
+      "default": "Email"
+    },
+    {
+      "type": "text",
+      "id": "phone_form_label",
+      "label": "Form phone label",
+      "default": "Telefon"
+    },
+    {
+      "type": "text",
+      "id": "subject_label",
+      "label": "Subject label",
+      "default": "Subiect"
+    },
+    {
+      "type": "text",
+      "id": "message_label",
+      "label": "Message label",
+      "default": "Mesaj"
+    },
+    {
+      "type": "richtext",
+      "id": "privacy_note",
+      "label": "Privacy note",
+      "default": "<p>Prin trimiterea formularului, datele tale vor fi folosite doar pentru a răspunde solicitării transmise.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Trimite mesajul"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success message",
+      "default": "Mesajul tău a fost trimis cu succes. Îți răspundem cât mai curând."
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom contact page"
+    }
+  ]
+}
+{% endschema %}

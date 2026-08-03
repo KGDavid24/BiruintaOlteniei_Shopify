@@ -1,0 +1,118 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "t:sections.footer.name",
+  "type": "footer",
+  "sections": {
+    "newsletter_BGacDD": {
+      "type": "newsletter",
+      "blocks": {
+        "judge_me_reviews_all_reviews_text_FWLk6A": {
+          "type": "shopify://apps/judge-me-reviews/blocks/all_reviews_text/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        },
+        "heading_ACGkAE": {
+          "type": "heading",
+          "settings": {
+            "heading": "Abonează-te la newsletter!",
+            "heading_size": "h2"
+          }
+        },
+        "email_form_X7Q33Y": {
+          "type": "email_form",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_all_reviews_text_FWLk6A",
+        "heading_ACGkAE",
+        "email_form_X7Q33Y"
+      ],
+      "name": "t:sections.newsletter.presets.name",
+      "settings": {
+        "color_scheme": "scheme-5",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "text_A9pB3w": {
+          "type": "text",
+          "settings": {
+            "heading": "Cine suntem noi",
+            "subtext": "<p><strong>BIRUINTA OLTENIEI COOPERATIVA AGRICOLA </strong></p><p><strong>CUI:</strong> 39545542</p><p><strong>Nr. Reg.</strong> C28/23/2018</p><p><strong>Judeţ:</strong> Olt</p><p><strong>Localitate:</strong> Sat. Redea</p><p><strong>Adresă:</strong> Str. Ias-Ului 8 CAM. 2 Cod 237370</p>"
+          }
+        },
+        "link_list_NBynzK": {
+          "type": "link_list",
+          "disabled": true,
+          "settings": {
+            "heading": "Pachete Speciale",
+            "menu": "pachetele-speciale"
+          }
+        },
+        "link_list_FDttJG": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Produsele cooperativei",
+            "menu": "produsele-cooperativei"
+          }
+        },
+        "link_list_WizUMF": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Linkuri Utile",
+            "menu": "footer"
+          }
+        }
+      },
+      "block_order": [
+        "text_A9pB3w",
+        "link_list_NBynzK",
+        "link_list_FDttJG",
+        "link_list_WizUMF"
+      ],
+      "custom_css": [
+        "h2 {text-transform: uppercase;}"
+      ],
+      "settings": {
+        "color_scheme": "scheme-4",
+        "newsletter_enable": false,
+        "newsletter_heading": "",
+        "enable_follow_on_shop": false,
+        "show_social": true,
+        "enable_country_selector": false,
+        "enable_language_selector": false,
+        "payment_enable": true,
+        "show_policy": true,
+        "margin_top": 0,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "custom_liquid_6daLUj": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<div class=\"page-width\" style=\"text-align:center;\">\n  <a href=\"https://anpc.ro/ce-este-sal/\" aria-describedby=\"a11y-external-message\"><img src=\"https://cdn.shopify.com/s/files/1/0868/5217/4102/files/anpc-sal.webp?v=1715772763\" alt=\"Ce este SAL?\" style=\"width:250px;height:62px;\"></a>\n</div>",
+        "color_scheme": "scheme-4",
+        "padding_top": 20,
+        "padding_bottom": 20
+      }
+    }
+  },
+  "order": [
+    "newsletter_BGacDD",
+    "footer",
+    "custom_liquid_6daLUj"
+  ]
+}

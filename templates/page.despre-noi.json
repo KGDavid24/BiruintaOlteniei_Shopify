@@ -1,0 +1,64 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "image_with_text_etTKpB": {
+      "type": "image-with-text",
+      "blocks": {
+        "caption_cmytxx": {
+          "type": "caption",
+          "settings": {
+            "caption": "Semințe cu spor",
+            "text_style": "caption-with-letter-spacing",
+            "text_size": "medium"
+          }
+        },
+        "text_NwjnzX": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Cooperativa Biruința Olteniei reprezintă esența eforturilor comune ale membrilor săi fondatori, uniți sub viziunea de a aduce pe piață produse alimentare autentice, sănătoase și de înaltă calitate. Fondată în 2018, în comuna Dobrun din județul Olt, cooperativa a crescut din dorința de a valorifica și promova patrimoniul agricol românesc, punând un accent deosebit pe cultivarea și procesarea cerealelor prin metode tradiționale.</p><p></p>",
+            "text_style": "body"
+          }
+        }
+      },
+      "block_order": [
+        "caption_cmytxx",
+        "text_NwjnzX"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/Sacuri_de_cereale.jpg",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "scheme-5",
+        "color_scheme": "scheme-5",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    }
+  },
+  "order": [
+    "main",
+    "image_with_text_etTKpB"
+  ]
+}

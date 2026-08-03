@@ -1,0 +1,328 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": {
+          "type": "text",
+          "settings": {
+            "text": "{{ product.vendor }}",
+            "text_style": "uppercase"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "judge_me_reviews_preview_badge_f4yNWb": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        },
+        "icon_with_text_UJXiUC": {
+          "type": "icon-with-text",
+          "disabled": true,
+          "settings": {
+            "layout": "vertical",
+            "icon_1": "price_tag",
+            "heading_1": "Black Friday: <strong>-30% REDUCERE</strong> la acest produs",
+            "icon_2": "return",
+            "heading_2": "",
+            "icon_3": "truck",
+            "heading_3": ""
+          }
+        },
+        "trafficly_visitors_counter_trafficly_nDinYz": {
+          "type": "shopify://apps/trafficly-visitors-counter/blocks/trafficly/ff0a9f47-c478-468c-8fa1-f5a7bb122960",
+          "disabled": true,
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "custom_liquid_ydNYtE": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{%- comment -%}\nDawn variant-aware “Economisești / You save” box (no prices shown)\nPaste into a Product template \"Custom liquid\" block.\nUpdates on variant change.\n{%- endcomment -%}\n\n{%- liquid\n  assign v = product.selected_or_first_available_variant\n  assign price = v.price | default: product.price\n  assign compare = v.compare_at_price | default: product.compare_at_price\n\n  assign has_discount = false\n  if compare and compare > price\n    assign has_discount = true\n    assign savings = compare | minus: price\n  endif\n-%}\n\n<style>\n  .economisesti-box {\n    display: inline-flex;\n    align-items: center;\n    gap: 10px;\n    padding: 10px 14px;\n    border-radius: 10px;\n    background: #f7d9dd; /* light pink */\n    color: #b3132c;      /* red */\n    font-weight: 800;\n    line-height: 1.2;\n    margin: 10px 0;\n  }\n  .economisesti-box[hidden] { display: none !important; }\n</style>\n\n<div\n  id=\"economisesti-{{ section.id | default: 'custom-liquid' }}\"\n  class=\"economisesti-box\"\n  {% unless has_discount %}hidden{% endunless %}\n  role=\"status\"\n  aria-live=\"polite\"\n>\n  <span class=\"economisesti-box__text\">\n    {% if request.locale.iso_code == 'en' %}You save{% else %}Economisești{% endif %} <span data-economisesti-amount>{{ savings | default: 0 | money }}</span>\n  </span>\n</div>\n\n<script>\n(() => {\n  const box = document.getElementById('economisesti-{{ section.id | default: 'custom-liquid' }}');\n  if (!box) return;\n\n  const amountEl = box.querySelector('[data-economisesti-amount]');\n  const variants = {{ product.variants | json }};\n\n  function getCurrentVariantId() {\n    // Dawn keeps a hidden input[name=\"id\"] inside the product form\n    const form = box.closest('section')?.querySelector('form[action*=\"/cart/add\"]')\n      || document.querySelector('form[action*=\"/cart/add\"]');\n    const idInput = form?.querySelector('input[name=\"id\"]');\n    const id = idInput?.value;\n\n    // Fallback: try URL ?variant=\n    if (id) return Number(id);\n    const urlId = new URL(window.location.href).searchParams.get('variant');\n    return urlId ? Number(urlId) : null;\n  }\n\n  function moneyFromCents(cents) {\n    // We let Shopify render money format via a tiny trick: reuse server-rendered money for 0 and replace number.\n    // More robust: format as RON with Intl if available.\n    try {\n      const locale = document.documentElement.lang || 'ro-RO';\n      // Shopify prices are integer cents\n      return new Intl.NumberFormat(locale, { style: 'currency', currency: '{{ cart.currency.iso_code | default: shop.currency }}' })\n        .format((cents || 0) / 100);\n    } catch (e) {\n      // Simple fallback (assumes 2 decimals)\n      const val = ((cents || 0) / 100).toFixed(2).replace('.', ',');\n      return val + ' {{ cart.currency.iso_code | default: shop.currency }}';\n    }\n  }\n\n  function updateEconomisesti(variantId) {\n    const v = variants.find(x => Number(x.id) === Number(variantId));\n    if (!v) {\n      box.hidden = true;\n      return;\n    }\n\n    const price = Number(v.price || 0);\n    const compare = Number(v.compare_at_price || 0);\n\n    if (compare > price) {\n      const savings = compare - price;\n      amountEl.textContent = moneyFromCents(savings);\n      box.hidden = false;\n    } else {\n      box.hidden = true;\n    }\n  }\n\n  // Initial\n  updateEconomisesti(getCurrentVariantId());\n\n  // 1) Dawn (and many themes) emit variant:change\n  document.addEventListener('variant:change', (e) => {\n    const id = e?.detail?.variant?.id || getCurrentVariantId();\n    updateEconomisesti(id);\n  });\n\n  // 2) Some Dawn versions publish a custom event on change\n  document.addEventListener('variantChange', (e) => {\n    const id = e?.detail?.variant?.id || getCurrentVariantId();\n    updateEconomisesti(id);\n  });\n\n  // 3) Generic fallback: listen to any change inside the product form\n  document.addEventListener('change', (e) => {\n    const target = e.target;\n    if (!target) return;\n    const form = target.closest?.('form[action*=\"/cart/add\"]');\n    if (!form) return;\n    // give Dawn time to update the hidden variant id\n    setTimeout(() => updateEconomisesti(getCurrentVariantId()), 0);\n  });\n\n  // 4) URL variant param changes (some themes update history)\n  const _pushState = history.pushState;\n  history.pushState = function() {\n    _pushState.apply(this, arguments);\n    setTimeout(() => updateEconomisesti(getCurrentVariantId()), 0);\n  };\n  window.addEventListener('popstate', () => {\n    setTimeout(() => updateEconomisesti(getCurrentVariantId()), 0);\n  });\n})();\n</script>"
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "essential_countdown_timer_app_block_BiAzzX": {
+          "type": "shopify://apps/essential-countdown-timer/blocks/app-block/722378e8-5a70-4eae-aa89-9e44e8e9f6de",
+          "settings": {
+            "id": "cmpud9hce004fl6st139hlra9"
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": false
+          }
+        },
+        "custom_liquid_UmRTG9": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<style>\n  /* Fő konténer */\n  .custom-delivery-row {\n    border-top: 1px solid #e5e5e5;\n    border-bottom: 1px solid #e5e5e5;\n    margin: 10px 0;\n    width: 100%;\n    box-sizing: border-box;\n    overflow: hidden;\n  }\n\n  /* Címsor */\n  .custom-delivery-row summary {\n    padding: 18px 0;\n    cursor: pointer;\n    list-style: none;\n    font-weight: 600;\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    font-size: 1.2rem;\n    color: inherit;\n    outline: none;\n  }\n\n  .custom-delivery-row summary::-webkit-details-marker {\n    display: none;\n  }\n\n  .custom-delivery-row summary::after {\n    content: '+';\n    font-size: 1.4rem;\n    font-weight: normal;\n    margin-left: 10px;\n  }\n\n  .custom-delivery-row[open] summary::after {\n    content: '-';\n  }\n\n  /* Tartalom doboz */\n  .custom-delivery-content {\n    padding-bottom: 25px;\n    padding-top: 15px;\n    display: flex;\n    justify-content: flex-start; \n    align-items: flex-start;\n    gap: 35px; /* Megnövelt távolság az elemek között a nagyobb képek miatt */\n    flex-wrap: wrap;\n    width: 100%;\n  }\n\n  /* Egy elem (kép + szöveg) */\n  .delivery-item {\n    display: flex;\n    flex-direction: column;\n    align-items: center; /* Középre igazítja a szöveget a képhez képest */\n    text-align: center;\n    min-width: 80px;\n  }\n\n  /* Képek stílusa - MEGNÖVELVE */\n  .custom-delivery-img {\n    height: 80px; /* Itt állíthatod a méretet (korábban 55px volt) */\n    width: auto;\n    max-width: 100%;\n    object-fit: contain;\n    display: block;\n    margin-bottom: 10px;\n  }\n\n  /* Feliratok stílusa */\n  .delivery-caption {\n    font-size: 0.95rem;\n    color: #333;\n    line-height: 1.2;\n    font-weight: 600;\n    white-space: nowrap;\n  }\n</style>\n\n<details class=\"custom-delivery-row\" open>\n  <summary>\n    {% if request.locale.iso_code == 'en' %}We deliver via{% else %}Livrăm prin{% endif %}\n  </summary>\n  \n  <div class=\"custom-delivery-content\">\n    \n    \n    <div class=\"delivery-item\">\n       <img src=\"https://cdn.shopify.com/s/files/1/0868/5217/4102/files/CG_LOGO_OGB_RGB__1.png?v=1768483964\" alt=\"Cargus\" class=\"custom-delivery-img\" loading=\"lazy\">\n    </div>\n\n  </div>\n</details>"
+          }
+        },
+        "custom_liquid_VpwLfd": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<div class=\"bookurier-promo-box\">\n  <div class=\"bookurier-icon\">\n    <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" style=\"width: 26px; height: 26px; color: #f28b00;\"><path d=\"M5 18H3c-.6 0-1-.4-1-1V7c0-.6.4-1 1-1h10c.6 0 1 .4 1 1v11\"></path><path d=\"M14 9h4l4 4v5c0 .6-.4 1-1 1h-2\"></path><circle cx=\"7\" cy=\"18\" r=\"2\"></circle><circle cx=\"17\" cy=\"18\" r=\"2\"></circle></svg>\n  </div>\n  <div class=\"bookurier-text\">\n    {% if request.locale.iso_code == 'en' %}\n      <strong>Cheaper delivery with Bookurier!</strong>\n      <span>(Valid only within coverage areas)</span>\n    {% else %}\n      <strong>Livrare mai ieftină cu Bookurier!</strong>\n      <span>(Valabil doar în zonele de acoperire)</span>\n    {% endif %}\n  </div>\n</div>\n\n<style>\n  .bookurier-promo-box {\n    display: flex;\n    align-items: center;\n    gap: 12px;\n    background-color: #fcf9f2; /* Halvány, meleg háttér, ami illik az oldalhoz */\n    border-left: 4px solid #f28b00; /* Narancssárga csík a kiemeléshez */\n    padding: 12px 16px;\n    margin: 10px 0;\n    border-radius: 4px;\n  }\n  .bookurier-text {\n    display: flex;\n    flex-direction: column;\n  }\n  .bookurier-text strong {\n    font-size: 14px;\n    color: #333;\n    margin-bottom: 2px;\n    line-height: 1.2;\n  }\n  .bookurier-text span {\n    font-size: 12px;\n    color: #666;\n    line-height: 1.2;\n  }\n</style>"
+          }
+        },
+        "description": {
+          "type": "description",
+          "disabled": true,
+          "settings": {}
+        },
+        "custom_liquid_TNbjFK": {
+          "type": "custom_liquid",
+          "disabled": true,
+          "settings": {
+            "custom_liquid": "<list>\n<ol><a href=\"https://cdn.shopify.com/s/files/1/0868/5217/4102/files/CC_GRAU_REZUMAT.pdf?v=1715791986\">Certificat de calitate grău</a></ol>\n<ol><a href=\"https://cdn.shopify.com/s/files/1/0868/5217/4102/files/CC_SECARA_REZUMAT.pdf?v=1715791987\">Certificat de calitate secară</a></ol>\n<ol><a href=\"https://cdn.shopify.com/s/files/1/0868/5217/4102/files/Analize_Biruinta_Olteniei.pdf?v=1763139226\">Analize cereale Biruința Olteniei 2025</a></ol>\n</list>"
+          }
+        },
+        "custom_liquid_XMzrHb": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<style>\n  .custom-pdf-container {\n    margin: 15px 0;\n    width: 100%;\n    display: flex;\n    flex-direction: column;\n    gap: 10px;\n  }\n\n  .pdf-download-button {\n    display: inline-flex;\n    align-items: center;\n    justify-content: center;\n    background-color: #F2AC29;\n    color: #ffffff;\n    padding: 10px 20px; \n    border-radius: 10px;\n    text-decoration: none;\n    font-weight: 700;\n    font-size: 1.4rem;\n    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;\n    border: 2px solid #F2AC29;\n    cursor: pointer;\n    line-height: 1.2;\n    width: fit-content;\n  }\n\n  .pdf-download-button:hover {\n    background-color: #ffffff;\n    color: #F2AC29;\n    border: 1px solid #F2AC29;\n  }\n\n  .button-icon {\n    margin-right: 10px;\n    display: flex;\n    align-items: center;\n  }\n\n  .button-icon svg {\n    width: 24px;\n    height: 24px;\n    fill: currentColor;\n  }\n</style>\n\n<div class=\"custom-pdf-container\">\n  \n  {% assign product_title = product.title | downcase %}\n  {% assign product_handle = product.handle | downcase %}\n\n  {%- comment -%} EZ A GOMB MINDIG MEGJELENIK {%- endcomment -%}\n  <a href=\"https://cdn.shopify.com/s/files/1/0868/5217/4102/files/Analize_Biruinta_Olteniei.pdf?v=1763139226\" \n     target=\"_blank\" \n     class=\"pdf-download-button\">\n    <span class=\"button-icon\">\n      <svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\">\n        <path d=\"M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z\"/>\n      </svg>\n    </span>\n    <span class=\"button-text\">\n      {% if request.locale.iso_code == 'en' %}\n        Biruinta Olteniei Analysis\n      {% else %}\n        Analize Biruinta Olteniei\n      {% endif %}\n    </span>\n  </a>\n\n  {%- comment -%} FŐ FELTÉTEL: Ha PREMIUM, akkor ez is megjelenik {%- endcomment -%}\n  {% if product_title contains 'premium' or product_handle contains 'premium' %}\n  \n    <a href=\"https://cdn.shopify.com/s/files/1/0868/5217/4102/files/Analize_faina_alba_PREMIUM.pdf?v=1770892454\" \n       target=\"_blank\" \n       class=\"pdf-download-button\">\n      <span class=\"button-icon\">\n        <svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\">\n          <path d=\"M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z\"/>\n        </svg>\n      </span>\n      <span class=\"button-text\">\n        {% if request.locale.iso_code == 'en' %}\n          PREMIUM White Flour Analysis\n        {% else %}\n          Analize faina alba PREMIUM\n        {% endif %}\n      </span>\n    </a>\n\n  {% else %}\n    \n    {%- comment -%} HA NEM PREMIUM: Akkor ellenőrizzük a többit {%- endcomment -%}\n    \n    {% if product_title contains 'grâu' or product_title contains 'wheat' or product_handle contains 'grau' %}\n      <a href=\"https://cdn.shopify.com/s/files/1/0868/5217/4102/files/Analize_faina_integrala_de_GRAU.pdf?v=1770892455\" \n         target=\"_blank\" \n         class=\"pdf-download-button\">\n        <span class=\"button-icon\">\n          <svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\">\n            <path d=\"M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z\"/>\n          </svg>\n        </span>\n        <span class=\"button-text\">\n          {% if request.locale.iso_code == 'en' %}\n            WHOLE WHEAT Flour Analysis\n          {% else %}\n            Analize faina integrala de GRAU\n          {% endif %}\n        </span>\n      </a>\n    {% endif %}\n\n    {% if product_title contains 'secară' or product_title contains 'rye' or product_handle contains 'secara' %}\n      <a href=\"https://cdn.shopify.com/s/files/1/0868/5217/4102/files/Analize_faina_integrala_de_SECARA.pdf?v=1770892454\" \n         target=\"_blank\" \n         class=\"pdf-download-button\">\n        <span class=\"button-icon\">\n          <svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\">\n            <path d=\"M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z\"/>\n          </svg>\n        </span>\n        <span class=\"button-text\">\n          {% if request.locale.iso_code == 'en' %}\n            WHOLE RYE Flour Analysis\n          {% else %}\n            Analize faina integrala de SECARA\n          {% endif %}\n        </span>\n      </a>\n    {% endif %}\n\n  {% endif %}\n\n</div>"
+          }
+        },
+        "share": {
+          "type": "share",
+          "disabled": true,
+          "settings": {
+            "share_label": "Share"
+          }
+        },
+        "selleasy_lb_upsell_widget_bac_cAaGKc": {
+          "type": "shopify://apps/selleasy/blocks/lb-upsell-widget-bac/790c1a03-a71f-4bc1-9869-00dad526d3c2",
+          "disabled": true,
+          "settings": {}
+        },
+        "judge_me_reviews_store_summary_4EXxDg": {
+          "type": "shopify://apps/judge-me-reviews/blocks/store_summary/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "data_source": "sample",
+            "theme": "expanded",
+            "button_theme_color": "#ffffff",
+            "button_theme_text_color": "#000000",
+            "show_keywords": true,
+            "keywords_visibility": "shown",
+            "show_button": true,
+            "button_visibility": "shown",
+            "alignment": "left",
+            "title_size": "default",
+            "text_size": "default",
+            "corner_styling": "soft",
+            "widget_color": "#f9f9f9",
+            "text_color": "#000000",
+            "lighter_text_color": "#787878",
+            "button_color": "#f2ac29",
+            "button_text_color": "#ffffff",
+            "show_sentiment_colors": false,
+            "max_width": 1100,
+            "heading_text": "Customers rate this store",
+            "button_text": "See AI reviews summary"
+          }
+        },
+        "custom_liquid_qMexka": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% if request.locale.iso_code == 'en' %}\n<script>\n  (function() {\n    // 1. Regex alapú szótár: a szögletes zárójelek közötti betűk bármelyikét elfogadja, \n    // az 'i' a végén pedig kikapcsolja a kis/nagybetű érzékenységet.\n    const translations = [\n      { regex: /Produse frecvent cumpărate împreună/i, replace: \"Frequently bought together\" },\n      { regex: /Produsele selectate vor fi adăugate în coș/i, replace: \"The selected products will be added to the cart.\" },\n      { regex: /Adaugă produsele selectate în coș/i, replace: \"Add selected products to cart\" },\n      { regex: /Acest produs:/i, replace: \"This product:\" },\n      // Terméknevek rugalmas kereséssel (ékezetes és ékezet nélküli verziókat is megfogja)\n      { regex: /F[ăaâ]in[ăa] integral[ăa] de gr[âaă]u/i, replace: \"WHOLE WHEAT Flour\" },\n      { regex: /F[ăaâ]in[ăa] integral[ăa] de sec[ăa]r[ăa]/i, replace: \"WHOLE RYE Flour\" },\n      { regex: /T[ăa]r[âa]țe integrale de gr[âa]u/i, replace: \"Whole Wheat Bran\" }\n    ];\n\n    // 2. A függvény, ami megkeresi és kicseréli a szövegeket\n    function translateAppText() {\n      const walk = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);\n      let node;\n      while ((node = walk.nextNode())) {\n        translations.forEach(item => {\n          // Ha a regex minta illeszkedik a szövegre, cseréljük\n          if (item.regex.test(node.nodeValue)) {\n            node.nodeValue = node.nodeValue.replace(item.regex, item.replace);\n          }\n        });\n      }\n    }\n\n    // 3. Lefuttatjuk azonnal, ha már betöltött valami\n    document.addEventListener('DOMContentLoaded', translateAppText);\n    \n    // 4. MutationObserver: Figyeli az oldalt az utólag betöltődő elemek miatt\n    const observer = new MutationObserver(function(mutations) {\n      translateAppText();\n    });\n    \n    observer.observe(document.body, { childList: true, subtree: true });\n    \n    // 5. SEO / Teljesítmény védelem: 4 másodperc után leállítjuk a figyelést\n    setTimeout(function() {\n      observer.disconnect();\n    }, 4000);\n  })();\n</script>\n{% endif %}"
+          }
+        },
+        "judge_me_reviews_store_summary_CBmBni": {
+          "type": "shopify://apps/judge-me-reviews/blocks/store_summary/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "disabled": true,
+          "settings": {
+            "data_source": "sample",
+            "theme": "expanded",
+            "button_theme_color": "#ffffff",
+            "button_theme_text_color": "#000000",
+            "show_keywords": true,
+            "keywords_visibility": "shown",
+            "show_button": true,
+            "button_visibility": "shown",
+            "alignment": "left",
+            "title_size": "default",
+            "text_size": "default",
+            "corner_styling": "soft",
+            "widget_color": "#f9f9f9",
+            "text_color": "#000000",
+            "lighter_text_color": "#787878",
+            "button_color": "#108474",
+            "button_text_color": "#ffffff",
+            "show_sentiment_colors": false,
+            "max_width": 1100,
+            "heading_text": "Customers rate this store",
+            "button_text": "See AI reviews summary"
+          }
+        }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "judge_me_reviews_preview_badge_f4yNWb",
+        "icon_with_text_UJXiUC",
+        "trafficly_visitors_counter_trafficly_nDinYz",
+        "price",
+        "custom_liquid_ydNYtE",
+        "variant_picker",
+        "quantity_selector",
+        "essential_countdown_timer_app_block_BiAzzX",
+        "buy_buttons",
+        "custom_liquid_UmRTG9",
+        "custom_liquid_VpwLfd",
+        "description",
+        "custom_liquid_TNbjFK",
+        "custom_liquid_XMzrHb",
+        "share",
+        "selleasy_lb_upsell_widget_bac_cAaGKc",
+        "judge_me_reviews_store_summary_4EXxDg",
+        "custom_liquid_qMexka",
+        "judge_me_reviews_store_summary_CBmBni"
+      ],
+      "custom_css": [
+        ".product-form__input--pill input[type=\"radio\"]:checked + label {background-color: #f2ac29; color: white; border: none;}"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "color_scheme": "scheme-4a47314d-af74-4963-830f-3eca5995d655",
+        "media_size": "small",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "gallery_layout": "thumbnail_slider",
+        "mobile_thumbnails": "hide",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "padding_top": 36,
+        "padding_bottom": 12
+      }
+    },
+    "17690049411b00dcde": {
+      "type": "apps",
+      "blocks": {
+        "selleasy_lb_upsell_widget_bac_gwAeyE": {
+          "type": "shopify://apps/selleasy/blocks/lb-upsell-widget-bac/790c1a03-a71f-4bc1-9869-00dad526d3c2",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "selleasy_lb_upsell_widget_bac_gwAeyE"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "rich_text_rmJWXD": {
+      "type": "rich-text",
+      "blocks": {
+        "text_MBTpRV": {
+          "type": "text",
+          "settings": {
+            "text": "{{ product.description }}"
+          }
+        }
+      },
+      "block_order": [
+        "text_MBTpRV"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "left",
+        "color_scheme": "",
+        "full_width": false,
+        "padding_top": 0,
+        "padding_bottom": 20
+      }
+    },
+    "174766524655546ea5": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_KigMCr": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "disabled": true,
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        },
+        "judge_me_reviews_review_snippet_widget_7nnU8z": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_snippet_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "disabled": true,
+          "settings": {}
+        },
+        "judge_me_reviews_all_reviews_page_fJeXNC": {
+          "type": "shopify://apps/judge-me-reviews/blocks/all_reviews_page/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "max_width": 1200,
+            "review_source": "all",
+            "show_all_reviews_in_same_tab": false,
+            "show_first": "product",
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_KigMCr",
+        "judge_me_reviews_review_snippet_widget_7nnU8z",
+        "judge_me_reviews_all_reviews_page_fJeXNC"
+      ],
+      "settings": {
+        "include_margins": false
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "settings": {
+        "heading": "Produse recomandate",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": true,
+        "padding_top": 36,
+        "padding_bottom": 28
+      }
+    }
+  },
+  "order": [
+    "main",
+    "17690049411b00dcde",
+    "rich_text_rmJWXD",
+    "174766524655546ea5",
+    "related-products"
+  ]
+}

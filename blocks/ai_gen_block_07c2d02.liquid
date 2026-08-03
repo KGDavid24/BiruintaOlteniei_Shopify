@@ -1,0 +1,937 @@
+{% doc %}
+  A featutred listing where products - flour bags are shown, and if they have variants, then show them directly underneath their selector. if no variants, then only add to cart button, this in romanian. Price and Compare at price with proper colouring needs to be shown, and calculate the amount of money they save (rounded up). , add admin option to select between pill variant selector or dropdown
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-featured-products-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    padding: {{ block.settings.section_padding }}px;
+    background-color: {{ block.settings.background_color }};
+  }
+
+  .ai-featured-products__heading-{{ ai_gen_id }} {
+    text-align: {{ block.settings.heading_alignment }};
+    margin-bottom: {{ block.settings.heading_spacing }}px;
+    color: {{ block.settings.heading_color }};
+    font-size: {{ block.settings.heading_size }}px;
+  }
+
+  .ai-featured-products__grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat({{ block.settings.columns_desktop }}, 1fr);
+    gap: {{ block.settings.grid_gap }}px;
+  }
+
+  .ai-featured-product-card-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    background-color: {{ block.settings.card_background }};
+    border-radius: {{ block.settings.card_border_radius }}px;
+    padding: {{ block.settings.card_padding }}px;
+    border: {{ block.settings.card_border_width }}px solid {{ block.settings.card_border_color }};
+  }
+
+  .ai-featured-product-card__image-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    margin-bottom: 16px;
+    border-radius: {{ block.settings.image_border_radius }}px;
+    overflow: hidden;
+  }
+
+  .ai-featured-product-card__image-{{ ai_gen_id }} {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .ai-featured-product-card__image-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    aspect-ratio: 1;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-featured-product-card__image-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-featured-product-card__title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.product_title_size }}px;
+    font-weight: 600;
+    margin: 0 0 12px;
+    color: {{ block.settings.text_color }};
+  }
+
+  .ai-featured-product-card__title-link-{{ ai_gen_id }} {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .ai-featured-product-card__title-link-{{ ai_gen_id }}:hover {
+    text-decoration: underline;
+  }
+
+  .ai-featured-product-card__price-wrapper-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+  }
+
+  .ai-featured-product-card__price-{{ ai_gen_id }} {
+    font-size: {{ block.settings.price_size }}px;
+    font-weight: 700;
+    color: {{ block.settings.price_color }};
+  }
+
+  .ai-featured-product-card__compare-price-{{ ai_gen_id }} {
+    font-size: {{ block.settings.compare_price_size }}px;
+    text-decoration: line-through;
+    color: {{ block.settings.compare_price_color }};
+  }
+
+  .ai-featured-product-card__savings-{{ ai_gen_id }} {
+    font-size: {{ block.settings.savings_size }}px;
+    font-weight: 600;
+    color: {{ block.settings.savings_color }};
+    background-color: {{ block.settings.savings_background }};
+    padding: 4px 8px;
+    border-radius: 4px;
+  }
+
+  .ai-featured-product-card__variants-{{ ai_gen_id }} {
+    margin-bottom: 16px;
+  }
+
+  .ai-featured-product-card__variant-label-{{ ai_gen_id }} {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: {{ block.settings.text_color }};
+  }
+
+  .ai-featured-product-card__variant-select-{{ ai_gen_id }} {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid {{ block.settings.input_border_color }};
+    border-radius: {{ block.settings.input_border_radius }}px;
+    background-color: {{ block.settings.input_background }};
+    color: {{ block.settings.text_color }};
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  .ai-featured-product-card__variant-pills-{{ ai_gen_id }} {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .ai-featured-product-card__variant-pill-{{ ai_gen_id }} {
+    padding: 8px 16px;
+    border: 2px solid {{ block.settings.pill_border_color }};
+    border-radius: {{ block.settings.pill_border_radius }}px;
+    background-color: {{ block.settings.pill_background }};
+    color: {{ block.settings.pill_text_color }};
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .ai-featured-product-card__variant-pill-{{ ai_gen_id }}:hover:not(.disabled) {
+    background-color: {{ block.settings.pill_hover_background }};
+    border-color: {{ block.settings.pill_hover_border_color }};
+  }
+
+  .ai-featured-product-card__variant-pill-{{ ai_gen_id }}.active {
+    background-color: {{ block.settings.pill_active_background }};
+    border-color: {{ block.settings.pill_active_border_color }};
+    color: {{ block.settings.pill_active_text_color }};
+  }
+
+  .ai-featured-product-card__variant-pill-{{ ai_gen_id }}.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    text-decoration: line-through;
+  }
+
+  .ai-featured-product-card__add-to-cart-{{ ai_gen_id }} {
+    width: 100%;
+    padding: 12px 24px;
+    background-color: {{ block.settings.button_background }};
+    color: {{ block.settings.button_text_color }};
+    border: none;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    font-size: {{ block.settings.button_text_size }}px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .ai-featured-product-card__add-to-cart-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_background }};
+  }
+
+  .ai-featured-product-card__add-to-cart-{{ ai_gen_id }}:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-featured-products__grid-{{ ai_gen_id }} {
+      grid-template-columns: repeat({{ block.settings.columns_mobile }}, 1fr);
+    }
+  }
+{% endstyle %}
+
+<featured-products-{{ ai_gen_id }} class="ai-featured-products-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  {% if block.settings.heading != blank %}
+    <h2 class="ai-featured-products__heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
+  {% endif %}
+
+  <div class="ai-featured-products__grid-{{ ai_gen_id }}">
+    {% for i in (1..4) %}
+      {% liquid
+        assign product_key = 'product_' | append: i
+        assign product = block.settings[product_key]
+      %}
+
+      {% if product != blank %}
+        <div class="ai-featured-product-card-{{ ai_gen_id }}">
+          <div class="ai-featured-product-card__image-wrapper-{{ ai_gen_id }}">
+            {% if product.featured_image %}
+              <a href="{{ product.url }}">
+                <img
+                  src="{{ product.featured_image | image_url: width: 600 }}"
+                  alt="{{ product.featured_image.alt | escape }}"
+                  class="ai-featured-product-card__image-{{ ai_gen_id }}"
+                  loading="lazy"
+                  width="600"
+                  height="{{ 600 | divided_by: product.featured_image.aspect_ratio | ceil }}"
+                >
+              </a>
+            {% else %}
+              <div class="ai-featured-product-card__image-placeholder-{{ ai_gen_id }}">
+                {{ 'product-1' | placeholder_svg_tag }}
+              </div>
+            {% endif %}
+          </div>
+
+          <h3 class="ai-featured-product-card__title-{{ ai_gen_id }}">
+            <a href="{{ product.url }}" class="ai-featured-product-card__title-link-{{ ai_gen_id }}">
+              {{ product.title }}
+            </a>
+          </h3>
+
+          {% liquid
+            assign current_variant = product.selected_or_first_available_variant
+            assign current_price = current_variant.price
+            assign current_compare_price = current_variant.compare_at_price
+          %}
+
+          <div class="ai-featured-product-card__price-wrapper-{{ ai_gen_id }}">
+            <span class="ai-featured-product-card__price-{{ ai_gen_id }}">
+              {{ current_price | money }}
+            </span>
+
+            {% if current_compare_price > current_price %}
+              <span class="ai-featured-product-card__compare-price-{{ ai_gen_id }}">
+                {{ current_compare_price | money }}
+              </span>
+
+              {% liquid
+                assign savings = current_compare_price | minus: current_price
+                assign savings_rounded = savings | divided_by: 100.0 | ceil | times: 100
+              %}
+
+              <span class="ai-featured-product-card__savings-{{ ai_gen_id }}">
+                {% if request.locale.iso_code == 'en' %}You save{% else %}Economisești{% endif %} {{ savings_rounded | money }}
+              </span>
+            {% endif %}
+          </div>
+
+          {% if product.has_only_default_variant %}
+            <button
+              type="button"
+              class="ai-featured-product-card__add-to-cart-{{ ai_gen_id }}"
+              data-product-id="{{ product.id }}"
+              data-variant-id="{{ current_variant.id }}"
+              {% unless current_variant.available %}disabled{% endunless %}
+            >
+              {% if current_variant.available %}
+                {% if request.locale.iso_code == 'en' %}Add to cart{% else %}Adaugă în coș{% endif %}
+              {% else %}
+                {% if request.locale.iso_code == 'en' %}Out of stock{% else %}Stoc epuizat{% endif %}
+              {% endif %}
+            </button>
+          {% else %}
+            <div class="ai-featured-product-card__variants-{{ ai_gen_id }}">
+              <label class="ai-featured-product-card__variant-label-{{ ai_gen_id }}">
+                {% if request.locale.iso_code == 'en' %}Select option:{% else %}Selectează varianta:{% endif %}
+              </label>
+
+              {% if block.settings.variant_selector_type == 'pills' %}
+                <div class="ai-featured-product-card__variant-pills-{{ ai_gen_id }}" data-product-index="{{ i }}">
+                  {% for variant in product.variants %}
+                    <button
+                      type="button"
+                      class="ai-featured-product-card__variant-pill-{{ ai_gen_id }} {% if variant == current_variant %}active{% endif %} {% unless variant.available %}disabled{% endunless %}"
+                      data-variant-id="{{ variant.id }}"
+                      data-price="{{ variant.price }}"
+                      data-compare-price="{{ variant.compare_at_price }}"
+                      data-available="{{ variant.available }}"
+                      data-product-index="{{ i }}"
+                      {% unless variant.available %}disabled{% endunless %}
+                    >
+                      {{ variant.title }}
+                    </button>
+                  {% endfor %}
+                </div>
+              {% else %}
+                <select
+                  id="variant-select-{{ ai_gen_id }}-{{ i }}"
+                  class="ai-featured-product-card__variant-select-{{ ai_gen_id }}"
+                  data-product-index="{{ i }}"
+                >
+                  {% for variant in product.variants %}
+                    <option
+                      value="{{ variant.id }}"
+                      data-price="{{ variant.price }}"
+                      data-compare-price="{{ variant.compare_at_price }}"
+                      {% if variant == current_variant %}selected{% endif %}
+                      {% unless variant.available %}disabled{% endunless %}
+                    >
+                      {{ variant.title }} - {{ variant.price | money }}
+                      {% unless variant.available %} - {% if request.locale.iso_code == 'en' %}Out of stock{% else %}Stoc epuizat{% endif %}{% endunless %}
+                    </option>
+                  {% endfor %}
+                </select>
+              {% endif %}
+            </div>
+
+            <button
+              type="button"
+              class="ai-featured-product-card__add-to-cart-{{ ai_gen_id }}"
+              data-product-id="{{ product.id }}"
+              data-variant-id="{{ current_variant.id }}"
+              data-product-index="{{ i }}"
+              {% unless current_variant.available %}disabled{% endunless %}
+            >
+              {% if current_variant.available %}
+                {% if request.locale.iso_code == 'en' %}Add to cart{% else %}Adaugă în coș{% endif %}
+              {% else %}
+                {% if request.locale.iso_code == 'en' %}Out of stock{% else %}Stoc epuizat{% endif %}
+              {% endif %}
+            </button>
+          {% endif %}
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</featured-products-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class FeaturedProducts{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.variantSelects = this.querySelectorAll('.ai-featured-product-card__variant-select-{{ ai_gen_id }}');
+        this.variantPills = this.querySelectorAll('.ai-featured-product-card__variant-pill-{{ ai_gen_id }}');
+        this.addToCartButtons = this.querySelectorAll('.ai-featured-product-card__add-to-cart-{{ ai_gen_id }}');
+
+        this.variantSelects.forEach((select) => {
+          select.addEventListener('change', this.handleVariantChange.bind(this));
+        });
+
+        this.variantPills.forEach((pill) => {
+          pill.addEventListener('click', this.handlePillClick.bind(this));
+        });
+
+        this.addToCartButtons.forEach((button) => {
+          button.addEventListener('click', this.handleAddToCart.bind(this));
+        });
+      }
+
+      handlePillClick(event) {
+        const pill = event.target;
+        
+        if (pill.classList.contains('disabled')) {
+          return;
+        }
+
+        const productIndex = pill.dataset.productIndex;
+        const variantId = pill.dataset.variantId;
+        const price = pill.dataset.price;
+        const comparePrice = pill.dataset.comparePrice;
+        const isAvailable = pill.dataset.available === 'true';
+
+        const pillsContainer = pill.closest('.ai-featured-product-card__variant-pills-{{ ai_gen_id }}');
+        const allPills = pillsContainer.querySelectorAll('.ai-featured-product-card__variant-pill-{{ ai_gen_id }}');
+        
+        allPills.forEach((p) => p.classList.remove('active'));
+        pill.classList.add('active');
+
+        const card = pill.closest('.ai-featured-product-card-{{ ai_gen_id }}');
+        const button = card.querySelector('.ai-featured-product-card__add-to-cart-{{ ai_gen_id }}[data-product-index="' + productIndex + '"]');
+        const priceWrapper = card.querySelector('.ai-featured-product-card__price-wrapper-{{ ai_gen_id }}');
+
+        button.dataset.variantId = variantId;
+
+        if (isAvailable) {
+          button.disabled = false;
+          button.textContent = '{% if request.locale.iso_code == "en" %}Add to cart{% else %}Adaugă în coș{% endif %}';
+        } else {
+          button.disabled = true;
+          button.textContent = '{% if request.locale.iso_code == "en" %}Out of stock{% else %}Stoc epuizat{% endif %}';
+        }
+
+        this.updatePrice(priceWrapper, price, comparePrice);
+      }
+
+      handleVariantChange(event) {
+        const select = event.target;
+        const productIndex = select.dataset.productIndex;
+        const selectedOption = select.options[select.selectedIndex];
+        const variantId = selectedOption.value;
+        const price = selectedOption.dataset.price;
+        const comparePrice = selectedOption.dataset.comparePrice;
+        const isAvailable = !selectedOption.disabled;
+
+        const card = select.closest('.ai-featured-product-card-{{ ai_gen_id }}');
+        const button = card.querySelector('.ai-featured-product-card__add-to-cart-{{ ai_gen_id }}[data-product-index="' + productIndex + '"]');
+        const priceWrapper = card.querySelector('.ai-featured-product-card__price-wrapper-{{ ai_gen_id }}');
+
+        button.dataset.variantId = variantId;
+
+        if (isAvailable) {
+          button.disabled = false;
+          button.textContent = '{% if request.locale.iso_code == "en" %}Add to cart{% else %}Adaugă în coș{% endif %}';
+        } else {
+          button.disabled = true;
+          button.textContent = '{% if request.locale.iso_code == "en" %}Out of stock{% else %}Stoc epuizat{% endif %}';
+        }
+
+        this.updatePrice(priceWrapper, price, comparePrice);
+      }
+
+      updatePrice(priceWrapper, price, comparePrice) {
+        let priceHTML = '<span class="ai-featured-product-card__price-{{ ai_gen_id }}">' + this.formatMoney(price) + '</span>';
+
+        if (comparePrice && parseInt(comparePrice) > parseInt(price)) {
+          const savings = parseInt(comparePrice) - parseInt(price);
+          const savingsRounded = Math.ceil(savings / 100) * 100;
+
+          priceHTML += '<span class="ai-featured-product-card__compare-price-{{ ai_gen_id }}">' + this.formatMoney(comparePrice) + '</span>';
+          priceHTML += '<span class="ai-featured-product-card__savings-{{ ai_gen_id }}">{% if request.locale.iso_code == "en" %}You save {% else %}Economisești {% endif %}' + this.formatMoney(savingsRounded) + '</span>';
+        }
+
+        priceWrapper.innerHTML = priceHTML;
+      }
+
+      handleAddToCart(event) {
+        const button = event.target;
+        const variantId = button.dataset.variantId;
+
+        if (!variantId || button.disabled) {
+          return;
+        }
+
+        button.disabled = true;
+        const originalText = button.textContent;
+        button.textContent = '{% if request.locale.iso_code == "en" %}Adding...{% else %}Se adaugă...{% endif %}';
+
+        fetch('/cart/add.js', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            id: variantId,
+            quantity: 1
+          })
+        })
+        .then(response => response.json())
+        .then(data => {
+          button.textContent = '{% if request.locale.iso_code == "en" %}Added!{% else %}Adăugat!{% endif %}';
+          setTimeout(() => {
+            button.textContent = originalText;
+            button.disabled = false;
+          }, 2000);
+
+          if (window.Shopify && window.Shopify.theme && window.Shopify.theme.cart) {
+            window.Shopify.theme.cart.refresh();
+          }
+
+          document.dispatchEvent(new CustomEvent('cart:refresh'));
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          button.textContent = '{% if request.locale.iso_code == "en" %}Error{% else %}Eroare{% endif %}';
+          setTimeout(() => {
+            button.textContent = originalText;
+            button.disabled = false;
+          }, 2000);
+        });
+      }
+
+      formatMoney(cents) {
+        const amount = (parseInt(cents) / 100).toFixed(2);
+        return amount.replace('.', ',') + ' RON';
+      }
+    }
+
+    customElements.define('featured-products-{{ ai_gen_id }}', FeaturedProducts{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Produse recomandate",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Conținut"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Titlu",
+      "default": "Produsele noastre"
+    },
+    {
+      "type": "product",
+      "id": "product_1",
+      "label": "Produs 1"
+    },
+    {
+      "type": "product",
+      "id": "product_2",
+      "label": "Produs 2"
+    },
+    {
+      "type": "product",
+      "id": "product_3",
+      "label": "Produs 3"
+    },
+    {
+      "type": "product",
+      "id": "product_4",
+      "label": "Produs 4"
+    },
+    {
+      "type": "header",
+      "content": "Aspect"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Lățime desktop",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "Coloane desktop",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Coloane mobile",
+      "options": [
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "range",
+      "id": "grid_gap",
+      "label": "Spațiu între produse",
+      "min": 8,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "section_padding",
+      "label": "Padding secțiune",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Titlu"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Aliniere titlu",
+      "options": [
+        {
+          "value": "left",
+          "label": "Stânga"
+        },
+        {
+          "value": "center",
+          "label": "Centru"
+        },
+        {
+          "value": "right",
+          "label": "Dreapta"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Dimensiune titlu",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "heading_spacing",
+      "label": "Spațiu sub titlu",
+      "min": 8,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Culoare titlu",
+      "default": "#593122"
+    },
+    {
+      "type": "header",
+      "content": "Card produs"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Fundal secțiune",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Fundal card",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Culoare bordură card",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "range",
+      "id": "card_border_width",
+      "label": "Grosime bordură card",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "label": "Rotunjire colțuri card",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "card_padding",
+      "label": "Padding card",
+      "min": 8,
+      "max": 32,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "label": "Rotunjire colțuri imagine",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "header",
+      "content": "Text produs"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Culoare text",
+      "default": "#593122"
+    },
+    {
+      "type": "range",
+      "id": "product_title_size",
+      "label": "Dimensiune titlu produs",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "header",
+      "content": "Prețuri"
+    },
+    {
+      "type": "color",
+      "id": "price_color",
+      "label": "Culoare preț",
+      "default": "#593122"
+    },
+    {
+      "type": "range",
+      "id": "price_size",
+      "label": "Dimensiune preț",
+      "min": 14,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "color",
+      "id": "compare_price_color",
+      "label": "Culoare preț comparat",
+      "default": "#999999"
+    },
+    {
+      "type": "range",
+      "id": "compare_price_size",
+      "label": "Dimensiune preț comparat",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "savings_color",
+      "label": "Culoare economie",
+      "default": "#d32f2f"
+    },
+    {
+      "type": "color",
+      "id": "savings_background",
+      "label": "Fundal economie",
+      "default": "#ffebee"
+    },
+    {
+      "type": "range",
+      "id": "savings_size",
+      "label": "Dimensiune economie",
+      "min": 10,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 13
+    },
+    {
+      "type": "header",
+      "content": "Selector variante"
+    },
+    {
+      "type": "select",
+      "id": "variant_selector_type",
+      "label": "Tip selector",
+      "options": [
+        {
+          "value": "dropdown",
+          "label": "Dropdown"
+        },
+        {
+          "value": "pills",
+          "label": "Butoane"
+        }
+      ],
+      "default": "dropdown"
+    },
+    {
+      "type": "color",
+      "id": "input_background",
+      "label": "Fundal dropdown",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "input_border_color",
+      "label": "Culoare bordură dropdown",
+      "default": "#cccccc"
+    },
+    {
+      "type": "range",
+      "id": "input_border_radius",
+      "label": "Rotunjire colțuri dropdown",
+      "min": 0,
+      "max": 12,
+      "step": 2,
+      "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "header",
+      "content": "Butoane variante"
+    },
+    {
+      "type": "color",
+      "id": "pill_background",
+      "label": "Fundal buton",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "pill_text_color",
+      "label": "Culoare text buton",
+      "default": "#593122"
+    },
+    {
+      "type": "color",
+      "id": "pill_border_color",
+      "label": "Culoare bordură buton",
+      "default": "#cccccc"
+    },
+    {
+      "type": "range",
+      "id": "pill_border_radius",
+      "label": "Rotunjire colțuri buton",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "color",
+      "id": "pill_hover_background",
+      "label": "Fundal buton hover",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "color",
+      "id": "pill_hover_border_color",
+      "label": "Culoare bordură hover",
+      "default": "#999999"
+    },
+    {
+      "type": "color",
+      "id": "pill_active_background",
+      "label": "Fundal buton activ",
+      "default": "#72bf4e"
+    },
+    {
+      "type": "color",
+      "id": "pill_active_text_color",
+      "label": "Culoare text activ",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "pill_active_border_color",
+      "label": "Culoare bordură activ",
+      "default": "#72bf4e"
+    },
+    {
+      "type": "header",
+      "content": "Buton adaugă în coș"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Fundal buton",
+      "default": "#72bf4e"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_background",
+      "label": "Fundal buton hover",
+      "default": "#5fa83d"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Culoare text buton",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "button_text_size",
+      "label": "Dimensiune text buton",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Rotunjire colțuri buton",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    }
+  ],
+  "presets": [
+    {
+      "name": "Produse recomandate"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,518 @@
+{% comment %}
+  ============================================================
+  Section: Chestionar Ziua Porților Deschise – Biruința Olteniei
+  Site: biruintaolteniei.ro
+
+  HOW IT WORKS (BULLETPROOF NATIVE METHOD):
+  - 1. Native Submit: Bypasses strict AJAX bot protection.
+  - 2. Double Save: Answers stored in Metafields AND Customer Notes (fallback for newsletter forms).
+  - 3. Email: On success reload, JS reads sessionStorage and silently emails the owner.
+  ============================================================
+{% endcomment %}
+
+<section class="bo-section" id="chestionar-portideschise">
+
+  {%- if section.settings.show_intro -%}
+  <div class="bo-intro" id="bo-intro-block">
+    <div class="bo-intro__badge">{{ section.settings.badge_text }}</div>
+    <h2 class="bo-intro__heading">{{ section.settings.heading }}</h2>
+    <p class="bo-intro__subheading">{{ section.settings.subheading }}</p>
+  </div>
+  {%- endif -%}
+
+  <div class="bo-form-wrap">
+
+    {%- form 'customer', id: 'PortiDeschiseForm', class: 'bo-form' -%}
+
+      {%- if form.posted_successfully? -%}
+        
+        <div class="bo-success" role="alert">
+          <div class="bo-success__icon" aria-hidden="true">🌾</div>
+          <h3>{{ section.settings.success_heading }}</h3>
+          <p>{{ section.settings.success_message }}</p>
+        </div>
+
+        <style>
+          /* Hide intro when success is shown */
+          #bo-intro-block { display: none !important; }
+        </style>
+
+        <script>
+          // Send the email in the background after successful reload
+          document.addEventListener('DOMContentLoaded', function() {
+            var stored = sessionStorage.getItem('bo_form_data');
+            if (!stored) return;
+            
+            try {
+              var d = JSON.parse(stored);
+              sessionStorage.removeItem('bo_form_data');
+
+              var body =
+                '=== CHESTIONAR: Ziua Porților Deschise – Biruința Olteniei ===\n\n' +
+                'Nume: '           + (d.nume || '') + '\n' +
+                'Email: '          + (d.email || '') + '\n' +
+                'Telefon: '        + (d.telefon || '') + '\n' +
+                'Localitate: '     + (d.localitate || '') + '\n' +
+                'Vii însoțit: '   + (d.insotit || '') + '\n' +
+                'Nr. persoane: '   + (d.nr_persoane || '') + '\n' +
+                'Ce atrage: '      + (d.atractii || '') + '\n' +
+                'Sursa: '          + (d.sursa || '') + '\n' +
+                'GDPR marketing: ' + (d.gdpr_marketing || '') + '\n' +
+                'Data: '           + (d.data_completarii || '') + '\n';
+
+              var params = new URLSearchParams();
+              params.append('form_type', 'contact');
+              params.append('utf8', '✓');
+              params.append('contact[email]', d.email);
+              params.append('contact[name]', d.nume);
+              params.append('contact[body]', body);
+
+              fetch('/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: params.toString()
+              });
+            } catch(e) { console.error(e); }
+          });
+        </script>
+
+      {%- else -%}
+
+        {%- if form.errors -%}
+          <div class="bo-error-banner" role="alert">
+            {{ form.errors | default_errors }}
+          </div>
+        {%- endif -%}
+
+        <input type="hidden" name="contact[tags]" value="porti-deschise-2026">
+        
+        {%- comment %} MULTIPLE FALLBACKS FOR SAVING DATA {%- endcomment %}
+        <input type="hidden" name="customer[metafields][porti_deschise][chestionar_2026]" id="json_payload_1">
+        <input type="hidden" name="contact[metafields][porti_deschise][chestionar_2026]" id="json_payload_2">
+        <input type="hidden" name="customer[note]" id="json_payload_note_1">
+        <input type="hidden" name="contact[note]" id="json_payload_note_2">
+
+        <input type="hidden" name="contact[accepts_marketing]" id="accepts_marketing_hidden" value="false">
+
+        <div class="bo-form__grid">
+          <div class="bo-field bo-field--half">
+            <label for="field_name" class="bo-label">Nume și prenume <span class="bo-required" aria-hidden="true">*</span></label>
+            <input type="text" id="field_name" class="bo-input" required aria-required="true" autocomplete="name" placeholder="ex. Maria Ionescu">
+          </div>
+
+          <div class="bo-field bo-field--half">
+            <label for="CustomerEmail" class="bo-label">Adresă de email <span class="bo-required" aria-hidden="true">*</span></label>
+            <input type="email" id="CustomerEmail" name="contact[email]" class="bo-input" required aria-required="true" autocomplete="email" placeholder="email@exemplu.ro">
+          </div>
+
+          <div class="bo-field bo-field--half">
+            <label for="field_phone" class="bo-label">Număr de telefon <span class="bo-required" aria-hidden="true">*</span></label>
+            <input type="tel" id="field_phone" class="bo-input" required aria-required="true" autocomplete="tel" placeholder="07xx xxx xxx">
+            <span class="bo-hint">Pentru confirmare și detalii organizatorice.</span>
+          </div>
+
+          <div class="bo-field bo-field--half">
+            <label for="field_localitate" class="bo-label">Din ce localitate veniți?</label>
+            <input type="text" id="field_localitate" class="bo-input" placeholder="ex. Craiova, București...">
+          </div>
+        </div>
+
+        <fieldset class="bo-fieldset">
+          <legend class="bo-legend">Veți veni singur/ă sau însoțit/ă?</legend>
+          <div class="bo-radios">
+            {%- assign insotit_options = "Vin singur/ă,Vin cu familia,Vin cu prieteni,Nu știu încă" | split: "," -%}
+            {%- for opt in insotit_options -%}
+              <label class="bo-radio-label">
+                <input type="radio" name="insotit" value="{{ opt }}" class="bo-radio">
+                <span class="bo-radio-custom" aria-hidden="true"></span>
+                {{ opt }}
+              </label>
+            {%- endfor -%}
+          </div>
+        </fieldset>
+
+        <div class="bo-field bo-field--narrow">
+          <label for="field_persoane" class="bo-label">Câte persoane ați veni în total?</label>
+          <input type="number" id="field_persoane" class="bo-input" min="1" max="50" placeholder="1">
+        </div>
+
+        <fieldset class="bo-fieldset">
+          <legend class="bo-legend">Ce v-ar atrage cel mai mult? <span class="bo-hint-inline">(puteți alege mai multe)</span></legend>
+          <div class="bo-checkboxes">
+            {%- assign atractii_list = "Turul morii,Povestea făinii măcinate pe piatră,Degustarea de pepeni,O zi relaxată la țară,Activități pentru copii,Posibilitatea de a cumpăra produse Biruința Olteniei,Ateliere de făcut pâine la țest,Susținerea producătorilor locali" | split: "," -%}
+            {%- for opt in atractii_list -%}
+              <label class="bo-check-label">
+                <input type="checkbox" class="bo-checkbox bo-atractie-cb" value="{{ opt }}">
+                <span class="bo-check-custom" aria-hidden="true"></span>
+                {{ opt }}
+              </label>
+            {%- endfor -%}
+            <label class="bo-check-label bo-check-label--other">
+              <input type="checkbox" class="bo-checkbox bo-atractie-cb" value="__other__" id="atractii_other_check">
+              <span class="bo-check-custom" aria-hidden="true"></span>
+              Altceva:
+              <input type="text" class="bo-input-inline" id="atractii_other_text" placeholder="specificați..." aria-label="Altceva" disabled>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset class="bo-fieldset">
+          <legend class="bo-legend">De unde ați aflat despre eveniment?</legend>
+          <div class="bo-radios bo-radios--wrap">
+            {%- assign surse = "Facebook,Instagram,TikTok,Biruința Olteniei,De la un prieten,Newsletter,Din presă,Grup Facebook" | split: "," -%}
+            {%- for opt in surse -%}
+              <label class="bo-radio-label">
+                <input type="radio" name="sursa" value="{{ opt }}" class="bo-radio">
+                <span class="bo-radio-custom" aria-hidden="true"></span>
+                {{ opt }}
+              </label>
+            {%- endfor -%}
+            <label class="bo-radio-label bo-radio-label--other">
+              <input type="radio" name="sursa" value="__other__" class="bo-radio" id="sursa_other_radio">
+              <span class="bo-radio-custom" aria-hidden="true"></span>
+              Altă sursă:
+              <input type="text" class="bo-input-inline" id="sursa_other_text" placeholder="specificați..." aria-label="Altă sursă" disabled>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset class="bo-fieldset bo-fieldset--consent">
+          <label class="bo-check-label bo-check-label--consent">
+            <input type="checkbox" id="acord_contact" class="bo-checkbox" required aria-required="true">
+            <span class="bo-check-custom" aria-hidden="true"></span>
+            <span>Sunt de acord să fiu contactat/ă cu detalii despre eveniment. <span class="bo-required" aria-hidden="true">*</span></span>
+          </label>
+        </fieldset>
+
+        <fieldset class="bo-fieldset bo-fieldset--consent">
+          <legend class="bo-legend bo-legend--small">Acord GDPR</legend>
+          <div class="bo-consent">
+            <label class="bo-check-label bo-check-label--consent">
+              <input type="checkbox" id="gdpr_participare" class="bo-checkbox" required aria-required="true">
+              <span class="bo-check-custom" aria-hidden="true"></span>
+              <span>Sunt de acord ca datele mele să fie folosite pentru organizarea participării la eveniment și pentru comunicări legate de acesta. <span class="bo-required" aria-hidden="true">*</span></span>
+            </label>
+            <label class="bo-check-label bo-check-label--consent bo-check-label--optional">
+              <input type="checkbox" id="gdpr_marketing" class="bo-checkbox">
+              <span class="bo-check-custom" aria-hidden="true"></span>
+              <span>
+                <span class="bo-optional-tag">Opțional</span>
+                Sunt de acord să primesc comunicări viitoare despre produsele, evenimentele și campaniile Biruința Olteniei.
+              </span>
+            </label>
+          </div>
+        </fieldset>
+
+        <div class="bo-submit-wrap">
+          <button type="submit" class="bo-submit" id="bo-submit-btn">
+            <span class="bo-submit__text">Trimit înscrierea</span>
+            <span class="bo-submit__icon" aria-hidden="true">🌻</span>
+          </button>
+          <p class="bo-submit__note">Câmpurile marcate cu <span class="bo-required" aria-hidden="true">*</span> sunt obligatorii.</p>
+        </div>
+
+      {%- endif -%}
+
+    {%- endform -%}
+
+  </div>
+
+</section>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Source+Sans+3:wght@300;400;500;600&display=swap');
+
+  :root {
+    --bo-gold: #C8922A;
+    --bo-earth: #5C3D1E;
+    --bo-cream: #FAF5EC;
+    --bo-green: #2D4A1E;
+    --bo-green-light: #4A7A35;
+    --bo-text: #2C2016;
+    --bo-text-muted: #7A6A55;
+    --bo-border: #DDD0B8;
+    --bo-radius: 6px;
+    --bo-input-bg: #FFFDF7;
+  }
+
+  .bo-section {
+    font-family: 'Source Sans 3', sans-serif;
+    background-color: var(--bo-cream);
+    background-image:
+      radial-gradient(ellipse at 10% 0%, rgba(200,146,42,0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 90% 100%, rgba(45,74,30,0.06) 0%, transparent 50%);
+    color: var(--bo-text);
+    padding: 64px 24px 80px;
+  }
+
+  .bo-intro { max-width: 680px; margin: 0 auto 56px; text-align: center; }
+  .bo-intro__badge {
+    display: inline-block;
+    font-weight: 600; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--bo-green);
+    background: rgba(45,74,30,0.1); border: 1px solid rgba(45,74,30,0.2);
+    padding: 5px 14px; border-radius: 20px; margin-bottom: 20px;
+  }
+  .bo-intro__heading {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 5vw, 44px); font-weight: 700;
+    color: var(--bo-earth); line-height: 1.2; margin: 0 0 18px;
+  }
+  .bo-intro__subheading { font-size: 17px; line-height: 1.7; color: var(--bo-text-muted); margin: 0; }
+
+  .bo-form-wrap { max-width: 760px; margin: 0 auto; }
+  .bo-form {
+    background: white; border: 1px solid var(--bo-border); border-radius: 12px;
+    padding: 40px 44px 48px; box-shadow: 0 4px 32px rgba(92,61,30,0.08);
+  }
+
+  @media (max-width: 600px) { .bo-form { padding: 28px 20px 36px; } }
+
+  .bo-form__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 24px; margin-bottom: 28px; }
+  @media (max-width: 580px) { .bo-form__grid { grid-template-columns: 1fr; } }
+
+  .bo-field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 24px; }
+  .bo-field--half { grid-column: span 1; margin-bottom: 0; }
+  .bo-field--narrow { max-width: 160px; margin-bottom: 28px; }
+
+  .bo-label { font-size: 13.5px; font-weight: 600; color: var(--bo-earth); }
+  .bo-input {
+    font-family: 'Source Sans 3', sans-serif; font-size: 15px;
+    background: var(--bo-input-bg); border: 1.5px solid var(--bo-border);
+    border-radius: var(--bo-radius); padding: 10px 14px; color: var(--bo-text);
+    transition: border-color 0.18s, box-shadow 0.18s; width: 100%; box-sizing: border-box;
+  }
+  .bo-input:focus { outline: none; border-color: var(--bo-gold); box-shadow: 0 0 0 3px rgba(200,146,42,0.15); }
+
+  .bo-hint { font-size: 12px; color: var(--bo-text-muted); line-height: 1.4; }
+  .bo-hint-inline { font-size: 12px; font-weight: 400; color: var(--bo-text-muted); }
+
+  .bo-fieldset { border: none; padding: 0; margin: 0 0 32px; }
+  .bo-legend { font-size: 14px; font-weight: 600; color: var(--bo-earth); margin-bottom: 14px; padding: 0; width: 100%; }
+  .bo-legend--small { font-size: 13px; }
+
+  .bo-radios { display: flex; flex-direction: column; gap: 10px; }
+  .bo-radios--wrap { flex-direction: row; flex-wrap: wrap; gap: 10px 20px; }
+  .bo-radio-label { display: flex; align-items: center; gap: 10px; font-size: 15px; cursor: pointer; color: var(--bo-text); }
+  .bo-radio { display: none; }
+  .bo-radio-custom {
+    width: 18px; height: 18px; border-radius: 50%;
+    border: 2px solid var(--bo-border); background: var(--bo-input-bg);
+    flex-shrink: 0; transition: border-color 0.15s, background 0.15s;
+  }
+  .bo-radio:checked + .bo-radio-custom { border-color: var(--bo-gold); background: var(--bo-gold); box-shadow: inset 0 0 0 3px white; }
+
+  .bo-checkboxes { display: flex; flex-direction: column; gap: 10px; }
+  .bo-check-label { display: flex; align-items: flex-start; gap: 10px; font-size: 15px; cursor: pointer; color: var(--bo-text); line-height: 1.4; }
+  .bo-checkbox { display: none; }
+  .bo-check-custom {
+    width: 18px; height: 18px; min-width: 18px; border-radius: 4px;
+    border: 2px solid var(--bo-border); background: var(--bo-input-bg);
+    margin-top: 1px; transition: border-color 0.15s, background 0.15s; position: relative;
+  }
+  .bo-checkbox:checked + .bo-check-custom { border-color: var(--bo-green-light); background: var(--bo-green-light); }
+  .bo-checkbox:checked + .bo-check-custom::after {
+    content: ''; position: absolute; top: 2px; left: 4px;
+    width: 6px; height: 10px; border: 2px solid white;
+    border-top: none; border-left: none; transform: rotate(42deg);
+  }
+
+  .bo-input-inline {
+    font-family: 'Source Sans 3', sans-serif; font-size: 14px;
+    border: none; border-bottom: 1.5px solid var(--bo-border);
+    background: transparent; padding: 2px 6px; color: var(--bo-text); width: 180px;
+  }
+  .bo-input-inline:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  .bo-fieldset--consent {
+    background: rgba(240,201,107,0.06); border: 1px solid rgba(200,146,42,0.18);
+    border-radius: 8px; padding: 18px 20px; margin-bottom: 20px;
+  }
+  .bo-consent { display: flex; flex-direction: column; gap: 14px; }
+  .bo-check-label--consent { font-size: 13.5px; color: #4A3820; line-height: 1.5; }
+  .bo-optional-tag {
+    display: inline-block; font-size: 10px; font-weight: 700;
+    background: rgba(45,74,30,0.1); color: var(--bo-green);
+    padding: 1px 7px; border-radius: 3px; margin-right: 4px;
+  }
+
+  .bo-required { color: #B54D2E; }
+  .bo-submit-wrap { margin-top: 36px; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+  .bo-submit {
+    font-family: 'Source Sans 3', sans-serif; font-size: 16px; font-weight: 600;
+    background: var(--bo-green); color: white; border: none; border-radius: 8px;
+    padding: 14px 32px; cursor: pointer; display: flex; align-items: center; gap: 10px;
+    box-shadow: 0 2px 12px rgba(45,74,30,0.25);
+    transition: background 0.2s, transform 0.15s;
+  }
+  .bo-submit:hover { background: var(--bo-green-light); transform: translateY(-1px); }
+  .bo-submit:active { transform: translateY(0); }
+
+  .bo-error-banner {
+    background: #FEF2F0; border: 1px solid #F4A99A; border-radius: 6px;
+    padding: 14px 18px; margin-bottom: 24px; font-size: 14px; color: #8B2500;
+  }
+  .bo-success { text-align: center; padding: 48px 24px; background: white; border: 1px solid var(--bo-border); border-radius: 12px; }
+  .bo-success__icon { font-size: 56px; margin-bottom: 16px; }
+  .bo-success h3 { font-family: 'Playfair Display', serif; font-size: 26px; color: var(--bo-earth); margin-bottom: 12px; }
+  .bo-success p { font-size: 16px; color: var(--bo-text-muted); max-width: 420px; margin: 0 auto; line-height: 1.6; }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+  // "Altceva" checkbox → enable free-text
+  var otherCb = document.getElementById('atractii_other_check');
+  var otherTxt = document.getElementById('atractii_other_text');
+  if (otherCb && otherTxt) {
+    otherCb.addEventListener('change', function () {
+      otherTxt.disabled = !this.checked;
+      if (this.checked) otherTxt.focus(); else otherTxt.value = '';
+    });
+  }
+
+  // "Altă sursă" radio → enable free-text
+  var sursaOtherRadio = document.getElementById('sursa_other_radio');
+  var sursaOtherTxt = document.getElementById('sursa_other_text');
+  if (sursaOtherRadio && sursaOtherTxt) {
+    document.querySelectorAll('input[name="sursa"]').forEach(function (r) {
+      r.addEventListener('change', function () {
+        var isOther = sursaOtherRadio.checked;
+        sursaOtherTxt.disabled = !isOther;
+        if (!isOther) sursaOtherTxt.value = ''; else sursaOtherTxt.focus();
+      });
+    });
+  }
+
+  // Mirror GDPR marketing checkbox
+  var gdprMkt = document.getElementById('gdpr_marketing');
+  var acceptsMkt = document.getElementById('accepts_marketing_hidden');
+  if (gdprMkt && acceptsMkt) {
+    gdprMkt.addEventListener('change', function () {
+      acceptsMkt.value = this.checked ? 'true' : 'false';
+    });
+  }
+
+  // Pre-submit data collection (Native submit)
+  var form = document.getElementById('PortiDeschiseForm');
+  if (!form) return;
+
+  form.addEventListener('submit', function (e) {
+    var submitBtn = document.getElementById('bo-submit-btn');
+    if (submitBtn) {
+      submitBtn.innerText = 'Se trimite...';
+      setTimeout(function() { submitBtn.disabled = true; }, 50);
+    }
+
+    var atractii = [];
+    document.querySelectorAll('.bo-atractie-cb:checked').forEach(function (cb) {
+      if (cb.value === '__other__') {
+        if (otherTxt && otherTxt.value.trim()) atractii.push(otherTxt.value.trim());
+      } else {
+        atractii.push(cb.value);
+      }
+    });
+
+    var sursaRadio = form.querySelector('input[name="sursa"]:checked');
+    var sursa = '';
+    if (sursaRadio) {
+      sursa = sursaRadio.value === '__other__' ? (sursaOtherTxt ? sursaOtherTxt.value.trim() : '') : sursaRadio.value;
+    }
+
+    var insotitRadio = form.querySelector('input[name="insotit"]:checked');
+    
+    var payload = {
+      nume:             document.getElementById('field_name').value.trim(),
+      email:            document.getElementById('CustomerEmail').value.trim(),
+      telefon:          document.getElementById('field_phone').value.trim(),
+      localitate:       document.getElementById('field_localitate').value.trim(),
+      insotit:          insotitRadio ? insotitRadio.value : '',
+      nr_persoane:      document.getElementById('field_persoane').value || '1',
+      atractii:         atractii.join(', '),
+      sursa:            sursa,
+      gdpr_marketing:   gdprMkt && gdprMkt.checked ? 'Da' : 'Nu',
+      data_completarii: new Date().toLocaleString('ro-RO')
+    };
+
+    var payloadStr = JSON.stringify(payload);
+    if(document.getElementById('json_payload_1')) document.getElementById('json_payload_1').value = payloadStr;
+    if(document.getElementById('json_payload_2')) document.getElementById('json_payload_2').value = payloadStr;
+
+    // Formatting Note Fallback
+    var noteStr = 
+      "=== CHESTIONAR 2026 ===\n" +
+      "Nume: " + payload.nume + "\n" +
+      "Telefon: " + payload.telefon + "\n" +
+      "Localitate: " + payload.localitate + "\n" +
+      "Însoțit: " + payload.insotit + "\n" +
+      "Persoane: " + payload.nr_persoane + "\n" +
+      "Atracții: " + payload.atractii + "\n" +
+      "Sursa: " + payload.sursa + "\n" +
+      "GDPR: " + payload.gdpr_marketing;
+
+    if(document.getElementById('json_payload_note_1')) document.getElementById('json_payload_note_1').value = noteStr;
+    if(document.getElementById('json_payload_note_2')) document.getElementById('json_payload_note_2').value = noteStr;
+
+    var nameInput = form.querySelector('input[name="contact[first_name]"]');
+    if (!nameInput) {
+      nameInput = document.createElement('input');
+      nameInput.type = 'hidden';
+      nameInput.name = 'contact[first_name]';
+      form.appendChild(nameInput);
+    }
+    nameInput.value = payload.nume;
+
+    try {
+      sessionStorage.setItem('bo_form_data', payloadStr);
+    } catch(err) {}
+  });
+
+});
+</script>
+
+{% schema %}
+{
+  "name": "Chestionar Porți Deschise",
+  "tag": "section",
+  "class": "bo-chestionar-section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_intro",
+      "label": "Afișează textul introductiv",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text",
+      "default": "Vară 2026 · Cooperativa Agricolă"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Titlu principal",
+      "default": "Ziua Porților Deschise la Biruința Olteniei"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Text introductiv",
+      "default": "La vară, când se coc pepenii, deschidem porțile. Tururi ale morii, povești despre făina măcinată pe piatră și pepeni din partea casei. Completează formularul și revenim cu detalii."
+    },
+    {
+      "type": "text",
+      "id": "success_heading",
+      "label": "Titlu confirmare",
+      "default": "Mulțumim pentru înregistrare!"
+    },
+    {
+      "type": "textarea",
+      "id": "success_message",
+      "label": "Mesaj confirmare",
+      "default": "Te-am primit. Revenim cu detalii despre eveniment înainte de ziua porților deschise."
+    }
+  ],
+  "presets": [{ "name": "Chestionar Porți Deschise" }]
+}
+{% endschema %}

@@ -1,0 +1,254 @@
+{% schema %}
+{
+  "name": "Cart Bar (Large Text)",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Beállítások"
+    },
+    {
+      "type": "number",
+      "id": "threshold_amount",
+      "label": "Célösszeg (Lei)",
+      "default": 100
+    },
+    {
+      "type": "text",
+      "id": "excluded_keyword",
+      "label": "Kizárt szó (pl. PREMIUM)",
+      "default": "PREMIUM"
+    },
+    {
+      "type": "header",
+      "content": "Design"
+    },
+    {
+      "type": "color",
+      "id": "color_primary",
+      "label": "Csík színe (Folyamat)",
+      "default": "#F2AC29"
+    },
+    {
+      "type": "color",
+      "id": "color_success",
+      "label": "Csík színe (Kész)",
+      "default": "#72BF4E"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cart Bar (Large Text)"
+    }
+  ]
+}
+{% endschema %}
+
+<div id="modern-cart-bar-root" 
+     class="page-width"
+     data-threshold="{{ section.settings.threshold_amount }}" 
+     data-keyword="{{ section.settings.excluded_keyword }}"
+     data-color-primary="{{ section.settings.color_primary }}"
+     data-color-success="{{ section.settings.color_success }}">
+  
+  <div class="modern-bar-card">
+    
+    <div class="bar-header">
+      <div class="icon-box" id="status-icon">🎁</div>
+      <div class="text-content">
+        <div id="bar-message" class="main-message">Se calculează...</div>
+      </div>
+    </div>
+
+    <div class="bar-track">
+      <div id="bar-fill" class="bar-fill">
+        <div class="bar-glare"></div>
+      </div>
+    </div>
+
+    <div class="bar-footer">
+      *Produsele "{{ section.settings.excluded_keyword }}" nu sunt incluse în ofertă.
+    </div>
+
+  </div>
+</div>
+
+<style>
+  /* KONTÉNER */
+  #modern-cart-bar-root {
+    padding-top: 25px;
+    padding-bottom: 25px;
+    width: 100%; 
+    margin: 0 auto;
+  }
+
+  .modern-bar-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 30px 35px; /* Még tágasabb belső tér */
+    width: 100%;
+    box-sizing: border-box;
+    box-shadow: 0 4px 25px rgba(0,0,0,0.07); 
+    border: 1px solid rgba(0,0,0,0.04);
+  }
+
+  .bar-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+    gap: 20px; /* Nagyobb távolság az ikon és szöveg között */
+  }
+
+  /* NAGYOBB IKON */
+  .icon-box {
+    font-size: 32px; /* Ikon méret növelve */
+    background: #fff8e1;
+    width: 60px; /* Doboz méret növelve */
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* NAGYOBB FŐ CÍMSOR */
+  .main-message {
+    font-size: 1.6rem; /* Kb. 26px - Jelentősen nagyobb */
+    font-weight: 700;
+    color: #222;
+    line-height: 1.3;
+  }
+
+  /* VASTAGABB CSÍK */
+  .bar-track {
+    width: 100%;
+    height: 32px; /* Vastagabb sáv */
+    background-color: #f0f0f0;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+  }
+
+  .bar-fill {
+    height: 100%;
+    width: 0%;
+    border-radius: 16px;
+    transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.4s ease;
+    position: relative;
+    
+    background-image: linear-gradient(
+      45deg, 
+      rgba(255, 255, 255, 0.22) 25%, 
+      transparent 25%, 
+      transparent 50%, 
+      rgba(255, 255, 255, 0.22) 50%, 
+      rgba(255, 255, 255, 0.22) 75%, 
+      transparent 75%, 
+      transparent
+    );
+    background-size: 40px 40px;
+    animation: stripe-move 1.5s linear infinite;
+  }
+
+  /* NAGYOBB APRÓBETŰS RÉSZ */
+  .bar-footer {
+    margin-top: 18px;
+    font-size: 1.0rem; /* Kb. 16px - Olvashatóbb */
+    color: #888;
+    text-align: right; 
+    font-style: italic;
+  }
+
+  @keyframes stripe-move {
+    0% { background-position: 0 0; }
+    100% { background-position: 40px 0; }
+  }
+
+  /* MOBILRA OPTIMALIZÁLÁS */
+  @media (max-width: 768px) {
+    .modern-bar-card { padding: 20px; }
+    .bar-header { flex-direction: column; text-align: center; gap: 15px; }
+    .bar-footer { text-align: center; font-size: 0.9rem; }
+    
+    /* Mobilon kicsit visszaveszünk, hogy kiférjen */
+    .main-message { font-size: 1.3rem; } 
+    .icon-box { width: 50px; height: 50px; font-size: 26px; }
+  }
+</style>
+
+<script>
+  (function() {
+    var root = document.getElementById('modern-cart-bar-root');
+    if (!root) return;
+
+    var config = {
+      threshold: parseFloat(root.getAttribute('data-threshold')) * 100,
+      keyword: root.getAttribute('data-keyword').toLowerCase(),
+      colorPrimary: root.getAttribute('data-color-primary'),
+      colorSuccess: root.getAttribute('data-color-success')
+    };
+
+    var els = {
+      message: document.getElementById('bar-message'),
+      fill: document.getElementById('bar-fill'),
+      icon: document.getElementById('status-icon')
+    };
+
+    function formatMoney(cents) {
+      return (cents / 100).toFixed(2).replace('.', ',') + ' Lei';
+    }
+
+    function updateBar() {
+      fetch('/cart.js?t=' + Date.now())
+        .then(res => res.json())
+        .then(cart => {
+          
+          var validTotal = 0;
+          cart.items.forEach(item => {
+            var fullName = (item.product_title + " " + item.title + " " + (item.variant_title || "")).toLowerCase();
+            if (!fullName.includes(config.keyword)) {
+              validTotal += item.final_line_price;
+            }
+          });
+
+          var percent = (validTotal / config.threshold) * 100;
+          if (percent > 100) percent = 100;
+          if (percent < 0) percent = 0;
+
+          if (els.fill) {
+            els.fill.style.width = percent + '%';
+            
+            if (validTotal >= config.threshold) {
+              // KÉSZ
+              els.fill.style.backgroundColor = config.colorSuccess;
+              els.fill.style.boxShadow = "0 0 15px " + config.colorSuccess + "40"; 
+              
+              els.message.innerHTML = '🎉 <strong>Felicitări!</strong> Ești eligibil pentru <strong style="color:'+config.colorSuccess+'">20% reducere</strong>!';
+              
+              els.icon.innerHTML = "🎉";
+              els.icon.style.backgroundColor = "#e8f5e9";
+              els.icon.style.color = config.colorSuccess;
+              
+            } else {
+              // FOLYAMAT
+              var remaining = config.threshold - validTotal;
+              
+              els.fill.style.backgroundColor = config.colorPrimary;
+              els.fill.style.boxShadow = "none";
+
+              els.message.innerHTML = 'Mai adaugă produse de <strong>' + formatMoney(remaining) + '</strong> pentru <span style="color:'+config.colorSuccess+'; font-weight:800;">20% reducere</span>!';
+              
+              els.icon.innerHTML = "🎁";
+              els.icon.style.backgroundColor = "#fff8e1";
+              els.icon.style.color = "#f57c00";
+            }
+          }
+        })
+        .catch(err => console.error(err));
+    }
+
+    updateBar();
+    setInterval(updateBar, 750);
+  })();
+</script> 

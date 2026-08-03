@@ -1,0 +1,482 @@
+{% comment %}
+  Final version with individual remove ('X') buttons, a section title,
+  the "Add product" button correctly styled as "+ underlined link",
+  and visible image placeholders from the start.
+{% endcomment %}
+
+{% schema %}
+{
+  "name": "Selector Pachet Flexibil",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Antetul Secțiunii"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Titlu",
+      "default": "Creează-ți propriul pachet"
+    },
+    {
+      "type": "richtext",
+      "id": "subtitle",
+      "label": "Subtitlu",
+      "default": "<p>Selectează cel puțin 3 produse pentru a continua.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Setări Colecții"
+    },
+    {
+      "type": "collection",
+      "id": "collection_1",
+      "label": "Colecția #1 (Implicit)"
+    },
+    {
+      "type": "collection",
+      "id": "collection_2",
+      "label": "Colecția #2 (Implicit)"
+    },
+    {
+      "type": "collection",
+      "id": "collection_3",
+      "label": "Colecția #3 (Opțional)"
+    },
+    {
+      "type": "collection",
+      "id": "collection_4",
+      "label": "Colecția #4 (Opțional)"
+    },
+    {
+      "type": "collection",
+      "id": "collection_5",
+      "label": "Colecția #5 (Opțional)"
+    },
+    {
+      "type": "collection",
+      "id": "collection_6",
+      "label": "Colecția #6 (Opțional)"
+    },
+    {
+      "type": "header",
+      "content": "Setări Texte (în Română)"
+    },
+    {
+      "type": "text",
+      "id": "add_product_button_text",
+      "label": "Text Buton 'Adaugă Produs'",
+      "default": "+ Adaugă un produs suplimentar"
+    },
+    {
+      "type": "text",
+      "id": "add_to_cart_button_text",
+      "label": "Text Buton 'Adaugă în Coș'",
+      "default": "Adaugă pachetul în coș"
+    },
+    {
+      "type": "text",
+      "id": "select_products_text",
+      "label": "Text Buton Inactiv",
+      "default": "Selectează produsele"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Selector Pachet Flexibil"
+    }
+  ]
+}
+{% endschema %}
+
+{% liquid
+  assign collection_handles = ''
+  assign collection_count = 0
+  for i in (1..6)
+    assign collection_setting_id = 'collection_' | append: i
+    assign collection_handle = section.settings[collection_setting_id]
+    if collection_handle != blank
+      assign collection_handles = collection_handles | append: collection_handle | append: ','
+      assign collection_count = collection_count | plus: 1
+    endif
+  endfor
+  assign collection_handles = collection_handles | split: ','
+%}
+
+<div class="flexible-bundle-container">
+  <div class="bundle-header">
+    {% if section.settings.title != blank %}
+      <h2>{{ section.settings.title }}</h2>
+    {% endif %}
+    {% if section.settings.subtitle != blank %}
+      <div class="bundle-subtitle">{{ section.settings.subtitle }}</div>
+    {% endif %}
+  </div>
+
+  <div class="selected-products-images" id="image-gallery">
+    {% for i in (1..6) %}
+      <div class="image-container" id="image-container-{{ i }}" data-placeholder-text="Produs #{{ i }}">
+        <div class="placeholder-text">Produs #{{ i }}</div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="selectors-wrapper">
+    <form id="add-to-cart-form" method="post" class="bundle-selector-form">
+      <div id="dropdown-container">
+        {% for handle in collection_handles %}
+          {% if handle == blank %}{% continue %}{% endif %}
+          {% assign product_collection = collections[handle] %}
+
+          {% if product_collection != blank and product_collection.products.size > 0 %}
+            <div class="collection-dropdown-wrapper {% if forloop.index > 2 %}hidden{% endif %}" id="dropdown-wrapper-{{ forloop.index }}" data-index="{{ forloop.index }}">
+              <div class="dropdown-header">
+                <label for="collection-{{ forloop.index }}-dropdown">{{ product_collection.title }}</label>
+                {% if forloop.index > 2 %}
+                  <button type="button" class="remove-dropdown-btn" data-target-index="{{ forloop.index }}" aria-label="Elimină acest produs">&times;</button>
+                {% endif %}
+              </div>
+              <select id="collection-{{ forloop.index }}-dropdown" class="product-selector-dropdown">
+                <option value="" disabled selected>Alege un produs</option>
+               {% for product in product_collection.products %}
+                    <option value="{{ product.variants.first.id }}"
+                          data-image="{{ product.featured_image | image_url: width: 500 }}"
+                          data-price="{% if product.title contains 'Făină albă de grâu PREMIUM' %}25
+                                       {% elsif product.title contains 'Tărâțe integrale de grâu' %}22.5
+                                        {% elsif product.title contains 'Făină integrală de secară' %}44.3
+                                          {% elsif product.title contains 'Făina integrală de grâu' %}40.7
+                                          {% else %}0{% endif %}">
+                       {{ product.title }}
+                   </option>
+                {% endfor %}
+              </select>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+      
+      <div class="form-actions">
+        <button type="button" id="add-product-button" class="button--link-style">
+          {{ section.settings.add_product_button_text }}
+        </button>
+        <button type="button" id="add-to-cart-button" class="button disabled" disabled>
+          {{ section.settings.select_products_text }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<style>
+  .flexible-bundle-container {
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  }
+  .bundle-header {
+      text-align: center;
+      margin-bottom: 40px;
+  }
+  .bundle-header h2 {
+      font-size: 28px;
+      margin-bottom: 10px;
+      color: #121212;
+  }
+  .bundle-subtitle p {
+      margin: 0;
+      font-size: 16px;
+      color: #555;
+  }
+  .selected-products-images {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+  .image-container {
+    aspect-ratio: 1 / 1;
+    border: 2px dashed #e0e0e0;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background-color: #f9f9f9;
+    transition: all 0.3s ease;
+  }
+  .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .placeholder-text {
+    color: #aaa;
+    text-align: center;
+    font-size: 14px;
+    padding: 5px;
+  }
+  .bundle-selector-form #dropdown-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+  @media (min-width: 768px) {
+    .bundle-selector-form #dropdown-container {
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+  }
+
+  .collection-dropdown-wrapper.hidden {
+    display: none;
+  }
+  .dropdown-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+  }
+  .dropdown-header label {
+    font-weight: 600;
+    color: #333;
+    flex-grow: 1;
+  }
+  .remove-dropdown-btn {
+      background: transparent;
+      border: none;
+      color: #999;
+      font-size: 26px;
+      line-height: 1;
+      padding: 0 0 0 10px;
+      cursor: pointer;
+      transition: color 0.2s ease;
+  }
+  .remove-dropdown-btn:hover {
+      color: #dc3545;
+  }
+  .product-selector-dropdown {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23666666%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 12px;
+  }
+  .form-actions {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+  .button {
+    width: 100%;
+    max-width: 400px;
+    border: none;
+    padding: 14px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 0px;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+  .button.hidden {
+      display: none;
+  }
+  .button--link-style {
+      background: none;
+      border: none;
+      padding: 0;
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: 600;
+      color: #000000;
+      text-decoration: underline;
+      cursor: pointer;
+      transition: color 0.2s ease;
+  }
+  .button--link-style:hover {
+      color: #555;
+  }
+  #add-to-cart-button {
+    background-color: #28a745;
+    color: #fff;
+  }
+  #add-to-cart-button:hover:not(.disabled) {
+    background-color: #218838;
+  }
+  #add-to-cart-button.disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const addToCartButton = document.getElementById('add-to-cart-button');
+  const addProductButton = document.getElementById('add-product-button');
+  const dropdownContainer = document.getElementById('dropdown-container');
+  const allDropdownWrappers = dropdownContainer.querySelectorAll('.collection-dropdown-wrapper');
+  
+  const addToCartText = '{{ section.settings.add_to_cart_button_text | escape }}';
+  const selectProductsText = '{{ section.settings.select_products_text | escape }}';
+
+  const totalAvailableDropdowns = allDropdownWrappers.length;
+  const minDropdowns = 2;
+
+  function updateAddButtonVisibility() {
+      const visibleCount = document.querySelectorAll('.collection-dropdown-wrapper:not(.hidden)').length;
+      if (addProductButton) {
+        if (visibleCount >= totalAvailableDropdowns) {
+            addProductButton.classList.add('hidden');
+        } else {
+            addProductButton.classList.remove('hidden');
+        }
+      }
+  }
+
+  function updateCartButtonState() {
+    const visibleDropdowns = dropdownContainer.querySelectorAll('.collection-dropdown-wrapper:not(.hidden) .product-selector-dropdown');
+    let allSelected = true;
+    if (visibleDropdowns.length < minDropdowns) {
+      allSelected = false;
+    }
+    visibleDropdowns.forEach(dropdown => {
+      if (!dropdown.value) {
+        allSelected = false;
+      }
+    });
+
+    if (allSelected) {
+      addToCartButton.classList.remove('disabled');
+      addToCartButton.removeAttribute('disabled');
+      addToCartButton.innerText = addToCartText;
+    } else {
+      addToCartButton.classList.add('disabled');
+      addToCartButton.setAttribute('disabled', 'true');
+      addToCartButton.innerText = selectProductsText;
+    }
+  }
+
+  function updateImage(dropdown) {
+    const wrapper = dropdown.closest('.collection-dropdown-wrapper');
+    const index = wrapper.dataset.index;
+    const imageContainer = document.getElementById(`image-container-${index}`);
+    
+    if (!imageContainer) return;
+
+    const selectedOption = dropdown.options[dropdown.selectedIndex];
+    const imageUrl = selectedOption.getAttribute('data-image');
+
+    if (imageUrl && dropdown.value) {
+      imageContainer.innerHTML = `<img src="${imageUrl}" alt="Imagine produs selectat">`;
+    } else {
+      const placeholderText = imageContainer.dataset.placeholderText;
+      imageContainer.innerHTML = `<div class="placeholder-text">${placeholderText}</div>`;
+    }
+  }
+
+  // EVENT DELEGATION for all dropdown changes and remove button clicks
+  dropdownContainer.addEventListener('change', function(event) {
+      if (event.target.classList.contains('product-selector-dropdown')) {
+          updateImage(event.target);
+          updateCartButtonState();
+      }
+  });
+
+  dropdownContainer.addEventListener('click', function(event) {
+      if (event.target.classList.contains('remove-dropdown-btn')) {
+          const indexToRemove = event.target.dataset.targetIndex;
+          const wrapperToRemove = document.getElementById(`dropdown-wrapper-${indexToRemove}`);
+          const dropdownToReset = document.getElementById(`collection-${indexToRemove}-dropdown`);
+          
+          if (wrapperToRemove) {
+              wrapperToRemove.classList.add('hidden');
+              dropdownToReset.value = '';
+              updateImage(dropdownToReset); // This will hide the image and reset placeholder
+              updateCartButtonState();
+              updateAddButtonVisibility();
+          }
+      }
+  });
+
+
+  // Logic for the "Add Product" button
+  if (addProductButton) {
+    addProductButton.addEventListener('click', () => {
+      const firstHidden = dropdownContainer.querySelector('.collection-dropdown-wrapper.hidden');
+      if (firstHidden) {
+          firstHidden.classList.remove('hidden');
+      }
+      updateCartButtonState();
+      updateAddButtonVisibility();
+    });
+  }
+
+  // Logic for the "Add to Cart" button
+ // Logic for the "Add to Cart" button (Bundle version)
+addToCartButton.addEventListener('click', function () {
+  const visibleDropdowns = dropdownContainer.querySelectorAll('.collection-dropdown-wrapper:not(.hidden) .product-selector-dropdown');
+  const selections = [];
+  let total = 0;
+
+  visibleDropdowns.forEach(dropdown => {
+    if (dropdown.value) {
+      const selectedOption = dropdown.options[dropdown.selectedIndex];
+      const title = selectedOption.text;
+      const price = parseFloat(selectedOption.getAttribute("data-price")); // we'll add data-price to options
+      total += price;
+      selections.push(`${title} (${price.toFixed(2)} lei)`);
+    }
+  });
+
+  if (selections.length === visibleDropdowns.length && selections.length > 0) {
+    // ID of the hidden Mix & Match product variant
+    const bundleProductId = {{ all_products["mix-and-match"].variants.first.id }};
+
+    const itemsToAdd = [{
+      id: bundleProductId,
+      quantity: 1,
+      properties: {
+        composition: selections.join(", "),
+        calculated_price: total.toFixed(2)
+      }
+    }];
+
+    fetch('/cart/add.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ items: itemsToAdd })
+    })
+    .then(response => response.json())
+    .then(() => {
+      window.location.href = '/cart';
+    })
+    .catch(error => {
+      console.error('Eroare la adăugarea pachetului:', error);
+      alert('A apărut o eroare. Te rog, încearcă din nou.');
+    });
+  } else {
+    alert('Te rog să selectezi un produs din fiecare listă vizibilă.');
+  }
+});
+
+
+  // Initial check on page load
+  function initialize() {
+    updateCartButtonState();
+    updateAddButtonVisibility();
+  }
+
+  initialize();
+});
+</script>

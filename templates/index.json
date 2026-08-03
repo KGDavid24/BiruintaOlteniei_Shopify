@@ -1,0 +1,934 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "image_banner_bbGyxN": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_eUTDcb": {
+          "type": "heading",
+          "settings": {
+            "heading": "<strong>Câstigă o mașină de făcut pâine!</strong>",
+            "heading_size": "h2"
+          }
+        },
+        "text_gEVkV8": {
+          "type": "text",
+          "settings": {
+            "text": "Cumpără făină <strong>Biruința Olteniei</strong> în valoare de minimum <strong>100 lei</strong> și poți câștiga o <strong>mașină de făcut pâine</strong>! 🍞🥖🎁. <strong>Fiecare comandă de făină de minimum 100 lei</strong>, plasată între <strong>13-24 decembrie</strong>, îți aduce o șansă în plus de câștig!",
+            "text_style": "body"
+          }
+        }
+      },
+      "block_order": [
+        "heading_eUTDcb",
+        "text_gEVkV8"
+      ],
+      "disabled": true,
+      "settings": {
+        "image": "shopify://shop_images/1.png",
+        "image_overlay_opacity": 0,
+        "image_height": "adapt",
+        "image_behavior": "none",
+        "desktop_content_position": "middle-center",
+        "desktop_content_alignment": "center",
+        "show_text_box": true,
+        "color_scheme": "",
+        "stack_images_on_mobile": true,
+        "mobile_content_alignment": "center",
+        "show_text_below": true
+      }
+    },
+    "slideshow_8LgVCQ": {
+      "type": "slideshow",
+      "blocks": {
+        "slide_3U48pr": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/1-min_2f7c4f26-b8b8-4a8b-8319-f045109bbf1a.jpg",
+            "image_overlay_opacity": 40,
+            "heading": "Măcinată tradițional în moară cu pietre, din cereale alese cu grijă.",
+            "heading_size": "h1",
+            "subheading": "",
+            "button_label": "Cumpără acum",
+            "link": "shopify://collections/toate-produsele",
+            "button_style_secondary": false,
+            "show_text_box": false,
+            "box_align": "middle-center",
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "color_scheme": "scheme-4035ac90-5d07-4655-93df-fc116399ccee"
+          }
+        },
+        "slide_KhHnjb": {
+          "type": "slide",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/4-min_4b1e2ac0-c42f-4bfb-a2d7-46e5e1ba1c75.jpg",
+            "image_overlay_opacity": 40,
+            "heading": "Cereale din soiuri românești produse local în Ulmet, Olt",
+            "heading_size": "h1",
+            "subheading": "",
+            "button_label": "Cumpără acum",
+            "link": "shopify://collections/all",
+            "button_style_secondary": false,
+            "show_text_box": false,
+            "box_align": "middle-center",
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "color_scheme": "scheme-4035ac90-5d07-4655-93df-fc116399ccee"
+          }
+        },
+        "slide_3R8qJd": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/3-min_7c0e3975-37d2-4736-987b-21ca27bfe4bd.jpg",
+            "image_overlay_opacity": 40,
+            "heading": "Măcinate lent la temperatura joasa pentru păstrarea nutrientilor.",
+            "heading_size": "h1",
+            "subheading": "",
+            "button_label": "Cumpără acum",
+            "link": "shopify://collections/toate-produsele",
+            "button_style_secondary": false,
+            "show_text_box": false,
+            "box_align": "middle-center",
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "color_scheme": "scheme-4035ac90-5d07-4655-93df-fc116399ccee"
+          }
+        },
+        "slide_cEB4mH": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design_4_-min.jpg",
+            "image_overlay_opacity": 40,
+            "heading": "Din grâu românesc nemodificat genetic.",
+            "heading_size": "h1",
+            "subheading": "",
+            "button_label": "Cumpără acum",
+            "link": "shopify://collections/toate-produsele",
+            "button_style_secondary": false,
+            "show_text_box": false,
+            "box_align": "middle-center",
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "color_scheme": "scheme-4035ac90-5d07-4655-93df-fc116399ccee"
+          }
+        },
+        "slide_LWUtcQ": {
+          "type": "slide",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/5-min.jpg",
+            "image_overlay_opacity": 40,
+            "heading": "Livrare rapidă în toată țara",
+            "heading_size": "h1",
+            "subheading": "",
+            "button_label": "Cumpără acum",
+            "link": "shopify://collections/all",
+            "button_style_secondary": false,
+            "show_text_box": false,
+            "box_align": "middle-center",
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "color_scheme": "scheme-4035ac90-5d07-4655-93df-fc116399ccee"
+          }
+        }
+      },
+      "block_order": [
+        "slide_3U48pr",
+        "slide_KhHnjb",
+        "slide_3R8qJd",
+        "slide_cEB4mH",
+        "slide_LWUtcQ"
+      ],
+      "custom_css": [],
+      "name": "t:sections.slideshow.presets.name",
+      "settings": {
+        "layout": "full_bleed",
+        "slide_height": "adapt_image",
+        "slider_visual": "dots",
+        "auto_rotate": true,
+        "change_slides_speed": 5,
+        "image_behavior": "none",
+        "show_text_below": false,
+        "accessibility_info": "Despre Biruinta Olteniei, si produsele oferite"
+      }
+    },
+    "1747666094542e4206": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_featured_carousel_nM8ijY": {
+          "type": "shopify://apps/judge-me-reviews/blocks/featured_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "maxwidth": 1080
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_featured_carousel_nM8ijY"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "1770069156d47bf8b5": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_d4eeae0_fbJa73": {
+          "type": "ai_gen_block_d4eeae0",
+          "settings": {
+            "heading": "Direct de la moara Biruința Olteniei: făinuri  integrale de grâu și secară",
+            "heading_tag": "h2",
+            "heading_size": 32,
+            "heading_alignment": "center",
+            "heading_color": "#593122",
+            "product_1": "tarata-de-grau-4-kilograme",
+            "product_2": "faina-integrala-de-secara-100",
+            "product_3": "faina-alba-de-grau-premium-5-kg",
+            "product_4": "faina-integrala-de-grau",
+            "variant_selector_type": "pill",
+            "pill_alignment": "center",
+            "card_background": "#f9f9f9",
+            "text_color": "#593122",
+            "price_color": "#593122",
+            "compare_price_color": "#999999",
+            "savings_bg_color": "#ffebee",
+            "savings_text_color": "#d32f2f",
+            "pill_border_color": "#593122",
+            "pill_hover_bg": "#f5f5f5",
+            "pill_selected_bg": "#f2ac29",
+            "pill_selected_border": "#f2ac29",
+            "pill_selected_text": "#ffffff",
+            "button_bg": "#72bf4e",
+            "button_text": "#ffffff",
+            "button_hover_bg": "#5fa83d",
+            "button_border_radius": 24,
+            "notification_bg": "#72bf4e",
+            "notification_text": "#ffffff",
+            "primary_color": "#72bf4e",
+            "card_border_radius": 8,
+            "image_border_radius": 4
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_d4eeae0_fbJa73"
+      ],
+      "disabled": true,
+      "settings": {}
+    },
+    "rich_text_gekF98": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_f4rq9i": {
+          "type": "heading",
+          "settings": {
+            "heading": "Direct de la moara Biruința Olteniei: făinuri  integrale de grâu și secară",
+            "heading_size": "h1"
+          }
+        },
+        "text_MenbXU": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>"
+          }
+        },
+        "button_kh6EnP": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_label": "Button label",
+            "button_link": "",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_f4rq9i",
+        "text_MenbXU",
+        "button_kh6EnP"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 0
+      }
+    },
+    "17700685394fe89f92": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_d7295ea_pqwez7": {
+          "type": "ai_gen_block_d7295ea",
+          "settings": {
+            "product_1": "tarata-de-grau-4-kilograme",
+            "product_2": "faina-integrala-de-secara-100",
+            "product_3": "faina-alba-de-grau-premium-5-kg",
+            "product_4": "faina-integrala-de-grau",
+            "product_5": "",
+            "product_6": "",
+            "desktop_width_percent": 100,
+            "columns_desktop": 4,
+            "columns_mobile": "2",
+            "grid_gap": 20,
+            "background_color": "#ffffff",
+            "card_background": "#ffffff",
+            "card_border_radius": 8,
+            "card_padding": 16,
+            "image_border_radius": 4,
+            "title_size": 18,
+            "price_size": 20,
+            "compare_price_size": 16,
+            "savings_size": 14,
+            "text_color": "#593122",
+            "price_color": "#593122",
+            "compare_price_color": "#999999",
+            "savings_color": "#f4f4f4",
+            "savings_bg_color": "#d32f2f",
+            "variant_selector_type": "pill",
+            "pill_alignment": "center",
+            "pill_bg_color": "#ffffff",
+            "pill_text_color": "#593122",
+            "pill_border_color": "#cccccc",
+            "pill_hover_bg_color": "#f4f4f4",
+            "pill_hover_border_color": "#999999",
+            "pill_active_bg_color": "#f2ac29",
+            "pill_active_text_color": "#ffffff",
+            "pill_active_border_color": "#f2ac29",
+            "dropdown_bg_color": "#ffffff",
+            "dropdown_border_color": "#cccccc",
+            "button_bg_color": "#72bf4e",
+            "button_text_color": "#ffffff",
+            "button_hover_bg_color": "#5fa83d"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_d7295ea_pqwez7"
+      ],
+      "custom_css": [],
+      "settings": {}
+    },
+    "1769795653844dc8c1": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_07c2d02_yA4Nwz": {
+          "type": "ai_gen_block_07c2d02",
+          "disabled": true,
+          "settings": {
+            "heading": "Direct de la moara Biruința Olteniei: făinuri  integrale de grâu și secară",
+            "product_1": "tarata-de-grau-4-kilograme",
+            "product_2": "faina-integrala-de-secara-100",
+            "product_3": "faina-alba-de-grau-premium-5-kg",
+            "product_4": "faina-integrala-de-grau",
+            "desktop_width_percent": 100,
+            "columns_desktop": 4,
+            "columns_mobile": "1",
+            "grid_gap": 20,
+            "section_padding": 40,
+            "heading_alignment": "center",
+            "heading_size": 30,
+            "heading_spacing": 32,
+            "heading_color": "#593122",
+            "background_color": "#ffffff",
+            "card_background": "#ffffff",
+            "card_border_color": "#e0e0e0",
+            "card_border_width": 1,
+            "card_border_radius": 8,
+            "card_padding": 16,
+            "image_border_radius": 4,
+            "text_color": "#593122",
+            "product_title_size": 18,
+            "price_color": "#593122",
+            "price_size": 20,
+            "compare_price_color": "#999999",
+            "compare_price_size": 16,
+            "savings_color": "#d32f2f",
+            "savings_background": "#ffebee",
+            "savings_size": 13,
+            "variant_selector_type": "pills",
+            "input_background": "#ffffff",
+            "input_border_color": "#cccccc",
+            "input_border_radius": 4,
+            "pill_background": "#ffffff",
+            "pill_text_color": "#593122",
+            "pill_border_color": "#cccccc",
+            "pill_border_radius": 20,
+            "pill_hover_background": "#f5f5f5",
+            "pill_hover_border_color": "#999999",
+            "pill_active_background": "#f5b029",
+            "pill_active_text_color": "#ffffff",
+            "pill_active_border_color": "#f2ac29",
+            "button_background": "#72bf4e",
+            "button_hover_background": "#5fa83d",
+            "button_text_color": "#ffffff",
+            "button_text_size": 16,
+            "button_border_radius": 40
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_07c2d02_yA4Nwz"
+      ],
+      "settings": {}
+    },
+    "featured_collection_nFnEHp": {
+      "type": "featured-collection",
+      "custom_css": [
+        ".card__heading {font-size: 18px; font-weight: bold; text-align: center;}",
+        ".card-information > .price {text-align: center; color: green;}",
+        ".title-wrapper {text-align: center;}"
+      ],
+      "settings": {
+        "collection": "pachete-best-buy",
+        "products_to_show": 3,
+        "title": "",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "columns_desktop": 3,
+        "enable_desktop_slider": true,
+        "full_width": true,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "color_scheme": "",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "standard",
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "padding_top": 8,
+        "padding_bottom": 0
+      }
+    },
+    "auto_collection_slider_Bmyjfb": {
+      "type": "auto-collection-slider",
+      "disabled": true,
+      "name": "Auto Collection Slider",
+      "settings": {
+        "title": "",
+        "collection": "produsele-biruinta-la-5kg",
+        "animation_speed": 40,
+        "background_color": ""
+      }
+    },
+    "multicolumn_rotate_4Yp7xP": {
+      "type": "multicolumn-rotate",
+      "blocks": {
+        "column_MAJNzb": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/MoaraPietre.jpg",
+            "title": "Cereale măcinate tradițional",
+            "text": "<p>Păstrând aroma și textura autentic naturală.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_XYGnP6": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/Cereale.jpg",
+            "title": "Fără aditivi, sau amelioratori",
+            "text": "<p>Complet pur, nealterat și absolut sănătos.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_6mrErh": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/Quality.jpg",
+            "title": "Calități nutriționale superioare",
+            "text": "<p>Extrem de bogate în fibre și minerale.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_YhDBbM": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/MasinaLivrare.jpg",
+            "title": "Sănătate maximă la tine acasă",
+            "text": "<p>Hrănește-ți familia în mod profund natural.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_MAJNzb",
+        "column_XYGnP6",
+        "column_6mrErh",
+        "column_YhDBbM"
+      ],
+      "name": "Auto Scroll Multicolumn",
+      "settings": {
+        "title": "Alege sănătatea, alege produsele fără aditivi!",
+        "heading_size": "h2",
+        "scroll_speed": 20,
+        "image_width": "half",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "",
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "column_alignment": "center",
+        "card_title_size": "h3",
+        "background_style": "primary",
+        "color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "pop_up_NMrNLH": {
+      "type": "pop_up",
+      "name": "Promo Popup (V21 - TEXT UP)",
+      "settings": {
+        "enabled": false,
+        "hero_image": "shopify://shop_images/all-products---five-bags-next.jpg",
+        "hero_alt": "Promo image",
+        "title": "Reducerile de vară",
+        "subtitle": "<h3>Discounturi în creștere:</h3><h6>5% cumpărături sub 100 lei</h6><h5><strong>15% cumpărături peste 100 lei</strong></h5><h4><strong>20% cumpărături peste 150 lei</strong></h4>",
+        "note": "",
+        "button_label": "COMANDĂ ACUM",
+        "button_link": "shopify://collections/toate-produsele",
+        "open_in_new_tab": false,
+        "close_aria_label": "Close popup",
+        "trigger_on_load": true,
+        "delay_seconds": 1,
+        "show_once_days": 0,
+        "exclude_templates": "none",
+        "overlay_opacity": 55,
+        "body_bg": "#ffffff",
+        "title_color": "#f90707",
+        "subtitle_color": "#000000",
+        "note_color": "#000000",
+        "button_bg": "#f90707",
+        "button_text": "#ffffff"
+      }
+    },
+    "rich_text_JYbAm8": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_mUrhRE": {
+          "type": "heading",
+          "settings": {
+            "heading": "<strong>Din moara tradițională Biruința Olteniei</strong>",
+            "heading_size": "h2"
+          }
+        },
+        "text_BPheiM": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Misiunea noastră este să aducem în bucătăriile românilor <strong>făină integrală de grâu și secară, produs local, măcinat tradițional</strong>, pentru că pe masa și pentru copiii noștri dorim să oferim <strong>sănătate maximă</strong>. Ne angajăm să păstrăm vie <strong>tradiția măcinării cu pietre</strong>, respectând și valorificând <strong>soiuri românești vechi</strong>, recunoscute pentru <strong>calitățile lor nutriționale superioare</strong>. Străduim să menținem un standard înalt de calitate, <strong>fără compromisuri</strong>, oferind astfel un produs pur, <strong>sănătos și nutritiv</strong>, <strong>fără aditivi sau amelioratori</strong>. Scopul nostru principal este să contribuim la o <strong>alimentație conștientă</strong> și sănătoasă, reîntorcându-ne la rădăcinile unei <strong>alimentații echilibrate</strong>, așa cum ne-au învățat strămoșii noștri.</p>"
+          }
+        },
+        "button_PhRP9R": {
+          "type": "button",
+          "settings": {
+            "button_label": "Află mai mult",
+            "button_link": "shopify://pages/despre-noi",
+            "button_style_secondary": true,
+            "button_label_2": "Contactează-ne",
+            "button_link_2": "shopify://pages/contact",
+            "button_style_secondary_2": true
+          }
+        },
+        "button_6MQhPR": {
+          "type": "button",
+          "settings": {
+            "button_label": "Oferte pentru companii",
+            "button_link": "https://biruintaolteniei.ro/pages/oferte-pentru-companii",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_mUrhRE",
+        "text_BPheiM",
+        "button_PhRP9R",
+        "button_6MQhPR"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-5",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "multicolumn_rotate_GjVHHG": {
+      "type": "multicolumn-rotate",
+      "blocks": {
+        "column_4YKQ4e": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/1_5cc58a8d-d135-4ebc-b9c9-7f3f94d9eee2.png",
+            "title": "",
+            "text": "<p><a href=\"https://www.zf.ro/zf-agropower/zf-agropower-cooperativa-biruinta-olteniei-vrea-sa-ajunga-la-22841825\" target=\"_blank\" title=\"https://www.zf.ro/zf-agropower/zf-agropower-cooperativa-biruinta-olteniei-vrea-sa-ajunga-la-22841825\">Vezi Articol</a></p>",
+            "link_label": "",
+            "link": "https://www.zf.ro/zf-agropower/zf-agropower-cooperativa-biruinta-olteniei-vrea-sa-ajunga-la-22841825"
+          }
+        },
+        "column_cDkJap": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/2_cee5486b-b09c-4a71-b985-53443e09a3df.png",
+            "title": "",
+            "text": "<p><a href=\"https://www.facebook.com/share/v/1CrcEZd2pg/\" target=\"_blank\" title=\"https://www.facebook.com/share/v/1CrcEZd2pg/\">Vezi Video</a></p>",
+            "link_label": "",
+            "link": "https://www.facebook.com/share/v/1CrcEZd2pg/"
+          }
+        },
+        "column_NPWLdh": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/3_30596b36-0724-441c-aca4-9287feabbb51.png",
+            "title": "",
+            "text": "<p><a href=\"https://agrointel.ro/296898/moara-faina-cooperativa-biruinta-olteniei\" target=\"_blank\" title=\"https://agrointel.ro/296898/moara-faina-cooperativa-biruinta-olteniei\">Vezi Articol</a></p>",
+            "link_label": "",
+            "link": "https://agrointel.ro/296898/moara-faina-cooperativa-biruinta-olteniei"
+          }
+        },
+        "column_4jwtTi": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/4_a9339d74-e616-4732-99e6-c131631d0f8c.png",
+            "title": "",
+            "text": "<p><a href=\"https://agrointel.ro/296898/moara-faina-cooperativa-biruinta-olteniei\" target=\"_blank\" title=\"https://agrointel.ro/296898/moara-faina-cooperativa-biruinta-olteniei\">Vezi Articol</a></p>",
+            "link_label": "",
+            "link": "https://reporter24.ro/faina-ecologica-produsa-de-o-cooperativa-agricola-din-judetul-olt/"
+          }
+        }
+      },
+      "block_order": [
+        "column_4YKQ4e",
+        "column_cDkJap",
+        "column_NPWLdh",
+        "column_4jwtTi"
+      ],
+      "name": "Auto Scroll Multicolumn",
+      "settings": {
+        "title": "Au scris despre noi",
+        "heading_size": "h2",
+        "scroll_speed": 20,
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "",
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "column_alignment": "center",
+        "card_title_size": "h3",
+        "background_style": "none",
+        "color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "image_banner_AQxbVN": {
+      "type": "image-banner",
+      "disabled": true,
+      "settings": {
+        "image": "shopify://shop_images/header_biruinta.jpg",
+        "image_overlay_opacity": 0,
+        "image_height": "small",
+        "image_behavior": "zoom-in",
+        "desktop_content_position": "middle-center",
+        "desktop_content_alignment": "center",
+        "show_text_box": true,
+        "color_scheme": "",
+        "stack_images_on_mobile": true,
+        "mobile_content_alignment": "center",
+        "show_text_below": true
+      }
+    },
+    "featured_collection_Hhfjk3": {
+      "type": "featured-collection",
+      "disabled": true,
+      "custom_css": [
+        ".card__heading {font-size: 18px; font-weight: bold; text-align: center;}",
+        ".card-information > .price {text-align: center; color: green;}"
+      ],
+      "settings": {
+        "collection": "pachete-faina-integrala",
+        "products_to_show": 6,
+        "title": "Pachete de la moară",
+        "heading_size": "h1",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "columns_desktop": 3,
+        "enable_desktop_slider": false,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "outline",
+        "color_scheme": "scheme-1",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "standard",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "featured_product_Qh4FiK": {
+      "type": "featured-product",
+      "blocks": {
+        "text_43grEc": {
+          "type": "text",
+          "settings": {
+            "text": "{{ section.settings.product.vendor }}",
+            "text_style": "uppercase"
+          }
+        },
+        "title_mUi6Jc": {
+          "type": "title",
+          "settings": {
+            "heading_size": "h1"
+          }
+        },
+        "price_94gYiW": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker_kVcTLj": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "quantity_selector_iGiNVT": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "buy_buttons_PkyhV4": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true
+          }
+        },
+        "share_CiUPPe": {
+          "type": "share",
+          "settings": {
+            "share_label": "Share"
+          }
+        }
+      },
+      "block_order": [
+        "text_43grEc",
+        "title_mUi6Jc",
+        "price_94gYiW",
+        "variant_picker_kVcTLj",
+        "quantity_selector_iGiNVT",
+        "buy_buttons_PkyhV4",
+        "share_CiUPPe"
+      ],
+      "disabled": true,
+      "settings": {
+        "product": "faina-integrala-de-grau",
+        "color_scheme": "scheme-2",
+        "secondary_background": true,
+        "media_size": "medium",
+        "constrain_to_viewport": true,
+        "media_fit": "cover",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "hide_variants": false,
+        "enable_video_looping": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "featured_product_MYUdaf": {
+      "type": "featured-product",
+      "blocks": {
+        "text_TLhCqY": {
+          "type": "text",
+          "settings": {
+            "text": "{{ section.settings.product.vendor }}",
+            "text_style": "uppercase"
+          }
+        },
+        "title_PtfmKj": {
+          "type": "title",
+          "settings": {
+            "heading_size": "h1"
+          }
+        },
+        "price_C8K9ap": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker_aYVF8y": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "buy_buttons_Fi9xkC": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true
+          }
+        },
+        "share_jtDqDf": {
+          "type": "share",
+          "settings": {
+            "share_label": "Share"
+          }
+        }
+      },
+      "block_order": [
+        "text_TLhCqY",
+        "title_PtfmKj",
+        "price_C8K9ap",
+        "variant_picker_aYVF8y",
+        "buy_buttons_Fi9xkC",
+        "share_jtDqDf"
+      ],
+      "disabled": true,
+      "settings": {
+        "product": "faina-integrala-de-secara-100",
+        "color_scheme": "scheme-2",
+        "secondary_background": true,
+        "media_size": "medium",
+        "constrain_to_viewport": true,
+        "media_fit": "cover",
+        "media_position": "right",
+        "image_zoom": "lightbox",
+        "hide_variants": false,
+        "enable_video_looping": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "featured_collection_9RNa9X": {
+      "type": "featured-collection",
+      "disabled": true,
+      "custom_css": [
+        ".card__heading {font-size: 18px; font-weight: bold; text-align: center;}",
+        ".card-information > .price {text-align: center; color: green;}"
+      ],
+      "settings": {
+        "collection": "pachete-faina-integrala",
+        "products_to_show": 2,
+        "title": "Pachete PROMO Făină integrală",
+        "heading_size": "h1",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "columns_desktop": 2,
+        "enable_desktop_slider": false,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "color_scheme": "",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "bulk",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "featured_blog_nLPUaN": {
+      "type": "featured-blog",
+      "settings": {
+        "blog": "news",
+        "post_limit": 2,
+        "heading": "Povești și stiri din viața noastră",
+        "heading_size": "h1",
+        "columns_desktop": 2,
+        "show_view_all": true,
+        "show_image": true,
+        "show_date": true,
+        "show_author": false,
+        "color_scheme": "scheme-2",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "17506829512ce88fed": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_homepage_bgFgWJ": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget_homepage/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "product": "",
+            "review_data": "sample_data",
+            "max_width": 1200
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_homepage_bgFgWJ"
+      ],
+      "disabled": true,
+      "settings": {
+        "include_margins": true
+      }
+    }
+  },
+  "order": [
+    "image_banner_bbGyxN",
+    "slideshow_8LgVCQ",
+    "1747666094542e4206",
+    "1770069156d47bf8b5",
+    "rich_text_gekF98",
+    "17700685394fe89f92",
+    "1769795653844dc8c1",
+    "featured_collection_nFnEHp",
+    "auto_collection_slider_Bmyjfb",
+    "multicolumn_rotate_4Yp7xP",
+    "pop_up_NMrNLH",
+    "rich_text_JYbAm8",
+    "multicolumn_rotate_GjVHHG",
+    "image_banner_AQxbVN",
+    "featured_collection_Hhfjk3",
+    "featured_product_Qh4FiK",
+    "featured_product_MYUdaf",
+    "featured_collection_9RNa9X",
+    "featured_blog_nLPUaN",
+    "17506829512ce88fed"
+  ]
+}

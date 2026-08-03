@@ -1,0 +1,37 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "biruinta_chestionar_AkjErR": {
+      "type": "biruinta-chestionar",
+      "name": "Chestionar Porți Deschise",
+      "settings": {
+        "show_intro": true,
+        "badge_text": "Vară 2026 · Cooperativa Agricolă",
+        "heading": "Ziua Porților Deschise la Biruința Olteniei",
+        "subheading": "La vară, când se coc pepenii, deschidem porțile. Tururi ale morii, povești despre făina măcinată pe piatră și pepeni din partea casei. Completează formularul și revenim cu detalii.",
+        "success_heading": "Mulțumim pentru înregistrare!",
+        "success_message": "Te-am primit. Revenim cu detalii despre eveniment înainte de ziua porților deschise."
+      }
+    }
+  },
+  "order": [
+    "biruinta_chestionar_AkjErR",
+    "main"
+  ]
+}

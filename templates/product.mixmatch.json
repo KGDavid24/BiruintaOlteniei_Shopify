@@ -1,0 +1,162 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": {
+          "type": "text",
+          "settings": {
+            "text": "{{ product.vendor }}",
+            "text_style": "uppercase"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "judge_me_reviews_preview_badge_f4yNWb": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "disabled": true,
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "disabled": true,
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "disabled": true,
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "disabled": true,
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "custom_liquid_TNbjFK": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<list>\n<ol><a href=\"https://cdn.shopify.com/s/files/1/0868/5217/4102/files/CC_GRAU_REZUMAT.pdf?v=1715791986\">Certificat de calitate grău</a></ol>\n<ol><a href=\"https://cdn.shopify.com/s/files/1/0868/5217/4102/files/CC_SECARA_REZUMAT.pdf?v=1715791987\">Certificat de calitate secară</a></ol>\n</list>"
+          }
+        },
+        "share": {
+          "type": "share",
+          "settings": {
+            "share_label": "Share"
+          }
+        }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "judge_me_reviews_preview_badge_f4yNWb",
+        "price",
+        "variant_picker",
+        "quantity_selector",
+        "buy_buttons",
+        "description",
+        "custom_liquid_TNbjFK",
+        "share"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "color_scheme": "scheme-1",
+        "media_size": "small",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "gallery_layout": "thumbnail_slider",
+        "mobile_thumbnails": "show",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "padding_top": 36,
+        "padding_bottom": 12
+      }
+    },
+    "174766524655546ea5": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_KigMCr": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_KigMCr"
+      ],
+      "disabled": true,
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "settings": {
+        "heading": "Produse recomandate",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": true,
+        "padding_top": 36,
+        "padding_bottom": 28
+      }
+    },
+    "add_products_GjMaAD": {
+      "type": "add_products",
+      "name": "Selector Pachet Flexibil",
+      "settings": {
+        "title": "Creează-ți propriul pachet",
+        "subtitle": "<p>Selectează cel puțin 2 produse pentru a continua.</p>",
+        "collection_1": "produsele-biruinta-la-5kg",
+        "collection_2": "produsele-biruinta-la-5kg",
+        "collection_3": "produsele-biruinta-la-5kg",
+        "collection_4": "produsele-biruinta-la-5kg",
+        "collection_5": "produsele-biruinta-la-5kg",
+        "collection_6": "produsele-biruinta-la-5kg",
+        "add_product_button_text": "+ Adaugă un produs suplimentar",
+        "add_to_cart_button_text": "Adaugă pachetul în coș",
+        "select_products_text": "Selectează produsele"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "174766524655546ea5",
+    "related-products",
+    "add_products_GjMaAD"
+  ]
+}

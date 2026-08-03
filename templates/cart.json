@@ -1,0 +1,90 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "custom_liquid_pmDXfc": {
+      "type": "custom-liquid",
+      "disabled": true,
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<div style=\"background-color: #E9F7EF; border: 1px solid #2ECC71; padding: 14px; margin: 12px 0; border-radius: 6px; font-size: 14px; color: #145A32; text-align: center;\">\n  💳 <b>Plățile online sunt cea mai sigură și rapidă metodă de plată,</b> iar noi le recomandăm cu drag!  \n  Totuși, vă rugăm să rețineți că în cazul cardurilor <b>ING</b> sau <b>Revolut</b> pot apărea temporar probleme la procesare.  \n  Echipa noastră lucrează la rezolvarea situației. 🙏\n</div>",
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "cart-items": {
+      "type": "main-cart-items",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "padding_top": 36,
+        "padding_bottom": 0
+      }
+    },
+    "cart_progress_bar_Vtftmd": {
+      "type": "cart-progress-bar",
+      "disabled": true,
+      "name": "Cart Discount Bar",
+      "settings": {
+        "threshold_amount": 100,
+        "excluded_keyword": "PREMIUM",
+        "color_primary": "#f2ac29",
+        "color_success": "#72bf4e"
+      }
+    },
+    "custom_liquid_XYDCcx": {
+      "type": "custom-liquid",
+      "disabled": true,
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<div style=\"background-color: #E9F7EF; border: 1px solid #2ECC71; padding: 14px; margin: 12px 0; border-radius: 6px; font-size: 14px; color: #145A32; text-align: center;\">\n📦 <b>Greutatea maximă</b> permisă pentru o comandă este de <b>30 kg</b>.\nDacă ai nevoie de o cantitate mai mare, te rugăm să împarți <b>comanda în mai multe tranșe</b>.<br>\n🧾 În unele cazuri promoționale, această limită poate fi mărită. <br>\n💬 Dacă la finalizare nu apare nicio opțiune de livrare pentru adresa ta, este posibil să fi fost depășită limita de greutate.\nÎn acest caz, <b>contactează-ne pe WhatsApp</b> folosind butonul din <b>colțul dreapta-jos</b> al site-ului. 🙏\n</div>",
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "cart-footer": {
+      "type": "main-cart-footer",
+      "blocks": {
+        "subtotal": {
+          "type": "subtotal",
+          "settings": {}
+        },
+        "essential_countdown_timer_app_block_CePyqi": {
+          "type": "shopify://apps/essential-countdown-timer/blocks/app-block/722378e8-5a70-4eae-aa89-9e44e8e9f6de",
+          "settings": {
+            "id": "cmpud9hce004fl6st139hlra9"
+          }
+        },
+        "buttons": {
+          "type": "buttons",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "subtotal",
+        "essential_countdown_timer_app_block_CePyqi",
+        "buttons"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "padding_top": 20,
+        "padding_bottom": 40
+      }
+    }
+  },
+  "order": [
+    "custom_liquid_pmDXfc",
+    "cart-items",
+    "cart_progress_bar_Vtftmd",
+    "custom_liquid_XYDCcx",
+    "cart-footer"
+  ]
+}

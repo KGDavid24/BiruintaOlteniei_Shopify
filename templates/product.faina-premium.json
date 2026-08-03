@@ -1,0 +1,244 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": {
+          "type": "text",
+          "settings": {
+            "text": "{{ product.vendor }}",
+            "text_style": "uppercase"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "judge_me_reviews_preview_badge_f4yNWb": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        },
+        "icon_with_text_UJXiUC": {
+          "type": "icon-with-text",
+          "disabled": true,
+          "settings": {
+            "layout": "vertical",
+            "icon_1": "price_tag",
+            "heading_1": "Black Friday: <strong>-30% REDUCERE</strong> la acest produs",
+            "icon_2": "return",
+            "heading_2": "",
+            "icon_3": "truck",
+            "heading_3": ""
+          }
+        },
+        "trafficly_visitors_counter_trafficly_nDinYz": {
+          "type": "shopify://apps/trafficly-visitors-counter/blocks/trafficly/ff0a9f47-c478-468c-8fa1-f5a7bb122960",
+          "disabled": true,
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": true
+          }
+        },
+        "custom_liquid_UmRTG9": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<style>\n  /* Fő konténer */\n  .custom-delivery-row {\n    border-top: 1px solid #e5e5e5;\n    border-bottom: 1px solid #e5e5e5;\n    margin: 10px 0;\n    width: 100%;\n    box-sizing: border-box;\n    overflow: hidden;\n  }\n\n  /* Címsor */\n  .custom-delivery-row summary {\n    padding: 18px 0;\n    cursor: pointer;\n    list-style: none;\n    font-weight: 600;\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    font-size: 1.2rem;\n    color: inherit;\n    outline: none;\n  }\n\n  .custom-delivery-row summary::-webkit-details-marker {\n    display: none;\n  }\n\n  .custom-delivery-row summary::after {\n    content: '+';\n    font-size: 1.4rem;\n    font-weight: normal;\n    margin-left: 10px;\n  }\n\n  .custom-delivery-row[open] summary::after {\n    content: '-';\n  }\n\n  /* Tartalom doboz */\n  .custom-delivery-content {\n    padding-bottom: 25px;\n    padding-top: 10px;\n    display: flex;\n    justify-content: flex-start; /* Dobozok balra igazítása */\n    align-items: flex-start;     /* Függőlegesen is fentre igazítva */\n    gap: 20px;\n    flex-wrap: wrap;\n    width: 100%;\n  }\n\n  /* Egy elem (kép + szöveg) */\n  .delivery-item {\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start; /* BALRA IGAZÍTÁS (képet és szöveget is) */\n    text-align: left;        /* Szöveg balra igazítása */\n    max-width: 100%;\n  }\n\n  /* Képek stílusa */\n  .custom-delivery-img {\n    height: 55px;\n    width: auto;\n    max-width: 100%;\n    object-fit: contain;\n    display: block;\n    margin-bottom: 8px;\n    margin-left: 0; /* Biztosítjuk, hogy ne legyen bal margója */\n  }\n\n  /* Feliratok stílusa */\n  .delivery-caption {\n    font-size: 1rem;\n    color: #333;\n    line-height: 1.2;\n    font-weight: 500;\n    white-space: nowrap;\n  }\n</style>\n\n<details class=\"custom-delivery-row\">\n  <summary>\n    Opțiuni disponibile livrare\n  </summary>\n  \n  <div class=\"custom-delivery-content\">\n    \n    <div class=\"delivery-item\">\n       <img src=\"https://cdn.shopify.com/s/files/1/0868/5217/4102/files/download_1.png?v=1768483963\" alt=\"Sameday\" class=\"custom-delivery-img\" loading=\"lazy\">\n       <span class=\"delivery-caption\">Fanbox</span>\n    </div>\n    \n    <div class=\"delivery-item\">\n       <img src=\"https://cdn.shopify.com/s/files/1/0868/5217/4102/files/fancourier.webp?v=1768483963\" alt=\"Fan Courier\" class=\"custom-delivery-img\" loading=\"lazy\">\n       <span class=\"delivery-caption\">Fan Curier</span>\n    </div>\n    \n    <div class=\"delivery-item\">\n       <img src=\"https://cdn.shopify.com/s/files/1/0868/5217/4102/files/CG_LOGO_OGB_RGB__1.png?v=1768483964\" alt=\"Cargus\" class=\"custom-delivery-img\" loading=\"lazy\">\n       <span class=\"delivery-caption\">Cargus</span>\n    </div>\n\n  </div>\n</details>"
+          }
+        },
+        "description": {
+          "type": "description",
+          "disabled": true,
+          "settings": {}
+        },
+        "custom_liquid_TNbjFK": {
+          "type": "custom_liquid",
+          "disabled": true,
+          "settings": {
+            "custom_liquid": "<list>\n<ol><a href=\"https://cdn.shopify.com/s/files/1/0868/5217/4102/files/CC_GRAU_REZUMAT.pdf?v=1715791986\">Certificat de calitate grău</a></ol>\n<ol><a href=\"https://cdn.shopify.com/s/files/1/0868/5217/4102/files/CC_SECARA_REZUMAT.pdf?v=1715791987\">Certificat de calitate secară</a></ol>\n<ol><a href=\"https://cdn.shopify.com/s/files/1/0868/5217/4102/files/Analize_Biruinta_Olteniei.pdf?v=1763139226\">Analize cereale Biruința Olteniei 2025</a></ol>\n</list>"
+          }
+        },
+        "custom_liquid_XMzrHb": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<a href=\"https://cdn.shopify.com/s/files/1/0868/5217/4102/files/Analize_Biruinta_Olteniei.pdf?v=1763139226\">Analize cereale Biruința Olteniei</a>"
+          }
+        },
+        "share": {
+          "type": "share",
+          "disabled": true,
+          "settings": {
+            "share_label": "Share"
+          }
+        },
+        "selleasy_lb_upsell_widget_bac_cAaGKc": {
+          "type": "shopify://apps/selleasy/blocks/lb-upsell-widget-bac/790c1a03-a71f-4bc1-9869-00dad526d3c2",
+          "disabled": true,
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "judge_me_reviews_preview_badge_f4yNWb",
+        "icon_with_text_UJXiUC",
+        "trafficly_visitors_counter_trafficly_nDinYz",
+        "price",
+        "variant_picker",
+        "quantity_selector",
+        "buy_buttons",
+        "custom_liquid_UmRTG9",
+        "description",
+        "custom_liquid_TNbjFK",
+        "custom_liquid_XMzrHb",
+        "share",
+        "selleasy_lb_upsell_widget_bac_cAaGKc"
+      ],
+      "custom_css": [
+        ".product-form__input--pill input[type=\"radio\"] + label {padding: 3rem 2rem;}"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "color_scheme": "scheme-1",
+        "media_size": "small",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "gallery_layout": "thumbnail_slider",
+        "mobile_thumbnails": "show",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "padding_top": 36,
+        "padding_bottom": 12
+      }
+    },
+    "1769005228de0f37f3": {
+      "type": "apps",
+      "blocks": {
+        "selleasy_lb_upsell_widget_bac_GG7fcq": {
+          "type": "shopify://apps/selleasy/blocks/lb-upsell-widget-bac/790c1a03-a71f-4bc1-9869-00dad526d3c2",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "selleasy_lb_upsell_widget_bac_GG7fcq"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "rich_text_rmJWXD": {
+      "type": "rich-text",
+      "blocks": {
+        "text_MBTpRV": {
+          "type": "text",
+          "settings": {
+            "text": "{{ product.description }}"
+          }
+        }
+      },
+      "block_order": [
+        "text_MBTpRV"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "left",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 0,
+        "padding_bottom": 20
+      }
+    },
+    "174766524655546ea5": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_KigMCr": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "disabled": true,
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        },
+        "judge_me_reviews_review_snippet_widget_7nnU8z": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_snippet_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "disabled": true,
+          "settings": {}
+        },
+        "judge_me_reviews_all_reviews_page_fJeXNC": {
+          "type": "shopify://apps/judge-me-reviews/blocks/all_reviews_page/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "max_width": 1200,
+            "review_source": "all",
+            "show_first": "product",
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_KigMCr",
+        "judge_me_reviews_review_snippet_widget_7nnU8z",
+        "judge_me_reviews_all_reviews_page_fJeXNC"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "settings": {
+        "heading": "Produse recomandate",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": true,
+        "padding_top": 36,
+        "padding_bottom": 28
+      }
+    }
+  },
+  "order": [
+    "main",
+    "1769005228de0f37f3",
+    "rich_text_rmJWXD",
+    "174766524655546ea5",
+    "related-products"
+  ]
+}
