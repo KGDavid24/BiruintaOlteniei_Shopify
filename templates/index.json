@@ -54,7 +54,7 @@
           "settings": {
             "image": "shopify://shop_images/1-min_2f7c4f26-b8b8-4a8b-8319-f045109bbf1a.jpg",
             "image_overlay_opacity": 40,
-            "heading": "Măcinată tradițional în moară cu pietre, din cereale alese cu grijă.",
+            "heading": "Măcinată lent în moară cu pietre, din cereale românești produse în cadrul cooperativei noastre.",
             "heading_size": "h1",
             "subheading": "",
             "button_label": "Cumpără acum",
@@ -88,6 +88,7 @@
         },
         "slide_3R8qJd": {
           "type": "slide",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/3-min_7c0e3975-37d2-4736-987b-21ca27bfe4bd.jpg",
             "image_overlay_opacity": 40,
@@ -106,6 +107,7 @@
         },
         "slide_cEB4mH": {
           "type": "slide",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/Untitled_design_4_-min.jpg",
             "image_overlay_opacity": 40,
@@ -285,7 +287,7 @@
             "product_6": "",
             "desktop_width_percent": 100,
             "columns_desktop": 4,
-            "columns_mobile": "2",
+            "columns_mobile": "1",
             "grid_gap": 20,
             "background_color": "#ffffff",
             "card_background": "#ffffff",
@@ -395,7 +397,12 @@
       "custom_css": [
         ".card__heading {font-size: 18px; font-weight: bold; text-align: center;}",
         ".card-information > .price {text-align: center; color: green;}",
-        ".title-wrapper {text-align: center;}"
+        ".title-wrapper {text-align: center;}",
+        ".grid__item {display: flex;}",
+        ".card-wrapper {display: flex; flex-direction: column; width: 100%;}",
+        ".card {display: flex; flex-direction: column;}",
+        ".card__content {display: flex; flex-direction: column; flex-grow: 1;}",
+        ".quick-add {margin-top: auto; padding-top: 0.5rem;}"
       ],
       "settings": {
         "collection": "pachete-best-buy",
@@ -647,7 +654,8 @@
         "columns_mobile": "2",
         "column_alignment": "center",
         "card_title_size": "h3",
-        "background_style": "none",
+        "background_style": "primary",
+        "card_shadow": true,
         "color_scheme": "",
         "padding_top": 36,
         "padding_bottom": 36

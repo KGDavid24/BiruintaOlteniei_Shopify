@@ -13,13 +13,54 @@
     }
   }
 
+  /* The theme's page-width setting is fairly narrow (1000px), which leaves
+     this section cramped on wide screens. Widen just this section's
+     container, same as was done for the reviews carousel. */
+  #shopify-section-{{ section.id }} .page-width {
+    max-width: 1700px;
+  }
+
+  {%- if section.settings.card_shadow -%}
+    /* Floating card look: same recipe as the reviews carousel cards —
+       image flush against the card, clipped to the card's own rounded
+       corners via overflow:hidden, white body below, soft shadow. */
+    #shopify-section-{{ section.id }} .multicolumn-card {
+      background: rgb(255, 255, 255) !important;
+      border-radius: 14px !important;
+      overflow: hidden !important;
+      box-shadow: 0 2px 6px rgba(var(--color-shadow), 0.08), 0 10px 24px rgba(var(--color-shadow), 0.08) !important;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    #shopify-section-{{ section.id }} .multicolumn-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 10px rgba(var(--color-shadow), 0.12), 0 14px 30px rgba(var(--color-shadow), 0.12) !important;
+    }
+    /* image_ratio: adapt normally insets the image from the card edges
+       (multicolumn-card-spacing); remove that so the logo sits flush at
+       the top, like the review cards' product photo. */
+    #shopify-section-{{ section.id }} .multicolumn-card-spacing {
+      padding-top: 0 !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
+    #shopify-section-{{ section.id }} .multicolumn-card__info {
+      padding: 2.5rem !important;
+      text-align: center !important;
+    }
+  {%- endif -%}
+
   /* Végtelen csúszka alap beállításai */
   .marquee-container-{{ section.id }} {
     overflow: hidden;
     width: 100%;
     position: relative;
     /* Ez akadályozza meg, hogy a téma alapértelmezett rácsa szétcsússzon */
-    box-sizing: border-box; 
+    box-sizing: border-box;
+    {%- if section.settings.card_shadow -%}
+      /* Room for the card box-shadow, otherwise this container's own
+         overflow:hidden (needed for the infinite scroll) clips it off. */
+      padding: 24px 0;
+    {%- endif -%}
   }
 
   .marquee-track-{{ section.id }} {
@@ -316,6 +357,13 @@
       ],
       "default": "primary",
       "label": "Háttér stílus"
+    },
+    {
+      "type": "checkbox",
+      "id": "card_shadow",
+      "default": false,
+      "label": "Lebegő kártya árnyék",
+      "info": "Árnyékot ad minden kártyának, hogy a háttér felett lebegjenek."
     },
     {
       "type": "color_scheme",

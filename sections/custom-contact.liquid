@@ -213,6 +213,26 @@
             </div>
           {% endif %}
 
+          {% if section.settings.gdpr_consent_label != blank %}
+            <div class="contact-page-custom__consent">
+              <input
+                id="ContactFormConsent-{{ section.id }}"
+                type="checkbox"
+                name="contact[consent]"
+                required
+                aria-required="true"
+              >
+              <label for="ContactFormConsent-{{ section.id }}">
+                {{ section.settings.gdpr_consent_label }}.
+                {%- if shop.policies.privacy_policy != blank %}
+                  <a href="{{ shop.policies.privacy_policy.url }}" target="_blank" rel="noopener">
+                    {{- section.settings.privacy_policy_link_label -}}
+                  </a>.
+                {%- endif -%}
+              </label>
+            </div>
+          {% endif %}
+
           <div style="margin-top: 2rem;">
             <button type="submit" class="button">
               {{ section.settings.button_label }}
@@ -243,6 +263,29 @@
 
   .contact-page-custom__form .field + .field {
     margin-top: 1.5rem;
+  }
+
+  .contact-page-custom__consent {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    margin-top: 1.5rem;
+  }
+
+  .contact-page-custom__consent input[type='checkbox'] {
+    flex-shrink: 0;
+    margin-top: 0.3rem;
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+
+  .contact-page-custom__consent label {
+    font-size: 1.3rem;
+    line-height: 1.4;
+  }
+
+  .contact-page-custom__consent a {
+    text-decoration: underline;
   }
 
   @media screen and (max-width: 989px) {
@@ -426,6 +469,20 @@
       "id": "privacy_note",
       "label": "Privacy note",
       "default": "<p>Prin trimiterea formularului, datele tale vor fi folosite doar pentru a răspunde solicitării transmise.</p>"
+    },
+    {
+      "type": "text",
+      "id": "gdpr_consent_label",
+      "label": "GDPR consent checkbox label",
+      "info": "Shown next to a required checkbox before the submit button, as its own complete sentence. Leave blank to hide the checkbox entirely.",
+      "default": "Sunt de acord ca datele mele să fie folosite pentru a răspunde solicitării mele"
+    },
+    {
+      "type": "text",
+      "id": "privacy_policy_link_label",
+      "label": "GDPR consent link label",
+      "info": "A second, separate sentence linking to your Privacy Policy. Only shown if one is set up under Settings > Policies.",
+      "default": "Vezi Politica de confidențialitate"
     },
     {
       "type": "text",

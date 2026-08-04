@@ -1,0 +1,130 @@
+/* Judge.me Featured Reviews Carousel (gallery theme) — visual polish.
+   Scoped to Judge.me's own markup; the widget itself is app-managed. */
+
+.jdgm-carousel--gallery-theme .jdgm-carousel-item__inner-wrapper {
+  border-radius: 14px !important;
+  box-shadow: 0 2px 6px rgba(var(--color-shadow), 0.08), 0 10px 24px rgba(var(--color-shadow), 0.08) !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.jdgm-carousel--gallery-theme .jdgm-carousel-item__inner-wrapper:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(var(--color-shadow), 0.12), 0 14px 30px rgba(var(--color-shadow), 0.12) !important;
+}
+
+.jdgm-carousel--gallery-theme .jdgm-carousel-item__image-wrapper {
+  height: 180px !important;
+  border-radius: 14px 14px 0 0 !important;
+  overflow: hidden !important;
+}
+
+/* Reviews without a product photo put the photo slot after the text in the
+   DOM instead of dropping it, which left stars/text starting at different
+   heights card to card. Force photo-slot-then-text order regardless of
+   source order so every card lines up, and give the empty slot its own
+   look instead of a blank void. */
+.jdgm-carousel-item__inner-wrapper {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.jdgm-carousel-item__image-wrapper {
+  order: 1 !important;
+  flex: 0 0 auto !important;
+}
+
+.jdgm-carousel-item__body {
+  order: 2 !important;
+  flex: 1 1 auto !important;
+}
+
+.jdgm-carousel-item__product-wrapper {
+  order: 3 !important;
+}
+
+/* Judge.me's own CSS sets display on this class at the same specificity;
+   the extra .jdgm-carousel-item ancestor breaks the tie in our favor. */
+.jdgm-carousel-item .jdgm-carousel-item__image-wrapper:empty {
+  background: transparent;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.jdgm-carousel-item__image-wrapper:empty::before {
+  content: "";
+  width: 100px;
+  height: 100px;
+  background-image: var(--jdgm-placeholder-logo);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  opacity: 0.85;
+}
+
+/* Center the star/name/title/body block in the space left below the photo,
+   so short reviews don't leave a dangling gap at the bottom of the card. */
+.jdgm-carousel-item__body {
+  justify-content: center !important;
+}
+
+/* component-judgeme-carousel.js trims every preview to a conservative
+   character count (short enough to fit here at any card width in the
+   layout), so this fixed height is a uniform reservation, not a mid-line
+   clip: every card ends up the same size. */
+.jdgm-carousel-item__review-body {
+  height: 96px !important;
+  overflow: hidden !important;
+}
+
+.jdgm-carousel-item__read-more {
+  display: block;
+  margin: 10px 0 0;
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgb(242, 172, 40);
+  cursor: pointer;
+}
+
+.jdgm-carousel-item__read-more:hover {
+  color: rgb(89, 49, 34);
+}
+
+.jdgm-carousel-item__review-title {
+  color: rgb(var(--color-foreground));
+}
+
+/* Judge.me caps the carousel at a fixed max-width and 3 cards per row even on
+   very wide screens. Widen the section and show 5 cards on large desktops so
+   the extra space isn't wasted. */
+.page-width:has(.jdgm-carousel-wrapper) {
+  max-width: 1700px !important;
+}
+
+.shopify-app-block > div[style*="max-width"] {
+  max-width: 1700px !important;
+}
+
+@media only screen and (min-width: 1400px) {
+  .jdgm-carousel--gallery-theme .jdgm-carousel-item {
+    width: 20% !important;
+  }
+}
+
+/* On phones, show one full card centered with the neighbors' edges peeking
+   in on both sides. Judge.me sizes each card to exactly fill the space left
+   by the item-container's own padding, so the peek width is controlled here
+   via that padding rather than the card's own width (which would compound
+   on top of it). */
+@media only screen and (max-width: 767px) {
+  .jdgm-carousel__item-container {
+    padding-left: 12% !important;
+    padding-right: 12% !important;
+  }
+}

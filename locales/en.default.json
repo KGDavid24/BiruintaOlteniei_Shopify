@@ -69,7 +69,10 @@
   "newsletter": {
     "label": "Email",
     "success": "Thanks for subscribing",
-    "button_label": "Subscribe"
+    "button_label": "Subscribe",
+    "gdpr_consent": "I agree that my data will be used to send me this newsletter.",
+    "privacy_policy": "Privacy Policy",
+    "gdpr_error": "You must agree before subscribing."
   },
   "accessibility": {
     "skip_to_text": "Skip to content",
@@ -538,5 +541,9 @@
       "send_on": "YYYY-MM-DD",
       "send_on_label": "Send on (optional)"
     }
+  },
+  "reviews": {
+    "read_more": "Read more",
+    "read_less": "Read less"
   }
 }

@@ -25,6 +25,22 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  /* The theme's page-width setting (1000px) squeezes the footer columns
+     together with a lot of unused space on either side. Widen just the
+     footer's content, same fix as the reviews carousel / marquees. */
+  #shopify-section-{{ section.id }} .footer__content-top.page-width {
+    max-width: 1700px;
+  }
+
+  /* The theme's global grid spacing is only 8px, so even at equal column
+     widths the footer columns read as cramped together. Give the footer's
+     own grid more breathing room between columns. */
+  @media screen and (min-width: 750px) {
+    #shopify-section-{{ section.id }} .footer__blocks-wrapper {
+      --grid-desktop-horizontal-spacing: 20rem;
+    }
+  }
 {%- endstyle -%}
 
 <footer class="footer color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
@@ -57,6 +73,8 @@
             elsif section.blocks.size > 6
               assign footer_grid_class = 'grid--4-col-desktop'
             elsif section.blocks.size > 4
+              assign footer_grid_class = 'grid--3-col-tablet'
+            elsif section.blocks.size == 3
               assign footer_grid_class = 'grid--3-col-tablet'
             endif
           -%}

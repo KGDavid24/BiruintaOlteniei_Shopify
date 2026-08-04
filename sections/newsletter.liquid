@@ -13,6 +13,31 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  .newsletter-form__consent {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    max-width: 36rem;
+    margin: 1.2rem auto 0;
+    text-align: left;
+  }
+
+  .newsletter-form__consent input[type='checkbox'] {
+    flex-shrink: 0;
+    margin-top: 0.3rem;
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+
+  .newsletter-form__consent label {
+    font-size: 1.3rem;
+    line-height: 1.4;
+  }
+
+  .newsletter-form__consent a {
+    text-decoration: underline;
+  }
 {%- endstyle -%}
 
 <div class="newsletter center {% if section.settings.full_width == false %}newsletter--narrow page-width{% endif %}">
@@ -99,6 +124,21 @@
                     {{ form.errors.messages.email -}}
                   </small>
                 {%- endif -%}
+                <div class="newsletter-form__consent">
+                  <input
+                    id="NewsletterConsent--{{ section.id }}"
+                    type="checkbox"
+                    name="newsletter_consent"
+                    required
+                    aria-required="true"
+                  >
+                  <label for="NewsletterConsent--{{ section.id }}">
+                    {{ 'newsletter.gdpr_consent' | t }}
+                    {%- if shop.policies.privacy_policy != blank %}
+                      <a href="{{ shop.policies.privacy_policy.url }}" target="_blank" rel="noopener">{{ 'newsletter.privacy_policy' | t }}</a>
+                    {%- endif -%}
+                  </label>
+                </div>
               </div>
               {%- if form.posted_successfully? -%}
                 <h3

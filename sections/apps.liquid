@@ -1,3 +1,18 @@
+{{ 'component-judgeme-carousel.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'component-judgeme-carousel.js' | asset_url }}" defer="defer"></script>
+<div
+  id="jdgm-carousel-i18n"
+  hidden
+  data-read-more="{{ 'reviews.read_more' | t | escape }}"
+  data-read-less="{{ 'reviews.read_less' | t | escape }}"
+></div>
+{%- if settings.logo != blank -%}
+  <style>
+    :root {
+      --jdgm-placeholder-logo: url({{ settings.logo | image_url: width: 200 }});
+    }
+  </style>
+{%- endif -%}
 <div class="{% if section.settings.include_margins %}page-width{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
   {%- for block in section.blocks -%}
     {% render block %}

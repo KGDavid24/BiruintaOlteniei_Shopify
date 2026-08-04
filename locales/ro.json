@@ -69,7 +69,10 @@
   "newsletter": {
     "label": "E-mail",
     "success": "Vă mulțumim că v-ați abonat",
-    "button_label": "Abonați-vă"
+    "button_label": "Abonați-vă",
+    "gdpr_consent": "Sunt de acord ca datele mele să fie folosite pentru a primi acest newsletter.",
+    "privacy_policy": "Politica de confidențialitate",
+    "gdpr_error": "Trebuie să fii de acord înainte de a te abona."
   },
   "accessibility": {
     "skip_to_text": "Salt la conținut",
@@ -549,5 +552,9 @@
       "expanded": "Formularul pentru destinatarul cardului cadou este extins",
       "collapsed": "Formularul pentru destinatarul cardului cadou este restrâns"
     }
+  },
+  "reviews": {
+    "read_more": "Citește mai mult",
+    "read_less": "Citește mai puțin"
   }
 }

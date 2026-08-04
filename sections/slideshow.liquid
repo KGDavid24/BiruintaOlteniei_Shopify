@@ -2,7 +2,14 @@
 {{ 'component-slider.css' | asset_url | stylesheet_tag }}
 {{ 'component-slideshow.css' | asset_url | stylesheet_tag }}
 
-{%- if section.settings.slide_height == 'adapt_image' and section.blocks.first.settings.image != blank -%}
+{%- liquid
+  assign effective_slide_height = section.settings.slide_height
+  if section.blocks.size == 1 and section.settings.slide_height == 'adapt_image'
+    assign effective_slide_height = 'small'
+  endif
+-%}
+
+{%- if effective_slide_height == 'adapt_image' and section.blocks.first.settings.image != blank -%}
   {%- style -%}
     @media screen and (max-width: 749px) {
       #Slider-{{ section.id }}::before,
@@ -98,7 +105,7 @@
   {%- endif -%}
 
   <div
-    class="slideshow banner banner--{{ section.settings.slide_height }} grid grid--1-col slider slider--everywhere{% if section.settings.show_text_below %} banner--mobile-bottom{% endif %}{% if section.blocks.first.settings.image == blank %} slideshow--placeholder{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+    class="slideshow banner banner--{{ effective_slide_height }} grid grid--1-col slider slider--everywhere{% if section.settings.show_text_below %} banner--mobile-bottom{% endif %}{% if section.blocks.first.settings.image == blank %} slideshow--placeholder{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
     id="Slider-{{ section.id }}"
     aria-live="polite"
     aria-atomic="true"
@@ -110,6 +117,25 @@
         #Slide-{{ section.id }}-{{ forloop.index }} .banner__media::after {
           opacity: {{ block.settings.image_overlay_opacity | divided_by: 100.0 }};
         }
+        {%- if section.blocks.size == 1 -%}
+          /* A single static slide with a flat overlay reads as flat/boring.
+             Give it some life: a slow ambient pan on the image, and a
+             gradient overlay (depth + better text contrast) instead of a
+             uniform tint. Only applies when there's exactly one slide, so
+             it never affects the real multi-slide carousel. */
+          {%- assign single_overlay = block.settings.image_overlay_opacity | divided_by: 100.0 -%}
+          {%- assign single_overlay_top = single_overlay | times: 0.4 -%}
+          {%- assign single_overlay_bottom = single_overlay | times: 1.6 | at_most: 0.75 -%}
+          #Slide-{{ section.id }}-{{ forloop.index }} .banner__media::after {
+            background: linear-gradient(
+              180deg,
+              rgba(0, 0, 0, {{ single_overlay_top }}) 0%,
+              rgba(0, 0, 0, {{ single_overlay }}) 55%,
+              rgba(0, 0, 0, {{ single_overlay_bottom }}) 100%
+            ) !important;
+            opacity: 1 !important;
+          }
+        {%- endif -%}
       </style>
       <div
         class="slideshow__slide grid__item grid--1-col slider__slide"
@@ -120,7 +146,7 @@
         aria-label="{{ forloop.index }} {{ 'general.slider.of' | t }} {{ forloop.length }}"
         tabindex="-1"
       >
-        <div class="slideshow__media banner__media media{% if block.settings.image == blank %} placeholder{% endif %}{% if section.settings.image_behavior != 'none' %} animate--{{ section.settings.image_behavior }}{% endif %}">
+        <div class="slideshow__media banner__media media{% if block.settings.image == blank %} placeholder{% endif %}{% if section.settings.image_behavior != 'none' %} animate--{{ section.settings.image_behavior }}{% elsif section.blocks.size == 1 %} animate--ambient{% endif %}">
           {%- if block.settings.image -%}
             {%- liquid
               assign height = block.settings.image.width | divided_by: block.settings.image.aspect_ratio | round
